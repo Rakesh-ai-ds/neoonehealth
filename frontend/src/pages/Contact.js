@@ -1,35 +1,42 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, CheckCircle2, Loader2 } from 'lucide-react';
+import { Mail, Phone, MapPin, CheckCircle2, Loader2, User, Building2, Baby, Heart, Briefcase, MessageSquare } from 'lucide-react';
 import Button from '@/components/ui/Button';
+import { motion } from 'framer-motion';
 
 const Contact = () => {
-  const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [selectedPurpose, setSelectedPurpose] = useState('');
   const [formData, setFormData] = useState({
     fullName: '',
-    workEmail: '',
-    role: '',
+    email: '',
     phone: '',
+    purpose: '',
+    message: '',
+    // Purpose-specific fields
     companyName: '',
-    industry: '',
     employeeCount: '',
-    primaryChallenge: [],
+    childAge: '',
+    preferredDate: '',
+    preferredTime: '',
   });
+
+  const purposes = [
+    { id: 'personal-wellness', icon: Heart, label: 'Personal Wellness', color: '#20BF55', desc: 'Health check-ups, fitness, nutrition consultations' },
+    { id: 'child-health', icon: Baby, label: 'Child Health', color: '#FF6B6B', desc: 'Pediatric care, vaccination, child development' },
+    { id: 'corporate-health', icon: Building2, label: 'Corporate Health', color: '#0B4F6C', desc: 'Employee wellness programs, health audits' },
+    { id: 'general-inquiry', icon: MessageSquare, label: 'General Inquiry', color: '#9B59B6', desc: 'Questions, feedback, partnership inquiries' },
+  ];
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleCheckboxChange = (value) => {
-    setFormData(prev => {
-      const challenges = prev.primaryChallenge.includes(value)
-        ? prev.primaryChallenge.filter(c => c !== value)
-        : [...prev.primaryChallenge, value];
-      return { ...prev, primaryChallenge: challenges };
-    });
+  const handlePurposeSelect = (purposeId) => {
+    setSelectedPurpose(purposeId);
+    setFormData(prev => ({ ...prev, purpose: purposeId }));
   };
 
   const handleSubmit = async (e) => {
@@ -38,14 +45,41 @@ const Contact = () => {
     setError('');
 
     try {
-      // Use local server for development, Vercel API for production
       const apiUrl = process.env.NODE_ENV === 'development'
         ? 'http://localhost:3001/api/send-email'
         : '/api/send-email';
 
-      console.log('Sending to:', apiUrl);
+      // Build message based on purpose
+      let messageContent = `
+Purpose: ${purposes.find(p => p.id === selectedPurpose)?.label || 'General Inquiry'}
+Phone: ${formData.phone}
+`;
 
-      // Send email via Resend API
+      if (selectedPurpose === 'corporate-health') {
+        messageContent += `
+Company: ${formData.companyName}
+Employee Count: ${formData.employeeCount}
+`;
+      }
+
+      if (selectedPurpose === 'child-health') {
+        messageContent += `
+Child's Age: ${formData.childAge}
+`;
+      }
+
+      if (formData.preferredDate) {
+        messageContent += `
+Preferred Date: ${formData.preferredDate}
+Preferred Time: ${formData.preferredTime}
+`;
+      }
+
+      messageContent += `
+Message:
+${formData.message}
+`;
+
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
@@ -53,26 +87,20 @@ const Contact = () => {
         },
         body: JSON.stringify({
           name: formData.fullName,
-          email: formData.workEmail,
+          email: formData.email,
           phone: formData.phone,
-          company: formData.companyName,
-          message: `
-Role: ${formData.role}
-Industry: ${formData.industry}
-Employee Count: ${formData.employeeCount}
-Primary Challenges: ${formData.primaryChallenge.join(', ')}
-          `,
-          subject: `New Demo Request from ${formData.companyName}`,
+          company: formData.companyName || 'Individual',
+          message: messageContent,
+          subject: `${purposes.find(p => p.id === selectedPurpose)?.label || 'New Inquiry'} - ${formData.fullName}`,
         }),
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to send email');
+        throw new Error(data.error || 'Failed to send message');
       }
 
-      console.log('Email sent successfully:', data);
       setSubmitted(true);
     } catch (err) {
       console.error('Error:', err);
@@ -84,358 +112,331 @@ Primary Challenges: ${formData.primaryChallenge.join(', ')}
 
   if (submitted) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#F5F7FA]">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="bg-white p-12 rounded-lg shadow-xl">
-            <div className="w-20 h-20 bg-[#20BF55] bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-6">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-blue-50 pt-20">
+        <motion.div
+          className="max-w-lg mx-auto px-4 text-center"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="bg-white p-12 rounded-2xl shadow-xl">
+            <div className="w-20 h-20 bg-[#20BF55]/10 rounded-full flex items-center justify-center mx-auto mb-6">
               <CheckCircle2 className="text-[#20BF55]" size={48} />
             </div>
-            <h2 className="text-3xl font-bold text-[#082C4A] mb-4">Thank You! We're Already Preparing Your Custom Projection.</h2>
-            <p className="text-lg text-gray-600 mb-8">
-              A specialist will contact you via email within 24 hours to confirm your consultation time.
+            <h2 className="text-3xl font-bold text-[#0B4F6C] mb-4">Thank You!</h2>
+            <p className="text-lg text-gray-600 mb-6">
+              We've received your inquiry. Our team will contact you within 24 hours.
             </p>
-            <div className="bg-[#F5F7FA] p-6 rounded-lg">
-              <h3 className="font-bold text-[#082C4A] mb-3">While You Wait...</h3>
-              <p className="text-gray-600">
-                Download our free white paper: <span className="text-[#FF7F11] font-semibold cursor-pointer hover:underline">The Financial Case for Preventative Wellness</span>
-              </p>
-            </div>
+            <p className="text-sm text-gray-500">
+              Check your email ({formData.email}) for confirmation.
+            </p>
           </div>
-        </div>
+        </motion.div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen pt-24 pb-20 bg-[#F5F7FA]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          {/* Left Column - Contact Info */}
-          <div className="lg:col-span-1">
-            <h1 className="text-4xl font-bold text-[#082C4A] mb-6">Let's Secure Your Workforce's Health</h1>
-            <p className="text-lg text-gray-600 mb-8">
-              Ready to transform your corporate health strategy? Get in touch with our team.
-            </p>
+    <div className="min-h-screen pt-24 pb-20 bg-gradient-to-br from-gray-50 to-blue-50">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-            <div className="space-y-6">
-              <div className="flex items-start">
-                <div className="w-12 h-12 bg-[#20BF55] bg-opacity-10 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                  <Mail className="text-[#20BF55]" size={24} />
+        {/* Header */}
+        <motion.div
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h1 className="text-4xl md:text-5xl font-bold text-[#0B4F6C] mb-4">Get in Touch</h1>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Tell us how we can help you. Select your purpose and we'll connect you with the right team.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+          {/* Contact Info Sidebar */}
+          <motion.div
+            className="lg:col-span-1"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <div className="bg-[#0B4F6C] text-white rounded-2xl p-8 sticky top-28">
+              <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
+
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Phone className="text-[#20BF55]" size={24} />
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-300 mb-1">Phone</p>
+                    <p className="font-semibold">+91 98765 43210</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-bold text-[#082C4A] mb-1">Email</h3>
-                  <p className="text-gray-600">contact@neoonehealth.in</p>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Mail className="text-[#20BF55]" size={24} />
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-300 mb-1">Email</p>
+                    <p className="font-semibold">contact@neoonehealth.in</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <MapPin className="text-[#20BF55]" size={24} />
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-300 mb-1">Address</p>
+                    <p className="font-semibold">Chennai, Tamil Nadu, India</p>
+                  </div>
                 </div>
               </div>
 
-              <div className="flex items-start">
-                <div className="w-12 h-12 bg-[#20BF55] bg-opacity-10 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                  <Phone className="text-[#20BF55]" size={24} />
-                </div>
-                <div>
-                  <h3 className="font-bold text-[#082C4A] mb-1">Phone</h3>
-                  <p className="text-gray-600">+1 (555) 123-4567</p>
-                </div>
-              </div>
+              <hr className="border-white/20 my-8" />
 
-              <div className="flex items-start">
-                <div className="w-12 h-12 bg-[#20BF55] bg-opacity-10 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                  <MapPin className="text-[#20BF55]" size={24} />
-                </div>
-                <div>
-                  <h3 className="font-bold text-[#082C4A] mb-1">Address</h3>
-                  <p className="text-gray-600">
-                    123 Wellness Drive<br />
-                    San Francisco, CA 94102<br />
-                    United States
-                  </p>
-                </div>
+              <div>
+                <h4 className="font-semibold mb-4">Working Hours</h4>
+                <p className="text-gray-300 text-sm">Monday - Saturday: 8:00 AM - 8:00 PM</p>
+                <p className="text-gray-300 text-sm">Sunday: 9:00 AM - 2:00 PM</p>
+                <p className="text-[#20BF55] text-sm mt-2 font-semibold">Emergency: 24/7</p>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Right Column - Multi-Step Form */}
-          <div className="lg:col-span-2">
-            <div className="bg-white p-8 md:p-12 rounded-lg shadow-xl">
-              <div className="mb-8">
-                <h2 className="text-2xl font-bold text-[#082C4A] mb-2">Ready to Build a Healthier Business?</h2>
-                <p className="text-gray-600 mb-4">
-                  Tell us a little about your organization, and we'll connect you with a Corporate Wellness Specialist within one business day.
-                </p>
-                <p className="text-sm text-gray-500">(2 Minutes to Complete)</p>
-              </div>
-
-              {/* Progress Indicator */}
-              <div className="flex items-center justify-center mb-8">
-                <div className={`flex items-center ${step >= 1 ? 'text-[#20BF55]' : 'text-gray-400'}`}>
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ${step >= 1 ? 'bg-[#20BF55] text-white' : 'bg-gray-300 text-gray-600'}`}>
-                    1
-                  </div>
-                  <span className="ml-2 font-semibold hidden md:inline">Your Info</span>
-                </div>
-                <div className={`h-1 w-16 md:w-24 mx-2 ${step >= 2 ? 'bg-[#20BF55]' : 'bg-gray-300'}`}></div>
-                <div className={`flex items-center ${step >= 2 ? 'text-[#20BF55]' : 'text-gray-400'}`}>
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ${step >= 2 ? 'bg-[#20BF55] text-white' : 'bg-gray-300 text-gray-600'}`}>
-                    2
-                  </div>
-                  <span className="ml-2 font-semibold hidden md:inline">Company</span>
-                </div>
-                <div className={`h-1 w-16 md:w-24 mx-2 ${step >= 3 ? 'bg-[#20BF55]' : 'bg-gray-300'}`}></div>
-                <div className={`flex items-center ${step >= 3 ? 'text-[#20BF55]' : 'text-gray-400'}`}>
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ${step >= 3 ? 'bg-[#20BF55] text-white' : 'bg-gray-300 text-gray-600'}`}>
-                    3
-                  </div>
-                  <span className="ml-2 font-semibold hidden md:inline">Submit</span>
-                </div>
-              </div>
-
+          {/* Main Form */}
+          <motion.div
+            className="lg:col-span-2"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            <div className="bg-white rounded-2xl p-8 shadow-xl">
               <form onSubmit={handleSubmit}>
-                {/* Step 1: Your Info */}
-                {step === 1 && (
-                  <div className="space-y-6">
-                    <div>
-                      <label htmlFor="fullName" className="block text-sm font-semibold text-[#082C4A] mb-2">
-                        Full Name *
-                      </label>
-                      <input
-                        type="text"
-                        id="fullName"
-                        name="fullName"
-                        value={formData.fullName}
-                        onChange={handleInputChange}
-                        placeholder="Jane Doe"
-                        required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#20BF55]"
-                        data-testid="full-name-input"
-                      />
-                    </div>
 
-                    <div>
-                      <label htmlFor="workEmail" className="block text-sm font-semibold text-[#082C4A] mb-2">
-                        Work Email *
-                      </label>
-                      <input
-                        type="email"
-                        id="workEmail"
-                        name="workEmail"
-                        value={formData.workEmail}
-                        onChange={handleInputChange}
-                        placeholder="your.name@company.com"
-                        required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#20BF55]"
-                        data-testid="work-email-input"
-                      />
-                    </div>
+                {/* Purpose Selection */}
+                <div className="mb-8">
+                  <label className="block text-lg font-semibold text-[#0B4F6C] mb-4">
+                    What can we help you with?
+                  </label>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {purposes.map((purpose) => (
+                      <div
+                        key={purpose.id}
+                        onClick={() => handlePurposeSelect(purpose.id)}
+                        className={`cursor-pointer p-4 rounded-xl border-2 transition-all duration-300 ${selectedPurpose === purpose.id
+                            ? 'border-[#20BF55] bg-[#20BF55]/5'
+                            : 'border-gray-200 hover:border-gray-300'
+                          }`}
+                      >
+                        <div className="flex items-start gap-3">
+                          <div
+                            className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
+                            style={{ backgroundColor: `${purpose.color}15` }}
+                          >
+                            <purpose.icon size={20} style={{ color: purpose.color }} />
+                          </div>
+                          <div>
+                            <p className="font-semibold text-[#0B4F6C]">{purpose.label}</p>
+                            <p className="text-sm text-gray-500">{purpose.desc}</p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
 
-                    <div>
-                      <label htmlFor="role" className="block text-sm font-semibold text-[#082C4A] mb-2">
-                        Role/Title *
-                      </label>
-                      <input
-                        type="text"
-                        id="role"
-                        name="role"
-                        value={formData.role}
-                        onChange={handleInputChange}
-                        placeholder="HR Manager, CEO, Benefits Director"
-                        required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#20BF55]"
-                        data-testid="role-input"
-                      />
-                    </div>
+                {/* Basic Info */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  <div>
+                    <label className="block text-sm font-semibold text-[#0B4F6C] mb-2">
+                      Full Name *
+                    </label>
+                    <input
+                      type="text"
+                      name="fullName"
+                      value={formData.fullName}
+                      onChange={handleInputChange}
+                      placeholder="John Doe"
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#20BF55] focus:border-transparent"
+                    />
+                  </div>
 
-                    <div>
-                      <label htmlFor="phone" className="block text-sm font-semibold text-[#082C4A] mb-2">
-                        Phone Number (Optional)
-                      </label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleInputChange}
-                        placeholder="+1 (555) 123-4567"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#20BF55]"
-                        data-testid="phone-input"
-                      />
-                    </div>
+                  <div>
+                    <label className="block text-sm font-semibold text-[#0B4F6C] mb-2">
+                      Email *
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      placeholder="john@example.com"
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#20BF55] focus:border-transparent"
+                    />
+                  </div>
 
-                    <Button
-                      type="button"
-                      onClick={() => setStep(2)}
-                      className="w-full"
-                      data-testid="next-to-step-2-button"
-                    >
-                      Next Step
-                    </Button>
+                  <div>
+                    <label className="block text-sm font-semibold text-[#0B4F6C] mb-2">
+                      Phone Number *
+                    </label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      placeholder="+91 98765 43210"
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#20BF55] focus:border-transparent"
+                    />
+                  </div>
+
+                  {/* Corporate Health Fields */}
+                  {selectedPurpose === 'corporate-health' && (
+                    <>
+                      <div>
+                        <label className="block text-sm font-semibold text-[#0B4F6C] mb-2">
+                          Company Name *
+                        </label>
+                        <input
+                          type="text"
+                          name="companyName"
+                          value={formData.companyName}
+                          onChange={handleInputChange}
+                          placeholder="Your Company"
+                          required
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#20BF55] focus:border-transparent"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-semibold text-[#0B4F6C] mb-2">
+                          Number of Employees
+                        </label>
+                        <select
+                          name="employeeCount"
+                          value={formData.employeeCount}
+                          onChange={handleInputChange}
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#20BF55] focus:border-transparent"
+                        >
+                          <option value="">Select range</option>
+                          <option value="1-50">1-50</option>
+                          <option value="51-200">51-200</option>
+                          <option value="201-500">201-500</option>
+                          <option value="500+">500+</option>
+                        </select>
+                      </div>
+                    </>
+                  )}
+
+                  {/* Child Health Fields */}
+                  {selectedPurpose === 'child-health' && (
+                    <div>
+                      <label className="block text-sm font-semibold text-[#0B4F6C] mb-2">
+                        Child's Age
+                      </label>
+                      <select
+                        name="childAge"
+                        value={formData.childAge}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#20BF55] focus:border-transparent"
+                      >
+                        <option value="">Select age range</option>
+                        <option value="0-1 years">0-1 years (Infant)</option>
+                        <option value="1-3 years">1-3 years (Toddler)</option>
+                        <option value="3-6 years">3-6 years (Preschool)</option>
+                        <option value="6-12 years">6-12 years (School age)</option>
+                        <option value="12-18 years">12-18 years (Teenager)</option>
+                      </select>
+                    </div>
+                  )}
+
+                  {/* Appointment Fields for Personal Wellness & Child Health */}
+                  {(selectedPurpose === 'personal-wellness' || selectedPurpose === 'child-health') && (
+                    <>
+                      <div>
+                        <label className="block text-sm font-semibold text-[#0B4F6C] mb-2">
+                          Preferred Date
+                        </label>
+                        <input
+                          type="date"
+                          name="preferredDate"
+                          value={formData.preferredDate}
+                          onChange={handleInputChange}
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#20BF55] focus:border-transparent"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-semibold text-[#0B4F6C] mb-2">
+                          Preferred Time
+                        </label>
+                        <select
+                          name="preferredTime"
+                          value={formData.preferredTime}
+                          onChange={handleInputChange}
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#20BF55] focus:border-transparent"
+                        >
+                          <option value="">Select time</option>
+                          <option value="Morning (8AM-12PM)">Morning (8AM-12PM)</option>
+                          <option value="Afternoon (12PM-4PM)">Afternoon (12PM-4PM)</option>
+                          <option value="Evening (4PM-8PM)">Evening (4PM-8PM)</option>
+                        </select>
+                      </div>
+                    </>
+                  )}
+                </div>
+
+                {/* Message */}
+                <div className="mb-6">
+                  <label className="block text-sm font-semibold text-[#0B4F6C] mb-2">
+                    Message / Additional Details
+                  </label>
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    placeholder="Tell us more about your requirements..."
+                    rows={4}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#20BF55] focus:border-transparent resize-none"
+                  />
+                </div>
+
+                {/* Error Message */}
+                {error && (
+                  <div className="mb-6 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+                    <p className="text-sm">{error}</p>
                   </div>
                 )}
 
-                {/* Step 2: Company Info */}
-                {step === 2 && (
-                  <div className="space-y-6">
-                    <div>
-                      <label htmlFor="companyName" className="block text-sm font-semibold text-[#082C4A] mb-2">
-                        Company Name *
-                      </label>
-                      <input
-                        type="text"
-                        id="companyName"
-                        name="companyName"
-                        value={formData.companyName}
-                        onChange={handleInputChange}
-                        placeholder="NeoCorp Global, Inc."
-                        required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#20BF55]"
-                        data-testid="company-name-input"
-                      />
-                    </div>
+                {/* Submit Button */}
+                <Button
+                  type="submit"
+                  className="w-full bg-[#20BF55] hover:bg-[#1aa548] text-white py-4 text-lg"
+                  disabled={loading || !selectedPurpose}
+                >
+                  {loading ? (
+                    <>
+                      <Loader2 className="animate-spin mr-2" size={20} />
+                      Sending...
+                    </>
+                  ) : (
+                    'Submit Inquiry'
+                  )}
+                </Button>
 
-                    <div>
-                      <label htmlFor="industry" className="block text-sm font-semibold text-[#082C4A] mb-2">
-                        Industry *
-                      </label>
-                      <select
-                        id="industry"
-                        name="industry"
-                        value={formData.industry}
-                        onChange={handleInputChange}
-                        required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#20BF55]"
-                        data-testid="industry-select"
-                      >
-                        <option value="">Select your industry</option>
-                        <option value="Manufacturing">Manufacturing</option>
-                        <option value="Technology">Technology</option>
-                        <option value="Finance">Finance</option>
-                        <option value="Healthcare">Healthcare</option>
-                        <option value="Retail">Retail</option>
-                        <option value="Other">Other</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label htmlFor="employeeCount" className="block text-sm font-semibold text-[#082C4A] mb-2">
-                        Number of Employees *
-                      </label>
-                      <select
-                        id="employeeCount"
-                        name="employeeCount"
-                        value={formData.employeeCount}
-                        onChange={handleInputChange}
-                        required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#20BF55]"
-                        data-testid="employee-count-select"
-                      >
-                        <option value="">Select employee range</option>
-                        <option value="<100">Less than 100</option>
-                        <option value="100-500">100-500</option>
-                        <option value="501-2000">501-2,000</option>
-                        <option value="2000+">2,000+</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-semibold text-[#082C4A] mb-2">
-                        Primary Challenge (Select one or two) *
-                      </label>
-                      <div className="space-y-2">
-                        {['Reduce costs', 'Boost engagement', 'Improve retention', 'Meet compliance'].map((challenge) => (
-                          <label key={challenge} className="flex items-center">
-                            <input
-                              type="checkbox"
-                              checked={formData.primaryChallenge.includes(challenge)}
-                              onChange={() => handleCheckboxChange(challenge)}
-                              className="mr-3 w-5 h-5 text-[#20BF55] focus:ring-[#20BF55]"
-                              data-testid={`challenge-${challenge.toLowerCase().replace(' ', '-')}`}
-                            />
-                            <span className="text-gray-700">{challenge}</span>
-                          </label>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="flex space-x-4">
-                      <Button
-                        type="button"
-                        onClick={() => setStep(1)}
-                        variant="ghost"
-                        className="flex-1"
-                      >
-                        Back
-                      </Button>
-                      <Button
-                        type="button"
-                        onClick={() => setStep(3)}
-                        className="flex-1"
-                        data-testid="next-to-step-3-button"
-                      >
-                        Next Step
-                      </Button>
-                    </div>
-                  </div>
-                )}
-
-                {/* Step 3: Submit */}
-                {step === 3 && (
-                  <div className="space-y-6">
-                    <div className="bg-[#F5F7FA] p-6 rounded-lg">
-                      <h3 className="font-bold text-[#082C4A] mb-4">Review Your Information</h3>
-                      <div className="space-y-2 text-sm">
-                        <p><strong>Name:</strong> {formData.fullName}</p>
-                        <p><strong>Email:</strong> {formData.workEmail}</p>
-                        <p><strong>Role:</strong> {formData.role}</p>
-                        <p><strong>Company:</strong> {formData.companyName}</p>
-                        <p><strong>Industry:</strong> {formData.industry}</p>
-                        <p><strong>Employees:</strong> {formData.employeeCount}</p>
-                        <p><strong>Challenges:</strong> {formData.primaryChallenge.join(', ')}</p>
-                      </div>
-                    </div>
-
-                    <div className="text-sm text-gray-600">
-                      <p>
-                        We will use this information to customize your demo. Your data is protected by our stringent{' '}
-                        <a href="#" className="text-[#FF7F11] hover:underline">HIPAA/GDPR-compliant Privacy Policy</a>.
-                      </p>
-                    </div>
-
-                    {error && (
-                      <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
-                        <p className="text-sm">{error}</p>
-                      </div>
-                    )}
-
-                    <div className="flex space-x-4">
-                      <Button
-                        type="button"
-                        onClick={() => setStep(2)}
-                        variant="ghost"
-                        className="flex-1"
-                        disabled={loading}
-                      >
-                        Back
-                      </Button>
-                      <Button
-                        type="submit"
-                        className="flex-1"
-                        data-testid="schedule-demo-submit-button"
-                        disabled={loading}
-                      >
-                        {loading ? (
-                          <>
-                            <Loader2 className="animate-spin mr-2" size={20} />
-                            Sending...
-                          </>
-                        ) : (
-                          'Schedule My Demo'
-                        )}
-                      </Button>
-                    </div>
-                  </div>
+                {!selectedPurpose && (
+                  <p className="text-center text-sm text-gray-500 mt-4">
+                    Please select a purpose above to continue
+                  </p>
                 )}
               </form>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>
