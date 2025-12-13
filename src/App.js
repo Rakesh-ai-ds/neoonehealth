@@ -12,6 +12,9 @@ import Careers from "@/pages/Careers";
 import Partnerships from "@/pages/Partnerships";
 import Contact from "@/pages/Contact";
 import HealthAudits from "@/pages/HealthAudits";
+import PersonalWellness from "@/pages/PersonalWellness";
+import ChildHealth from "@/pages/ChildHealth";
+import CorporateHealth from "@/pages/CorporateHealth";
 
 // Component to scroll to top on route change
 function ScrollToTop() {
@@ -35,11 +38,14 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/personal-wellness" element={<PersonalWellness />} />
+          <Route path="/child-health" element={<ChildHealth />} />
+          <Route path="/corporate-health" element={<CorporateHealth />} />
           <Route path="/corporate-screening" element={<CorporateScreening />} />
           <Route path="/digital-platform" element={<DigitalPlatform />} />
           <Route path="/health-audits" element={<HealthAudits />} />
           <Route path="/benefits" element={<Benefits />} />
-          <Route path="/about" element={<About />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/partnerships" element={<Partnerships />} />
           <Route path="/contact" element={<Contact />} />
