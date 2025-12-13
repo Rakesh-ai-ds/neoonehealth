@@ -1,112 +1,166 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Facebook, Twitter, Linkedin, Instagram, Phone, Mail, MapPin } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
 const Footer = () => {
+  const [footerRef, footerInView] = useInView({ triggerOnce: true, threshold: 0.1 });
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+  };
+
   return (
-    <footer className="bg-[#0B4F6C] text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <footer className="bg-[#0B4F6C] text-white" ref={footerRef}>
+      <motion.div
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12"
+        initial="hidden"
+        animate={footerInView ? "visible" : "hidden"}
+        variants={containerVariants}
+      >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 
           {/* Company Info */}
-          <div>
+          <motion.div variants={itemVariants}>
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-[#01BAEF] via-[#20BF55] to-[#0B4F6C] rounded-full flex items-center justify-center">
+              <motion.div
+                className="w-10 h-10 bg-gradient-to-br from-[#01BAEF] via-[#20BF55] to-[#0B4F6C] rounded-full flex items-center justify-center"
+                whileHover={{ rotate: 360, scale: 1.1 }}
+                transition={{ duration: 0.5 }}
+              >
                 <span className="text-white font-bold text-xl">N</span>
-              </div>
+              </motion.div>
               <span className="text-white font-bold text-xl">NeoOne Health</span>
             </div>
             <p className="text-gray-300 text-sm mb-6">
               Your trusted healthcare partner. Comprehensive wellness solutions for individuals, children, and corporate organizations.
             </p>
-            <div className="flex space-x-4">
-              <a href="#" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-gray-300 hover:bg-[#20BF55] hover:text-white transition-all" aria-label="Facebook">
-                <Facebook size={18} />
-              </a>
-              <a href="#" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-gray-300 hover:bg-[#20BF55] hover:text-white transition-all" aria-label="Twitter">
-                <Twitter size={18} />
-              </a>
-              <a href="#" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-gray-300 hover:bg-[#20BF55] hover:text-white transition-all" aria-label="LinkedIn">
-                <Linkedin size={18} />
-              </a>
-              <a href="#" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-gray-300 hover:bg-[#20BF55] hover:text-white transition-all" aria-label="Instagram">
-                <Instagram size={18} />
-              </a>
+            <div className="flex space-x-3">
+              {[Facebook, Twitter, Linkedin, Instagram].map((Icon, index) => (
+                <motion.a
+                  key={index}
+                  href="#"
+                  className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-gray-300 hover:bg-[#20BF55] hover:text-white transition-all"
+                  whileHover={{ scale: 1.2, y: -3 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Icon size={18} />
+                </motion.a>
+              ))}
             </div>
-          </div>
+          </motion.div>
 
-          {/* Quick Links - Matching Header */}
-          <div>
+          {/* Quick Links */}
+          <motion.div variants={itemVariants}>
             <h3 className="text-white font-bold mb-4">Quick Links</h3>
             <ul className="space-y-3">
-              <li><Link to="/" className="text-gray-300 hover:text-[#20BF55] transition-colors text-sm">Home</Link></li>
-              <li><Link to="/about" className="text-gray-300 hover:text-[#20BF55] transition-colors text-sm">About Us</Link></li>
-              <li><Link to="/personal-wellness" className="text-gray-300 hover:text-[#20BF55] transition-colors text-sm">Personal Wellness</Link></li>
-              <li><Link to="/child-health" className="text-gray-300 hover:text-[#20BF55] transition-colors text-sm">Child Health</Link></li>
-              <li><Link to="/corporate-health" className="text-gray-300 hover:text-[#20BF55] transition-colors text-sm">Corporate Health</Link></li>
-              <li><Link to="/contact" className="text-gray-300 hover:text-[#20BF55] transition-colors text-sm">Contact Us</Link></li>
+              {[
+                { to: "/", label: "Home" },
+                { to: "/about", label: "About Us" },
+                { to: "/personal-wellness", label: "Personal Wellness" },
+                { to: "/child-health", label: "Child Health" },
+                { to: "/corporate-health", label: "Corporate Health" },
+                { to: "/contact", label: "Contact Us" }
+              ].map((link, index) => (
+                <motion.li
+                  key={index}
+                  whileHover={{ x: 5 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <Link to={link.to} className="text-gray-300 hover:text-[#20BF55] transition-colors text-sm flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-[#20BF55] rounded-full opacity-0 group-hover:opacity-100"></span>
+                    {link.label}
+                  </Link>
+                </motion.li>
+              ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* Services */}
-          <div>
+          <motion.div variants={itemVariants}>
             <h3 className="text-white font-bold mb-4">Our Services</h3>
             <ul className="space-y-3">
-              <li><Link to="/personal-wellness#fitness" className="text-gray-300 hover:text-[#20BF55] transition-colors text-sm">Fitness & Exercise</Link></li>
-              <li><Link to="/personal-wellness#nutrition" className="text-gray-300 hover:text-[#20BF55] transition-colors text-sm">Nutrition & Diet</Link></li>
-              <li><Link to="/child-health#pediatric-care" className="text-gray-300 hover:text-[#20BF55] transition-colors text-sm">Pediatric Care</Link></li>
-              <li><Link to="/child-health#vaccination" className="text-gray-300 hover:text-[#20BF55] transition-colors text-sm">Vaccination Programs</Link></li>
-              <li><Link to="/corporate-health#screening" className="text-gray-300 hover:text-[#20BF55] transition-colors text-sm">Health Screening</Link></li>
-              <li><Link to="/corporate-health#wellness-programs" className="text-gray-300 hover:text-[#20BF55] transition-colors text-sm">Wellness Programs</Link></li>
+              {[
+                { to: "/personal-wellness#fitness", label: "Fitness & Exercise" },
+                { to: "/personal-wellness#nutrition", label: "Nutrition & Diet" },
+                { to: "/child-health#pediatric-care", label: "Pediatric Care" },
+                { to: "/child-health#vaccination", label: "Vaccination Programs" },
+                { to: "/corporate-health#screening", label: "Health Screening" },
+                { to: "/corporate-health#wellness-programs", label: "Wellness Programs" }
+              ].map((link, index) => (
+                <motion.li
+                  key={index}
+                  whileHover={{ x: 5 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <Link to={link.to} className="text-gray-300 hover:text-[#20BF55] transition-colors text-sm">
+                    {link.label}
+                  </Link>
+                </motion.li>
+              ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* Contact Info */}
-          <div>
+          <motion.div variants={itemVariants}>
             <h3 className="text-white font-bold mb-4">Contact Us</h3>
             <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <Phone className="text-[#20BF55]" size={16} />
-                </div>
-                <div>
-                  <p className="text-sm text-gray-400">Phone</p>
-                  <p className="text-gray-200 text-sm">+91 98765 43210</p>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <Mail className="text-[#20BF55]" size={16} />
-                </div>
-                <div>
-                  <p className="text-sm text-gray-400">Email</p>
-                  <p className="text-gray-200 text-sm">contact@neoonehealth.in</p>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <MapPin className="text-[#20BF55]" size={16} />
-                </div>
-                <div>
-                  <p className="text-sm text-gray-400">Address</p>
-                  <p className="text-gray-200 text-sm">Chennai, Tamil Nadu, India</p>
-                </div>
-              </li>
+              {[
+                { icon: Phone, label: "Phone", value: "+91 98765 43210" },
+                { icon: Mail, label: "Email", value: "contact@neoonehealth.in" },
+                { icon: MapPin, label: "Address", value: "Chennai, Tamil Nadu, India" }
+              ].map((item, index) => (
+                <motion.li
+                  key={index}
+                  className="flex items-start gap-3"
+                  whileHover={{ x: 3 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <motion.div
+                    className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5"
+                    whileHover={{ scale: 1.1, backgroundColor: "rgba(32, 191, 85, 0.3)" }}
+                  >
+                    <item.icon className="text-[#20BF55]" size={16} />
+                  </motion.div>
+                  <div>
+                    <p className="text-sm text-gray-400">{item.label}</p>
+                    <p className="text-gray-200 text-sm">{item.value}</p>
+                  </div>
+                </motion.li>
+              ))}
             </ul>
-          </div>
+          </motion.div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-white/10 mt-10 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <motion.div
+          className="border-t border-white/10 mt-10 pt-8 flex flex-col md:flex-row justify-between items-center"
+          variants={itemVariants}
+        >
           <p className="text-gray-400 text-sm mb-4 md:mb-0">
             © 2025 NeoOne Health. All rights reserved.
           </p>
           <div className="flex space-x-6">
-            <Link to="/privacy" className="text-gray-400 hover:text-[#20BF55] transition-colors text-sm">Privacy Policy</Link>
-            <Link to="/terms" className="text-gray-400 hover:text-[#20BF55] transition-colors text-sm">Terms of Service</Link>
+            {["Privacy Policy", "Terms of Service"].map((text, index) => (
+              <motion.div key={index} whileHover={{ scale: 1.05 }}>
+                <Link to={index === 0 ? "/privacy" : "/terms"} className="text-gray-400 hover:text-[#20BF55] transition-colors text-sm">
+                  {text}
+                </Link>
+              </motion.div>
+            ))}
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </footer>
   );
 };
