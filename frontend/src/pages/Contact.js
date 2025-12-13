@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, CheckCircle2 } from 'lucide-react';
+import { Mail, Phone, MapPin, CheckCircle2, Loader2 } from 'lucide-react';
 import Button from '@/components/ui/Button';
 
 const Contact = () => {
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const [formData, setFormData] = useState({
     fullName: '',
     workEmail: '',
@@ -30,11 +32,54 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Form submission would go here - currently just frontend
-    console.log('Form Data:', formData);
-    setSubmitted(true);
+    setLoading(true);
+    setError('');
+
+    try {
+      // Use local server for development, Vercel API for production
+      const apiUrl = process.env.NODE_ENV === 'development'
+        ? 'http://localhost:3001/api/send-email'
+        : '/api/send-email';
+
+      console.log('Sending to:', apiUrl);
+
+      // Send email via Resend API
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.fullName,
+          email: formData.workEmail,
+          phone: formData.phone,
+          company: formData.companyName,
+          message: `
+Role: ${formData.role}
+Industry: ${formData.industry}
+Employee Count: ${formData.employeeCount}
+Primary Challenges: ${formData.primaryChallenge.join(', ')}
+          `,
+          subject: `New Demo Request from ${formData.companyName}`,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send email');
+      }
+
+      console.log('Email sent successfully:', data);
+      setSubmitted(true);
+    } catch (err) {
+      console.error('Error:', err);
+      setError(err.message || 'Failed to send message. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (submitted) {
@@ -354,12 +399,19 @@ const Contact = () => {
                       </p>
                     </div>
 
+                    {error && (
+                      <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+                        <p className="text-sm">{error}</p>
+                      </div>
+                    )}
+
                     <div className="flex space-x-4">
                       <Button
                         type="button"
                         onClick={() => setStep(2)}
                         variant="ghost"
                         className="flex-1"
+                        disabled={loading}
                       >
                         Back
                       </Button>
@@ -367,8 +419,16 @@ const Contact = () => {
                         type="submit"
                         className="flex-1"
                         data-testid="schedule-demo-submit-button"
+                        disabled={loading}
                       >
-                        Schedule My Demo
+                        {loading ? (
+                          <>
+                            <Loader2 className="animate-spin mr-2" size={20} />
+                            Sending...
+                          </>
+                        ) : (
+                          'Schedule My Demo'
+                        )}
                       </Button>
                     </div>
                   </div>
