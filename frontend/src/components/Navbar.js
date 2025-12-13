@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown } from 'lucide-react';
-import Button from '@/components/ui/Button';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [solutionsOpen, setSolutionsOpen] = useState(false);
-  const [benefitsOpen, setBenefitsOpen] = useState(false);
+  const [personalWellnessOpen, setPersonalWellnessOpen] = useState(false);
+  const [childHealthOpen, setChildHealthOpen] = useState(false);
+  const [corporateHealthOpen, setCorporateHealthOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
@@ -46,37 +46,51 @@ const Navbar = () => {
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-8">
+            <div className="hidden lg:flex items-center space-x-6">
               <Link to="/" className={`text-[#082C4A] hover:text-[#20BF55] font-medium transition-colors ${isActive('/') ? 'text-[#20BF55]' : ''}`}>Home</Link>
 
-              {/* Solutions Dropdown */}
+              <Link to="/about" className={`text-[#082C4A] hover:text-[#20BF55] font-medium transition-colors ${isActive('/about') ? 'text-[#20BF55]' : ''}`}>About Us</Link>
+
+              {/* Personal Wellness Dropdown */}
               <div className="relative group">
                 <button className="flex items-center text-[#082C4A] hover:text-[#20BF55] font-medium transition-colors">
-                  Solutions <ChevronDown className="ml-1 h-4 w-4" />
+                  Personal Wellness <ChevronDown className="ml-1 h-4 w-4" />
                 </button>
                 <div className="absolute left-0 mt-2 w-64 bg-white shadow-lg rounded-md py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                  <Link to="/corporate-screening" className="block px-4 py-2 text-[#082C4A] hover:bg-[#F5F7FA] hover:text-[#20BF55]">Corporate Screening</Link>
-                  <Link to="/digital-platform" className="block px-4 py-2 text-[#082C4A] hover:bg-[#F5F7FA] hover:text-[#20BF55]">Digital Wellness Platform</Link>
-                  <Link to="/health-audits" className="block px-4 py-2 text-[#082C4A] hover:bg-[#F5F7FA] hover:text-[#20BF55]">Health Audits & Reporting</Link>
+                  <Link to="/personal-wellness#fitness" className="block px-4 py-2 text-[#082C4A] hover:bg-[#F5F7FA] hover:text-[#20BF55]">Fitness & Exercise</Link>
+                  <Link to="/personal-wellness#nutrition" className="block px-4 py-2 text-[#082C4A] hover:bg-[#F5F7FA] hover:text-[#20BF55]">Nutrition & Diet</Link>
+                  <Link to="/personal-wellness#mental-health" className="block px-4 py-2 text-[#082C4A] hover:bg-[#F5F7FA] hover:text-[#20BF55]">Mental Health</Link>
+                  <Link to="/personal-wellness#preventive-care" className="block px-4 py-2 text-[#082C4A] hover:bg-[#F5F7FA] hover:text-[#20BF55]">Preventive Care</Link>
                 </div>
               </div>
 
-              {/* Benefits Dropdown */}
+              {/* Child Health Dropdown */}
               <div className="relative group">
                 <button className="flex items-center text-[#082C4A] hover:text-[#20BF55] font-medium transition-colors">
-                  Benefits <ChevronDown className="ml-1 h-4 w-4" />
+                  Child Health <ChevronDown className="ml-1 h-4 w-4" />
                 </button>
                 <div className="absolute left-0 mt-2 w-64 bg-white shadow-lg rounded-md py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                  <Link to="/benefits#roi" className="block px-4 py-2 text-[#082C4A] hover:bg-[#F5F7FA] hover:text-[#20BF55]">ROI & Financial Savings</Link>
-                  <Link to="/benefits#productivity" className="block px-4 py-2 text-[#082C4A] hover:bg-[#F5F7FA] hover:text-[#20BF55]">Productivity & Performance</Link>
-                  <Link to="/benefits#retention" className="block px-4 py-2 text-[#082C4A] hover:bg-[#F5F7FA] hover:text-[#20BF55]">Employee Retention</Link>
+                  <Link to="/child-health#pediatric-care" className="block px-4 py-2 text-[#082C4A] hover:bg-[#F5F7FA] hover:text-[#20BF55]">Pediatric Care</Link>
+                  <Link to="/child-health#vaccination" className="block px-4 py-2 text-[#082C4A] hover:bg-[#F5F7FA] hover:text-[#20BF55]">Vaccination Programs</Link>
+                  <Link to="/child-health#growth-development" className="block px-4 py-2 text-[#082C4A] hover:bg-[#F5F7FA] hover:text-[#20BF55]">Growth & Development</Link>
+                  <Link to="/child-health#child-nutrition" className="block px-4 py-2 text-[#082C4A] hover:bg-[#F5F7FA] hover:text-[#20BF55]">Child Nutrition</Link>
                 </div>
               </div>
 
-              <Link to="/about" className={`text-[#082C4A] hover:text-[#20BF55] font-medium transition-colors ${isActive('/about') ? 'text-[#20BF55]' : ''}`}>About</Link>
-              <Link to="/partnerships" className={`text-[#082C4A] hover:text-[#20BF55] font-medium transition-colors ${isActive('/partnerships') ? 'text-[#20BF55]' : ''}`}>Partnerships</Link>
-              <Link to="/careers" className={`text-[#082C4A] hover:text-[#20BF55] font-medium transition-colors ${isActive('/careers') ? 'text-[#20BF55]' : ''}`}>Careers</Link>
-              <Link to="/contact" className={`text-[#082C4A] hover:text-[#20BF55] font-medium transition-colors ${isActive('/contact') ? 'text-[#20BF55]' : ''}`}>Contact</Link>
+              {/* Corporate Health Dropdown */}
+              <div className="relative group">
+                <button className="flex items-center text-[#082C4A] hover:text-[#20BF55] font-medium transition-colors">
+                  Corporate Health <ChevronDown className="ml-1 h-4 w-4" />
+                </button>
+                <div className="absolute left-0 mt-2 w-64 bg-white shadow-lg rounded-md py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                  <Link to="/corporate-health#screening" className="block px-4 py-2 text-[#082C4A] hover:bg-[#F5F7FA] hover:text-[#20BF55]">Health Screening</Link>
+                  <Link to="/corporate-health#wellness-programs" className="block px-4 py-2 text-[#082C4A] hover:bg-[#F5F7FA] hover:text-[#20BF55]">Wellness Programs</Link>
+                  <Link to="/corporate-health#mental-wellness" className="block px-4 py-2 text-[#082C4A] hover:bg-[#F5F7FA] hover:text-[#20BF55]">Mental Wellness</Link>
+                  <Link to="/corporate-health#health-audits" className="block px-4 py-2 text-[#082C4A] hover:bg-[#F5F7FA] hover:text-[#20BF55]">Health Audits</Link>
+                </div>
+              </div>
+
+              <Link to="/contact" className={`text-[#082C4A] hover:text-[#20BF55] font-medium transition-colors ${isActive('/contact') ? 'text-[#20BF55]' : ''}`}>Contact Us</Link>
             </div>
 
             {/* Mobile Menu Button */}
@@ -115,59 +129,84 @@ const Navbar = () => {
               <div className="flex-1 overflow-y-auto p-6">
                 <div className="space-y-4">
                   <Link to="/" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] font-medium py-2">Home</Link>
+                  <Link to="/about" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] font-medium py-2">About Us</Link>
 
-                  {/* Solutions */}
+                  {/* Personal Wellness */}
                   <div>
                     <button
-                      onClick={() => setSolutionsOpen(!solutionsOpen)}
+                      onClick={() => setPersonalWellnessOpen(!personalWellnessOpen)}
                       className="flex items-center justify-between w-full text-[#082C4A] font-medium py-2"
                     >
-                      Solutions <ChevronDown className={`h-4 w-4 transition-transform ${solutionsOpen ? 'rotate-180' : ''}`} />
+                      Personal Wellness <ChevronDown className={`h-4 w-4 transition-transform ${personalWellnessOpen ? 'rotate-180' : ''}`} />
                     </button>
                     <AnimatePresence>
-                      {solutionsOpen && (
+                      {personalWellnessOpen && (
                         <motion.div
                           className="ml-4 mt-2 space-y-2"
                           initial={{ opacity: 0, height: 0 }}
                           animate={{ opacity: 1, height: 'auto' }}
                           exit={{ opacity: 0, height: 0 }}
                         >
-                          <Link to="/corporate-screening" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] py-2">Corporate Screening</Link>
-                          <Link to="/digital-platform" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] py-2">Digital Wellness Platform</Link>
-                          <Link to="/health-audits" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] py-2">Health Audits & Reporting</Link>
+                          <Link to="/personal-wellness#fitness" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] py-2">Fitness & Exercise</Link>
+                          <Link to="/personal-wellness#nutrition" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] py-2">Nutrition & Diet</Link>
+                          <Link to="/personal-wellness#mental-health" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] py-2">Mental Health</Link>
+                          <Link to="/personal-wellness#preventive-care" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] py-2">Preventive Care</Link>
                         </motion.div>
                       )}
                     </AnimatePresence>
                   </div>
 
-                  {/* Benefits */}
+                  {/* Child Health */}
                   <div>
                     <button
-                      onClick={() => setBenefitsOpen(!benefitsOpen)}
+                      onClick={() => setChildHealthOpen(!childHealthOpen)}
                       className="flex items-center justify-between w-full text-[#082C4A] font-medium py-2"
                     >
-                      Benefits <ChevronDown className={`h-4 w-4 transition-transform ${benefitsOpen ? 'rotate-180' : ''}`} />
+                      Child Health <ChevronDown className={`h-4 w-4 transition-transform ${childHealthOpen ? 'rotate-180' : ''}`} />
                     </button>
                     <AnimatePresence>
-                      {benefitsOpen && (
+                      {childHealthOpen && (
                         <motion.div
                           className="ml-4 mt-2 space-y-2"
                           initial={{ opacity: 0, height: 0 }}
                           animate={{ opacity: 1, height: 'auto' }}
                           exit={{ opacity: 0, height: 0 }}
                         >
-                          <Link to="/benefits#roi" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] py-2">ROI & Financial Savings</Link>
-                          <Link to="/benefits#productivity" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] py-2">Productivity & Performance</Link>
-                          <Link to="/benefits#retention" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] py-2">Employee Retention</Link>
+                          <Link to="/child-health#pediatric-care" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] py-2">Pediatric Care</Link>
+                          <Link to="/child-health#vaccination" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] py-2">Vaccination Programs</Link>
+                          <Link to="/child-health#growth-development" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] py-2">Growth & Development</Link>
+                          <Link to="/child-health#child-nutrition" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] py-2">Child Nutrition</Link>
                         </motion.div>
                       )}
                     </AnimatePresence>
                   </div>
 
-                  <Link to="/about" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] font-medium py-2">About</Link>
-                  <Link to="/partnerships" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] font-medium py-2">Partnerships</Link>
-                  <Link to="/careers" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] font-medium py-2">Careers</Link>
-                  <Link to="/contact" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] font-medium py-2">Contact</Link>
+                  {/* Corporate Health */}
+                  <div>
+                    <button
+                      onClick={() => setCorporateHealthOpen(!corporateHealthOpen)}
+                      className="flex items-center justify-between w-full text-[#082C4A] font-medium py-2"
+                    >
+                      Corporate Health <ChevronDown className={`h-4 w-4 transition-transform ${corporateHealthOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    <AnimatePresence>
+                      {corporateHealthOpen && (
+                        <motion.div
+                          className="ml-4 mt-2 space-y-2"
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                        >
+                          <Link to="/corporate-health#screening" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] py-2">Health Screening</Link>
+                          <Link to="/corporate-health#wellness-programs" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] py-2">Wellness Programs</Link>
+                          <Link to="/corporate-health#mental-wellness" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] py-2">Mental Wellness</Link>
+                          <Link to="/corporate-health#health-audits" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] py-2">Health Audits</Link>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+
+                  <Link to="/contact" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] font-medium py-2">Contact Us</Link>
                 </div>
               </div>
             </div>
