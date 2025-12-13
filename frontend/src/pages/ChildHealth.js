@@ -145,7 +145,7 @@ const ChildHealth = () => {
                             variants={fadeInUp}
                         >
                             <img
-                                src="https://images.unsplash.com/photo-1632053002928-1919605ee6e4?auto=format&fit=crop&w=800&q=80"
+                                src="https://images.unsplash.com/photo-1612277795421-9bc7706a4a34?auto=format&fit=crop&w=800&q=80"
                                 alt="Child Vaccination"
                                 className="w-full h-80 object-cover"
                             />
