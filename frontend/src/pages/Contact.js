@@ -7,6 +7,7 @@ const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [validationErrors, setValidationErrors] = useState({});
   const [selectedPurpose, setSelectedPurpose] = useState('');
   const [formData, setFormData] = useState({
     fullName: '',
@@ -32,15 +33,64 @@ const Contact = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    // Clear error when user starts typing
+    if (validationErrors[name]) {
+      setValidationErrors(prev => ({ ...prev, [name]: '' }));
+    }
   };
 
   const handlePurposeSelect = (purposeId) => {
     setSelectedPurpose(purposeId);
     setFormData(prev => ({ ...prev, purpose: purposeId }));
+    // Clear purpose error
+    if (validationErrors.purpose) {
+      setValidationErrors(prev => ({ ...prev, purpose: '' }));
+    }
+  };
+
+  // Validation function
+  const validateForm = () => {
+    const errors = {};
+
+    // Check if purpose is selected
+    if (!selectedPurpose) {
+      errors.purpose = 'Please select an inquiry type';
+    }
+
+    // Basic required fields
+    if (!formData.fullName.trim()) {
+      errors.fullName = 'Full name is required';
+    }
+
+    if (!formData.email.trim()) {
+      errors.email = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      errors.email = 'Please enter a valid email';
+    }
+
+    if (!formData.phone.trim()) {
+      errors.phone = 'Phone number is required';
+    } else if (!/^[\+]?[\d\s-]{10,}$/.test(formData.phone.replace(/\s/g, ''))) {
+      errors.phone = 'Please enter a valid phone number';
+    }
+
+    // Corporate health specific validation
+    if (selectedPurpose === 'corporate-health' && !formData.companyName.trim()) {
+      errors.companyName = 'Company name is required';
+    }
+
+    setValidationErrors(errors);
+    return Object.keys(errors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validate before submitting
+    if (!validateForm()) {
+      return;
+    }
+
     setLoading(true);
     setError('');
 
@@ -229,8 +279,8 @@ ${formData.message}
                         key={purpose.id}
                         onClick={() => handlePurposeSelect(purpose.id)}
                         className={`cursor-pointer p-4 rounded-xl border-2 transition-all duration-300 ${selectedPurpose === purpose.id
-                            ? 'border-[#20BF55] bg-[#20BF55]/5'
-                            : 'border-gray-200 hover:border-gray-300'
+                          ? 'border-[#20BF55] bg-[#20BF55]/5'
+                          : 'border-gray-200 hover:border-gray-300'
                           }`}
                       >
                         <div className="flex items-start gap-3">
@@ -248,6 +298,9 @@ ${formData.message}
                       </div>
                     ))}
                   </div>
+                  {validationErrors.purpose && (
+                    <p className="text-red-500 text-sm mt-2">{validationErrors.purpose}</p>
+                  )}
                 </div>
 
                 {/* Basic Info */}
@@ -262,9 +315,12 @@ ${formData.message}
                       value={formData.fullName}
                       onChange={handleInputChange}
                       placeholder="John Doe"
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#20BF55] focus:border-transparent"
+                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#20BF55] focus:border-transparent ${validationErrors.fullName ? 'border-red-500' : 'border-gray-300'
+                        }`}
                     />
+                    {validationErrors.fullName && (
+                      <p className="text-red-500 text-sm mt-1">{validationErrors.fullName}</p>
+                    )}
                   </div>
 
                   <div>
@@ -277,9 +333,12 @@ ${formData.message}
                       value={formData.email}
                       onChange={handleInputChange}
                       placeholder="john@example.com"
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#20BF55] focus:border-transparent"
+                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#20BF55] focus:border-transparent ${validationErrors.email ? 'border-red-500' : 'border-gray-300'
+                        }`}
                     />
+                    {validationErrors.email && (
+                      <p className="text-red-500 text-sm mt-1">{validationErrors.email}</p>
+                    )}
                   </div>
 
                   <div>
@@ -292,9 +351,12 @@ ${formData.message}
                       value={formData.phone}
                       onChange={handleInputChange}
                       placeholder="+91 98765 43210"
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#20BF55] focus:border-transparent"
+                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#20BF55] focus:border-transparent ${validationErrors.phone ? 'border-red-500' : 'border-gray-300'
+                        }`}
                     />
+                    {validationErrors.phone && (
+                      <p className="text-red-500 text-sm mt-1">{validationErrors.phone}</p>
+                    )}
                   </div>
 
                   {/* Corporate Health Fields */}
@@ -310,9 +372,12 @@ ${formData.message}
                           value={formData.companyName}
                           onChange={handleInputChange}
                           placeholder="Your Company"
-                          required
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#20BF55] focus:border-transparent"
+                          className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#20BF55] focus:border-transparent ${validationErrors.companyName ? 'border-red-500' : 'border-gray-300'
+                            }`}
                         />
+                        {validationErrors.companyName && (
+                          <p className="text-red-500 text-sm mt-1">{validationErrors.companyName}</p>
+                        )}
                       </div>
                       <div>
                         <label className="block text-sm font-semibold text-[#0B4F6C] mb-2">
