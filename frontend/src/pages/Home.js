@@ -73,26 +73,26 @@ const Home = () => {
     <div className="min-h-screen">
       {/* Hero Section with Background Image Slider */}
       <section className="relative min-h-screen flex items-center overflow-hidden" ref={heroRef}>
+        {/* Static Dark Overlay - Always visible to prevent flash */}
+        <div className="absolute inset-0 bg-[#0B4F6C] z-0"></div>
+
         {/* Background Image Slider */}
-        <div className="absolute inset-0 z-0">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentImageIndex}
-              initial={{ opacity: 0, scale: 1.1 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 1.5, ease: "easeInOut" }}
-              className="absolute inset-0"
+        <div className="absolute inset-0 z-[1]">
+          {heroImages.map((image, index) => (
+            <div
+              key={index}
+              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+                }`}
             >
               <img
-                src={heroImages[currentImageIndex].url}
-                alt={heroImages[currentImageIndex].alt}
+                src={image.url}
+                alt={image.alt}
                 className="w-full h-full object-cover"
               />
-              {/* Dark overlay for text readability */}
-              <div className="absolute inset-0 bg-gradient-to-r from-[#0B4F6C]/90 via-[#0B4F6C]/70 to-[#0B4F6C]/40"></div>
-            </motion.div>
-          </AnimatePresence>
+            </div>
+          ))}
+          {/* Dark overlay for text readability - Always on top of images */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0B4F6C]/85 via-[#0B4F6C]/70 to-[#0B4F6C]/50 z-[2]"></div>
         </div>
 
         {/* Image Indicators */}
@@ -102,8 +102,8 @@ const Home = () => {
               key={index}
               onClick={() => setCurrentImageIndex(index)}
               className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentImageIndex
-                  ? 'bg-white w-8'
-                  : 'bg-white/50 hover:bg-white/70'
+                ? 'bg-white w-8'
+                : 'bg-white/50 hover:bg-white/70'
                 }`}
               aria-label={`Go to slide ${index + 1}`}
             />
