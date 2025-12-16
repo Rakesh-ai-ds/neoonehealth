@@ -140,23 +140,23 @@ const Home = () => {
                   </motion.button>
                 </a>
               </div>
-
-              {/* Slide Indicators - Tiny centered dots */}
-              <div className="flex items-center justify-center gap-2 mt-8">
-                {heroSlides.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentSlide(index)}
-                    className={`rounded-full transition-all duration-300 ${currentSlide === index
-                      ? 'w-[6px] h-[6px] bg-[#2563EB]'
-                      : 'w-[6px] h-[6px] bg-[#CBD5E1] hover:bg-[#94A3B8]'
-                      }`}
-                    aria-label={`Go to slide ${index + 1}`}
-                  />
-                ))}
-              </div>
             </motion.div>
           </div>
+        </div>
+
+        {/* Slide Indicators - Absolute bottom center, tiny dots */}
+        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20 flex items-center gap-1.5">
+          {heroSlides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`rounded-full transition-all duration-300 ${currentSlide === index
+                ? 'w-1.5 h-1.5 bg-[#2563EB]'
+                : 'w-1.5 h-1.5 bg-[#94A3B8]/60 hover:bg-[#64748B]'
+                }`}
+              aria-label={`Slide ${index + 1}`}
+            />
+          ))}
         </div>
       </section>
 
