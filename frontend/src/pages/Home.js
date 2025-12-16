@@ -141,15 +141,15 @@ const Home = () => {
                 </a>
               </div>
 
-              {/* Slide Indicators */}
-              <div className="flex gap-2 mt-6 md:mt-8">
+              {/* Slide Indicators - Small dots */}
+              <div className="flex items-center justify-start gap-1.5 mt-6 md:mt-8">
                 {heroSlides.map((_, index) => (
                   <button
                     key={index}
                     onClick={() => setCurrentSlide(index)}
-                    className={`h-1.5 rounded-full transition-all duration-300 ${currentSlide === index
-                        ? 'w-8 bg-[#2563EB]'
-                        : 'w-4 bg-[#94A3B8]/50 hover:bg-[#64748B]'
+                    className={`rounded-full transition-all duration-300 ${currentSlide === index
+                      ? 'w-2 h-2 bg-[#2563EB]'
+                      : 'w-1.5 h-1.5 bg-[#CBD5E1] hover:bg-[#94A3B8]'
                       }`}
                     aria-label={`Go to slide ${index + 1}`}
                   />
