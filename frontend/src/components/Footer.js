@@ -7,159 +7,120 @@ import { useInView } from 'react-intersection-observer';
 const Footer = () => {
   const [footerRef, footerInView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
-  };
-
   const quickLinks = [
     { label: 'Home', path: '/' },
-    { label: 'About Us', path: '/about' },
+    { label: 'About', path: '/about' },
     { label: 'Personal Wellness', path: '/personal-wellness' },
     { label: 'Child Health', path: '/child-health' },
-    { label: 'Occupational Health', path: '/occupational-health' },
-    { label: 'Elderly Health', path: '/elderly-health' },
-    { label: 'Contact Us', path: '/contact' }
-  ];
-
-  const services = [
-    { label: 'Fitness & Exercise', path: '/personal-wellness#fitness' },
-    { label: 'Nutrition & Diet', path: '/personal-wellness#nutrition' },
-    { label: 'Mental Wellness', path: '/personal-wellness#mental-health' },
-    { label: 'Pediatric Care', path: '/child-health#pediatric-care' },
-    { label: 'Workplace Safety', path: '/occupational-health#workplace-safety' },
-    { label: '3F Elderly Care', path: '/elderly-health' }
+    { label: 'Occupational', path: '/occupational-health' },
+    { label: 'Elderly', path: '/elderly-health' },
+    { label: 'Contact', path: '/contact' }
   ];
 
   return (
     <footer className="bg-[#1E293B] text-white" ref={footerRef}>
-      <motion.div
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12"
-        initial="hidden"
-        animate={footerInView ? "visible" : "hidden"}
-        variants={containerVariants}
-      >
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
 
           {/* Company Info */}
-          <motion.div variants={itemVariants}>
-            <div className="flex items-center space-x-3 mb-4">
-              <motion.div
-                className="w-10 h-10 bg-gradient-to-br from-[#2563EB] to-[#38BDF8] rounded-xl flex items-center justify-center"
-                whileHover={{ scale: 1.05 }}
-              >
-                <span className="text-white font-bold text-xl">N</span>
-              </motion.div>
-              <span className="text-white font-bold text-xl">NeoOne Health</span>
+          <motion.div
+            className="col-span-2 md:col-span-1"
+            initial={{ opacity: 0, y: 20 }}
+            animate={footerInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="flex items-center space-x-2 mb-4">
+              <div className="w-8 h-8 bg-gradient-to-br from-[#2563EB] to-[#38BDF8] rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-lg">N</span>
+              </div>
+              <span className="text-white font-bold text-lg">NeoOne Health</span>
             </div>
-            <p className="text-gray-400 text-sm mb-6 leading-relaxed">
-              Your trusted healthcare partner. Comprehensive wellness solutions for individuals, families, and organizations.
+            <p className="text-gray-400 text-sm mb-4 leading-relaxed">
+              Your trusted healthcare partner for comprehensive wellness solutions.
             </p>
-            <div className="flex space-x-3">
+            <div className="flex space-x-2">
               {[Facebook, Twitter, Linkedin, Instagram].map((Icon, index) => (
-                <motion.a
-                  key={index}
-                  href="#"
-                  className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center text-gray-400 hover:bg-[#2563EB] hover:text-white transition-all"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Icon size={18} />
-                </motion.a>
+                <a key={index} href="#" className="w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center text-gray-400 hover:bg-[#2563EB] hover:text-white transition-all">
+                  <Icon size={16} />
+                </a>
               ))}
             </div>
           </motion.div>
 
           {/* Quick Links */}
-          <motion.div variants={itemVariants}>
-            <h3 className="text-white font-bold mb-4">Quick Links</h3>
-            <ul className="space-y-3">
-              {quickLinks.map((link, index) => (
-                <motion.li
-                  key={index}
-                  whileHover={{ x: 5 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={footerInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            <h3 className="text-white font-bold text-sm md:text-base mb-3 md:mb-4">Quick Links</h3>
+            <ul className="space-y-2">
+              {quickLinks.slice(0, 4).map((link, index) => (
+                <li key={index}>
                   <Link to={link.path} className="text-gray-400 hover:text-[#38BDF8] transition-colors text-sm">
                     {link.label}
                   </Link>
-                </motion.li>
+                </li>
               ))}
             </ul>
           </motion.div>
 
           {/* Services */}
-          <motion.div variants={itemVariants}>
-            <h3 className="text-white font-bold mb-4">Our Services</h3>
-            <ul className="space-y-3">
-              {services.map((link, index) => (
-                <motion.li
-                  key={index}
-                  whileHover={{ x: 5 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={footerInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <h3 className="text-white font-bold text-sm md:text-base mb-3 md:mb-4">Services</h3>
+            <ul className="space-y-2">
+              {quickLinks.slice(2).map((link, index) => (
+                <li key={index}>
                   <Link to={link.path} className="text-gray-400 hover:text-[#38BDF8] transition-colors text-sm">
                     {link.label}
                   </Link>
-                </motion.li>
+                </li>
               ))}
             </ul>
           </motion.div>
 
-          {/* Contact Info */}
-          <motion.div variants={itemVariants}>
-            <h3 className="text-white font-bold mb-4">Contact Us</h3>
-            <ul className="space-y-4">
-              {[
-                { icon: Phone, label: "Phone", value: "+91 98765 43210" },
-                { icon: Mail, label: "Email", value: "contact@neoonehealth.in" },
-                { icon: MapPin, label: "Address", value: "Chennai, Tamil Nadu, India" }
-              ].map((item, index) => (
-                <motion.li
-                  key={index}
-                  className="flex items-start gap-3"
-                  whileHover={{ x: 3 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <item.icon className="text-[#38BDF8]" size={16} />
-                  </div>
-                  <div>
-                    <p className="text-xs text-gray-500">{item.label}</p>
-                    <p className="text-gray-300 text-sm">{item.value}</p>
-                  </div>
-                </motion.li>
-              ))}
+          {/* Contact */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={footerInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            <h3 className="text-white font-bold text-sm md:text-base mb-3 md:mb-4">Contact</h3>
+            <ul className="space-y-3">
+              <li className="flex items-start gap-2">
+                <Phone className="text-[#38BDF8] flex-shrink-0 mt-0.5" size={14} />
+                <a href="tel:+919876543210" className="text-gray-300 text-sm">+91 98765 43210</a>
+              </li>
+              <li className="flex items-start gap-2">
+                <Mail className="text-[#38BDF8] flex-shrink-0 mt-0.5" size={14} />
+                <span className="text-gray-300 text-sm break-all">contact@neoonehealth.in</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <MapPin className="text-[#38BDF8] flex-shrink-0 mt-0.5" size={14} />
+                <span className="text-gray-300 text-sm">Chennai, India</span>
+              </li>
             </ul>
           </motion.div>
         </div>
 
         {/* Bottom Bar */}
-        <motion.div
-          className="border-t border-white/10 mt-10 pt-8 flex flex-col md:flex-row justify-between items-center"
-          variants={itemVariants}
-        >
-          <p className="text-gray-500 text-sm mb-4 md:mb-0">
+        <div className="border-t border-white/10 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-gray-500 text-xs md:text-sm text-center md:text-left">
             © 2025 NeoOne Health. All rights reserved.
           </p>
-          <div className="flex space-x-6">
-            {["Privacy Policy", "Terms of Service"].map((text, index) => (
-              <Link
-                key={index}
-                to={index === 0 ? "/privacy" : "/terms"}
-                className="text-gray-500 hover:text-[#38BDF8] transition-colors text-sm"
-              >
-                {text}
-              </Link>
-            ))}
+          <div className="flex space-x-4 md:space-x-6">
+            <Link to="/privacy" className="text-gray-500 hover:text-[#38BDF8] text-xs md:text-sm">Privacy</Link>
+            <Link to="/terms" className="text-gray-500 hover:text-[#38BDF8] text-xs md:text-sm">Terms</Link>
           </div>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
+
+      {/* Safe area padding for iOS */}
+      <div className="h-[env(safe-area-inset-bottom)] bg-[#1E293B]"></div>
     </footer>
   );
 };

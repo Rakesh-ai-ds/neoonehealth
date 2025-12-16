@@ -5,43 +5,123 @@
 @tailwind utilities;
 
 /* ===========================================
-   NEOONE HEALTH - CLEAN WHITE DESIGN SYSTEM
+   NEOONE HEALTH - MOBILE-FIRST DESIGN SYSTEM
    =========================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+    -webkit-text-size-adjust: 100%;
+}
 
 body {
     margin: 0;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-        "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-        sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    padding-top: 80px;
+    padding-top: 64px;
+    /* Mobile navbar height */
     background-color: #FFFFFF;
     color: #1E293B;
+    line-height: 1.6;
+    overflow-x: hidden;
 }
 
-code {
-    font-family:
-        source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+@media (min-width: 768px) {
+    body {
+        padding-top: 80px;
+        /* Desktop navbar height */
+    }
 }
 
-/* CSS Variables for Clean White Theme */
+/* CSS Variables */
 :root {
     --neo-bg: #FFFFFF;
     --neo-bg-card: #F8FAFC;
-    --neo-bg-hover: #F1F5F9;
     --neo-text: #1E293B;
     --neo-text-muted: #64748B;
-    --neo-text-dim: #94A3B8;
     --neo-primary: #2563EB;
     --neo-cyan: #38BDF8;
     --neo-success: #22C55E;
-    --neo-warning: #FACC15;
+    --neo-warning: #D97706;
     --neo-danger: #EF4444;
-    --neo-gradient: linear-gradient(135deg, #2563EB 0%, #38BDF8 100%);
+    --safe-top: env(safe-area-inset-top);
+    --safe-bottom: env(safe-area-inset-bottom);
 }
 
-/* Custom Animations */
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: #F1F5F9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #2563EB;
+    border-radius: 4px;
+}
+
+/* Mobile-friendly selection */
+::selection {
+    background-color: rgba(37, 99, 235, 0.2);
+    color: #1E293B;
+}
+
+/* Touch-friendly tap targets */
+button,
+a,
+input,
+select,
+textarea {
+    touch-action: manipulation;
+}
+
+/* Buttons and links - larger touch targets on mobile */
+button,
+[role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+}
+
+/* Form inputs - larger on mobile */
+input,
+textarea,
+select {
+    font-size: 16px;
+    /* Prevents iOS zoom on focus */
+    min-height: 48px;
+    padding: 12px 16px;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    background-color: #FFFFFF;
+    color: #1E293B;
+    width: 100%;
+    transition: border-color 0.2s;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: #2563EB;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #94A3B8;
+}
+
+/* Animations */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -55,7 +135,7 @@ code {
 @keyframes slideUp {
     from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(20px);
     }
 
     to {
@@ -64,170 +144,15 @@ code {
     }
 }
 
-@keyframes slideInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-30px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes slideInRight {
-    from {
-        opacity: 0;
-        transform: translateX(30px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes scaleIn {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-@keyframes float {
-
-    0%,
-    100% {
-        transform: translateY(0px);
-    }
-
-    50% {
-        transform: translateY(-10px);
-    }
-}
-
-@keyframes pulse {
-
-    0%,
-    100% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.8;
-    }
-}
-
-@keyframes gradientShift {
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-/* Utility Classes for Animations */
 .animate-fadeIn {
-    animation: fadeIn 0.6s ease-out;
+    animation: fadeIn 0.5s ease-out;
 }
 
 .animate-slideUp {
-    animation: slideUp 0.6s ease-out;
+    animation: slideUp 0.5s ease-out;
 }
 
-.animate-slideInLeft {
-    animation: slideInLeft 0.6s ease-out;
-}
-
-.animate-slideInRight {
-    animation: slideInRight 0.6s ease-out;
-}
-
-.animate-scaleIn {
-    animation: scaleIn 0.5s ease-out;
-}
-
-.animate-float {
-    animation: float 3s ease-in-out infinite;
-}
-
-.animate-pulse {
-    animation: pulse 2s ease-in-out infinite;
-}
-
-.animate-gradient {
-    background-size: 200% 200%;
-    animation: gradientShift 8s ease infinite;
-}
-
-/* Smooth Transitions */
-* {
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    box-sizing: border-box;
-}
-
-/* Smooth Scrolling */
-html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 100px;
-}
-
-/* Custom Scrollbar - Light Theme */
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: #F1F5F9;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #2563EB;
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #38BDF8;
-}
-
-/* Selection */
-::selection {
-    background-color: rgba(37, 99, 235, 0.2);
-    color: #1E293B;
-}
-
-/* Glassmorphism Effect */
-.glass-effect {
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-/* Hover Effects */
-.hover-lift {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.hover-lift:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-}
-
-/* Gradient Text */
+/* Gradient text utility */
 .gradient-text {
     background: linear-gradient(135deg, #2563EB, #38BDF8);
     -webkit-background-clip: text;
@@ -235,45 +160,101 @@ html {
     background-clip: text;
 }
 
-/* Neo Card */
+/* Mobile card styles */
 .neo-card {
     background-color: #FFFFFF;
     border: 1px solid #E2E8F0;
     border-radius: 16px;
+    padding: 16px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
-.neo-card:hover {
-    border-color: rgba(37, 99, 235, 0.3);
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
-}
-
-/* Mobile Optimizations */
-@media (max-width: 768px) {
-    .animate-fadeIn {
-        animation-duration: 0.4s;
-    }
-
-    .animate-slideUp {
-        animation-duration: 0.5s;
-    }
-
-    button:active,
-    a:active {
-        transform: scale(0.97);
-        transition: transform 0.1s ease;
+@media (min-width: 768px) {
+    .neo-card {
+        padding: 24px;
     }
 }
 
-/* Hardware acceleration */
-.animate-fadeIn,
-.animate-slideUp,
-.animate-slideInLeft,
-.animate-slideInRight,
-.animate-scaleIn,
-.animate-float,
-.hover-lift {
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    will-change: transform;
+/* Mobile-optimized buttons */
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 24px;
+    background: linear-gradient(135deg, #2563EB, #38BDF8);
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    min-height: 48px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 24px;
+    background: transparent;
+    color: #2563EB;
+    font-weight: 700;
+    font-size: 14px;
+    border-radius: 12px;
+    border: 2px solid #2563EB;
+    cursor: pointer;
+    min-height: 48px;
+    transition: all 0.2s;
+}
+
+.btn-secondary:active {
+    background: #2563EB;
+    color: white;
+}
+
+/* Safe area padding for iOS */
+.safe-bottom {
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
+}
+
+/* Prevent text selection on interactive elements */
+.no-select {
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Image optimization */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Smooth transitions on all */
+* {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hide scrollbar on mobile but allow scrolling */
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }
