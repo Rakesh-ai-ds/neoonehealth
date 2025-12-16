@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 /* ===========================================
-   NEOONE HEALTH - PHYSIOLOGY-BASED DESIGN SYSTEM
+   NEOONE HEALTH - CLEAN WHITE DESIGN SYSTEM
    =========================================== */
 
 body {
@@ -16,8 +16,8 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     padding-top: 80px;
-    background-color: #020617;
-    color: #E5E7EB;
+    background-color: #FFFFFF;
+    color: #1E293B;
 }
 
 code {
@@ -25,14 +25,14 @@ code {
         source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-/* CSS Variables for Medical Color System */
+/* CSS Variables for Clean White Theme */
 :root {
-    --neo-bg: #020617;
-    --neo-bg-card: #0F172A;
-    --neo-bg-hover: #1E293B;
-    --neo-text: #E5E7EB;
-    --neo-text-muted: #94A3B8;
-    --neo-text-dim: #64748B;
+    --neo-bg: #FFFFFF;
+    --neo-bg-card: #F8FAFC;
+    --neo-bg-hover: #F1F5F9;
+    --neo-text: #1E293B;
+    --neo-text-muted: #64748B;
+    --neo-text-dim: #94A3B8;
     --neo-primary: #2563EB;
     --neo-cyan: #38BDF8;
     --neo-success: #22C55E;
@@ -184,14 +184,14 @@ html {
     scroll-padding-top: 100px;
 }
 
-/* Custom Scrollbar - Medical Dark Theme */
+/* Custom Scrollbar - Light Theme */
 ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-    background: #0F172A;
+    background: #F1F5F9;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -205,16 +205,16 @@ html {
 
 /* Selection */
 ::selection {
-    background-color: rgba(37, 99, 235, 0.3);
-    color: #E5E7EB;
+    background-color: rgba(37, 99, 235, 0.2);
+    color: #1E293B;
 }
 
 /* Glassmorphism Effect */
 .glass-effect {
-    background: rgba(15, 23, 42, 0.8);
+    background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 /* Hover Effects */
@@ -224,7 +224,7 @@ html {
 
 .hover-lift:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 /* Gradient Text */
@@ -237,18 +237,19 @@ html {
 
 /* Neo Card */
 .neo-card {
-    background-color: #0F172A;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background-color: #FFFFFF;
+    border: 1px solid #E2E8F0;
     border-radius: 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .neo-card:hover {
     border-color: rgba(37, 99, 235, 0.3);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
 }
 
 /* Mobile Optimizations */
 @media (max-width: 768px) {
-
     .animate-fadeIn {
         animation-duration: 0.4s;
     }
@@ -262,27 +263,9 @@ html {
         transform: scale(0.97);
         transition: transform 0.1s ease;
     }
-
-    [class*="shadow-"]:active {
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        transition: box-shadow 0.2s ease;
-    }
 }
 
-/* Touch-friendly interactions */
-@media (hover: none) and (pointer: coarse) {
-    .hover-lift:active {
-        transform: translateY(2px) scale(0.98);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .animate-gradient {
-        background-size: 200% 200%;
-        animation: gradientShift 4s ease infinite;
-    }
-}
-
-/* Hardware acceleration for smooth mobile animations */
+/* Hardware acceleration */
 .animate-fadeIn,
 .animate-slideUp,
 .animate-slideInLeft,

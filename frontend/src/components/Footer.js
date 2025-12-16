@@ -9,10 +9,7 @@ const Footer = () => {
 
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1 }
-    }
+    visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
   };
 
   const itemVariants = {
@@ -40,7 +37,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-[#0F172A] border-t border-white/5" ref={footerRef}>
+    <footer className="bg-[#1E293B] text-white" ref={footerRef}>
       <motion.div
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12"
         initial="hidden"
@@ -58,17 +55,17 @@ const Footer = () => {
               >
                 <span className="text-white font-bold text-xl">N</span>
               </motion.div>
-              <span className="text-[#E5E7EB] font-bold text-xl">NeoOne Health</span>
+              <span className="text-white font-bold text-xl">NeoOne Health</span>
             </div>
-            <p className="text-[#94A3B8] text-sm mb-6 leading-relaxed">
-              Your trusted healthcare partner. Medical-grade wellness solutions backed by science and designed for results.
+            <p className="text-gray-400 text-sm mb-6 leading-relaxed">
+              Your trusted healthcare partner. Comprehensive wellness solutions for individuals, families, and organizations.
             </p>
             <div className="flex space-x-3">
               {[Facebook, Twitter, Linkedin, Instagram].map((Icon, index) => (
                 <motion.a
                   key={index}
                   href="#"
-                  className="w-10 h-10 bg-[#1E293B] rounded-xl flex items-center justify-center text-[#94A3B8] hover:bg-[#2563EB] hover:text-white transition-all"
+                  className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center text-gray-400 hover:bg-[#2563EB] hover:text-white transition-all"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -80,7 +77,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <motion.div variants={itemVariants}>
-            <h3 className="text-[#E5E7EB] font-bold mb-4">Quick Links</h3>
+            <h3 className="text-white font-bold mb-4">Quick Links</h3>
             <ul className="space-y-3">
               {quickLinks.map((link, index) => (
                 <motion.li
@@ -88,7 +85,7 @@ const Footer = () => {
                   whileHover={{ x: 5 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <Link to={link.path} className="text-[#94A3B8] hover:text-[#38BDF8] transition-colors text-sm">
+                  <Link to={link.path} className="text-gray-400 hover:text-[#38BDF8] transition-colors text-sm">
                     {link.label}
                   </Link>
                 </motion.li>
@@ -98,7 +95,7 @@ const Footer = () => {
 
           {/* Services */}
           <motion.div variants={itemVariants}>
-            <h3 className="text-[#E5E7EB] font-bold mb-4">Our Services</h3>
+            <h3 className="text-white font-bold mb-4">Our Services</h3>
             <ul className="space-y-3">
               {services.map((link, index) => (
                 <motion.li
@@ -106,7 +103,7 @@ const Footer = () => {
                   whileHover={{ x: 5 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <Link to={link.path} className="text-[#94A3B8] hover:text-[#38BDF8] transition-colors text-sm">
+                  <Link to={link.path} className="text-gray-400 hover:text-[#38BDF8] transition-colors text-sm">
                     {link.label}
                   </Link>
                 </motion.li>
@@ -116,7 +113,7 @@ const Footer = () => {
 
           {/* Contact Info */}
           <motion.div variants={itemVariants}>
-            <h3 className="text-[#E5E7EB] font-bold mb-4">Contact Us</h3>
+            <h3 className="text-white font-bold mb-4">Contact Us</h3>
             <ul className="space-y-4">
               {[
                 { icon: Phone, label: "Phone", value: "+91 98765 43210" },
@@ -129,12 +126,12 @@ const Footer = () => {
                   whileHover={{ x: 3 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <div className="w-8 h-8 bg-[#1E293B] rounded-lg flex items-center justify-center flex-shrink-0">
+                  <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center flex-shrink-0">
                     <item.icon className="text-[#38BDF8]" size={16} />
                   </div>
                   <div>
-                    <p className="text-xs text-[#64748B]">{item.label}</p>
-                    <p className="text-[#E5E7EB] text-sm">{item.value}</p>
+                    <p className="text-xs text-gray-500">{item.label}</p>
+                    <p className="text-gray-300 text-sm">{item.value}</p>
                   </div>
                 </motion.li>
               ))}
@@ -144,10 +141,10 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <motion.div
-          className="border-t border-white/5 mt-10 pt-8 flex flex-col md:flex-row justify-between items-center"
+          className="border-t border-white/10 mt-10 pt-8 flex flex-col md:flex-row justify-between items-center"
           variants={itemVariants}
         >
-          <p className="text-[#64748B] text-sm mb-4 md:mb-0">
+          <p className="text-gray-500 text-sm mb-4 md:mb-0">
             © 2025 NeoOne Health. All rights reserved.
           </p>
           <div className="flex space-x-6">
@@ -155,7 +152,7 @@ const Footer = () => {
               <Link
                 key={index}
                 to={index === 0 ? "/privacy" : "/terms"}
-                className="text-[#64748B] hover:text-[#38BDF8] transition-colors text-sm"
+                className="text-gray-500 hover:text-[#38BDF8] transition-colors text-sm"
               >
                 {text}
               </Link>

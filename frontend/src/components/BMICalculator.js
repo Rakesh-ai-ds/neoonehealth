@@ -46,7 +46,7 @@ const BMICalculator = () => {
     const bmiInfo = bmi ? getBMICategory(bmi) : null;
 
     return (
-        <div id="bmi-calculator" className="py-20 bg-[#0F172A]">
+        <div id="bmi-calculator" className="py-20 bg-[#F8FAFC]">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <motion.div
                     className="text-center mb-10"
@@ -54,26 +54,26 @@ const BMICalculator = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                 >
-                    <div className="w-16 h-16 bg-[#2563EB]/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                        <Calculator className="text-[#38BDF8]" size={32} />
+                    <div className="w-16 h-16 bg-[#2563EB]/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <Calculator className="text-[#2563EB]" size={32} />
                     </div>
-                    <h2 className="text-3xl md:text-4xl font-bold text-[#E5E7EB] mb-2">BMI Calculator</h2>
-                    <p className="text-[#94A3B8]">Calculate your Body Mass Index and understand your health status</p>
+                    <h2 className="text-3xl md:text-4xl font-bold text-[#1E293B] mb-2">BMI Calculator</h2>
+                    <p className="text-[#64748B]">Calculate your Body Mass Index and understand your health status</p>
                 </motion.div>
 
                 <motion.div
-                    className="bg-[#020617] border border-white/5 rounded-2xl overflow-hidden"
+                    className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                 >
                     {/* Unit Toggle */}
-                    <div className="bg-[#0F172A] p-4 flex justify-center gap-4 border-b border-white/5">
+                    <div className="bg-[#F8FAFC] p-4 flex justify-center gap-4 border-b border-gray-100">
                         <button
                             onClick={() => setUnit('metric')}
                             className={`px-6 py-2 rounded-xl font-medium transition-all ${unit === 'metric'
                                     ? 'bg-gradient-to-r from-[#2563EB] to-[#38BDF8] text-white'
-                                    : 'bg-[#1E293B] text-[#94A3B8] hover:text-[#E5E7EB]'
+                                    : 'bg-white border border-gray-200 text-[#64748B] hover:text-[#1E293B]'
                                 }`}
                         >
                             Metric (kg, cm)
@@ -82,7 +82,7 @@ const BMICalculator = () => {
                             onClick={() => setUnit('imperial')}
                             className={`px-6 py-2 rounded-xl font-medium transition-all ${unit === 'imperial'
                                     ? 'bg-gradient-to-r from-[#2563EB] to-[#38BDF8] text-white'
-                                    : 'bg-[#1E293B] text-[#94A3B8] hover:text-[#E5E7EB]'
+                                    : 'bg-white border border-gray-200 text-[#64748B] hover:text-[#1E293B]'
                                 }`}
                         >
                             Imperial (lbs, in)
@@ -93,8 +93,8 @@ const BMICalculator = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                             {/* Weight Input */}
                             <div>
-                                <label className="block text-sm font-semibold text-[#E5E7EB] mb-2 flex items-center gap-2">
-                                    <Scale size={18} className="text-[#38BDF8]" />
+                                <label className="block text-sm font-semibold text-[#1E293B] mb-2 flex items-center gap-2">
+                                    <Scale size={18} className="text-[#2563EB]" />
                                     Weight ({unit === 'metric' ? 'kg' : 'lbs'})
                                 </label>
                                 <input
@@ -102,14 +102,14 @@ const BMICalculator = () => {
                                     value={weight}
                                     onChange={(e) => setWeight(e.target.value)}
                                     placeholder={unit === 'metric' ? 'e.g., 70' : 'e.g., 154'}
-                                    className="w-full px-4 py-3 bg-[#0F172A] border border-white/10 rounded-xl text-[#E5E7EB] placeholder-[#64748B] focus:outline-none focus:border-[#38BDF8] text-lg"
+                                    className="w-full px-4 py-3 bg-[#F8FAFC] border border-gray-200 rounded-xl text-[#1E293B] placeholder-[#94A3B8] focus:outline-none focus:border-[#2563EB] text-lg"
                                 />
                             </div>
 
                             {/* Height Input */}
                             <div>
-                                <label className="block text-sm font-semibold text-[#E5E7EB] mb-2 flex items-center gap-2">
-                                    <Ruler size={18} className="text-[#38BDF8]" />
+                                <label className="block text-sm font-semibold text-[#1E293B] mb-2 flex items-center gap-2">
+                                    <Ruler size={18} className="text-[#2563EB]" />
                                     Height ({unit === 'metric' ? 'cm' : 'inches'})
                                 </label>
                                 <input
@@ -117,13 +117,13 @@ const BMICalculator = () => {
                                     value={height}
                                     onChange={(e) => setHeight(e.target.value)}
                                     placeholder={unit === 'metric' ? 'e.g., 175' : 'e.g., 69'}
-                                    className="w-full px-4 py-3 bg-[#0F172A] border border-white/10 rounded-xl text-[#E5E7EB] placeholder-[#64748B] focus:outline-none focus:border-[#38BDF8] text-lg"
+                                    className="w-full px-4 py-3 bg-[#F8FAFC] border border-gray-200 rounded-xl text-[#1E293B] placeholder-[#94A3B8] focus:outline-none focus:border-[#2563EB] text-lg"
                                 />
                             </div>
 
                             {/* Age Input */}
                             <div>
-                                <label className="block text-sm font-semibold text-[#E5E7EB] mb-2">
+                                <label className="block text-sm font-semibold text-[#1E293B] mb-2">
                                     Age (optional)
                                 </label>
                                 <input
@@ -131,13 +131,13 @@ const BMICalculator = () => {
                                     value={age}
                                     onChange={(e) => setAge(e.target.value)}
                                     placeholder="e.g., 30"
-                                    className="w-full px-4 py-3 bg-[#0F172A] border border-white/10 rounded-xl text-[#E5E7EB] placeholder-[#64748B] focus:outline-none focus:border-[#38BDF8] text-lg"
+                                    className="w-full px-4 py-3 bg-[#F8FAFC] border border-gray-200 rounded-xl text-[#1E293B] placeholder-[#94A3B8] focus:outline-none focus:border-[#2563EB] text-lg"
                                 />
                             </div>
 
                             {/* Gender Select */}
                             <div>
-                                <label className="block text-sm font-semibold text-[#E5E7EB] mb-2">
+                                <label className="block text-sm font-semibold text-[#1E293B] mb-2">
                                     Gender
                                 </label>
                                 <div className="flex gap-4">
@@ -145,7 +145,7 @@ const BMICalculator = () => {
                                         onClick={() => setGender('male')}
                                         className={`flex-1 py-3 rounded-xl font-medium transition-all ${gender === 'male'
                                                 ? 'bg-[#2563EB] text-white'
-                                                : 'bg-[#1E293B] text-[#94A3B8] hover:text-[#E5E7EB]'
+                                                : 'bg-[#F8FAFC] border border-gray-200 text-[#64748B] hover:text-[#1E293B]'
                                             }`}
                                     >
                                         Male
@@ -154,7 +154,7 @@ const BMICalculator = () => {
                                         onClick={() => setGender('female')}
                                         className={`flex-1 py-3 rounded-xl font-medium transition-all ${gender === 'female'
                                                 ? 'bg-[#2563EB] text-white'
-                                                : 'bg-[#1E293B] text-[#94A3B8] hover:text-[#E5E7EB]'
+                                                : 'bg-[#F8FAFC] border border-gray-200 text-[#64748B] hover:text-[#1E293B]'
                                             }`}
                                     >
                                         Female
@@ -177,7 +177,7 @@ const BMICalculator = () => {
                             </motion.button>
                             <motion.button
                                 onClick={resetCalculator}
-                                className="px-6 bg-[#1E293B] text-[#94A3B8] py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:text-[#E5E7EB]"
+                                className="px-6 bg-[#F1F5F9] text-[#64748B] py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:text-[#1E293B]"
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
                             >
@@ -196,7 +196,7 @@ const BMICalculator = () => {
                                 transition={{ duration: 0.5 }}
                                 className="overflow-hidden"
                             >
-                                <div className="bg-[#0F172A] p-8 border-t border-white/5">
+                                <div className="bg-[#F8FAFC] p-8 border-t border-gray-100">
                                     <div className="text-center mb-6">
                                         <motion.div
                                             initial={{ scale: 0 }}
@@ -211,7 +211,7 @@ const BMICalculator = () => {
                                                 <span className="text-5xl font-bold" style={{ color: bmiInfo.color }}>{bmi}</span>
                                             </div>
                                         </motion.div>
-                                        <h3 className="text-2xl font-bold text-[#E5E7EB] mb-2">Your BMI: {bmi}</h3>
+                                        <h3 className="text-2xl font-bold text-[#1E293B] mb-2">Your BMI: {bmi}</h3>
                                         <div className="flex items-center justify-center gap-2">
                                             <bmiInfo.icon size={24} style={{ color: bmiInfo.color }} />
                                             <span className="text-xl font-semibold" style={{ color: bmiInfo.color }}>
@@ -243,12 +243,12 @@ const BMICalculator = () => {
                                     </div>
 
                                     {/* Advice */}
-                                    <div className="bg-[#020617] p-4 rounded-xl border border-white/5">
+                                    <div className="bg-white p-4 rounded-xl border border-gray-100">
                                         <div className="flex items-start gap-3">
-                                            <Heart className="text-[#38BDF8] flex-shrink-0 mt-1" size={20} />
+                                            <Heart className="text-[#2563EB] flex-shrink-0 mt-1" size={20} />
                                             <div>
-                                                <h4 className="font-semibold text-[#E5E7EB] mb-1">Health Advice</h4>
-                                                <p className="text-[#94A3B8] text-sm">{bmiInfo.advice}</p>
+                                                <h4 className="font-semibold text-[#1E293B] mb-1">Health Advice</h4>
+                                                <p className="text-[#64748B] text-sm">{bmiInfo.advice}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -258,8 +258,7 @@ const BMICalculator = () => {
                     </AnimatePresence>
                 </motion.div>
 
-                {/* Disclaimer */}
-                <p className="text-center text-[#64748B] text-sm mt-6">
+                <p className="text-center text-[#94A3B8] text-sm mt-6">
                     *BMI is a general indicator and may not be accurate for athletes, pregnant women, or the elderly.
                     Consult a healthcare professional for personalized advice.
                 </p>
