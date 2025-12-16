@@ -2,16 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Briefcase, Shield, Activity, Brain, Eye, Ear, Monitor, HardHat, CheckCircle } from 'lucide-react';
+import { Briefcase, Shield, Activity, Brain, Monitor, HardHat, ChevronRight, Users, TrendingUp } from 'lucide-react';
 import FAQSection from '@/components/FAQSection';
 import TopicQueryForm from '@/components/TopicQueryForm';
 
 const OccupationalHealth = () => {
     const [heroRef, heroInView] = useInView({ triggerOnce: true, threshold: 0.1 });
-    const [workplaceRef, workplaceInView] = useInView({ triggerOnce: true, threshold: 0.1 });
-    const [ergonomicsRef, ergonomicsInView] = useInView({ triggerOnce: true, threshold: 0.1 });
-    const [mentalRef, mentalInView] = useInView({ triggerOnce: true, threshold: 0.1 });
-    const [screeningRef, screeningInView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
     const fadeInUp = {
         hidden: { opacity: 0, y: 30 },
@@ -33,82 +29,90 @@ const OccupationalHealth = () => {
             id: "workplace-safety",
             title: "Workplace Safety Assessment",
             icon: HardHat,
-            color: "#FF7F11",
-            image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
-            what: "A comprehensive evaluation of your workplace environment to identify potential health hazards, safety risks, and areas for improvement. We assess physical, chemical, biological, and ergonomic factors that could impact employee health.",
-            when: "Conduct assessments annually, after any workplace incidents, when introducing new processes or equipment, or when employees report health concerns. Regular monitoring ensures ongoing safety compliance.",
-            how: "Our experts visit your workplace, observe work processes, measure environmental factors (noise, air quality, lighting), interview employees, review safety protocols, and provide detailed reports with actionable recommendations.",
-            why: "A safe workplace reduces injuries, lowers insurance costs, improves productivity, ensures legal compliance, and creates a positive work culture where employees feel valued and protected."
+            image: "/images/occupational-health.png",
+            description: "Comprehensive evaluation of your workplace environment to identify health hazards, safety risks, and areas for improvement. We assess physical, chemical, biological, and ergonomic factors that could impact employee health.",
+            benefits: [
+                "Hazard identification and mitigation",
+                "Compliance with safety regulations",
+                "Reduced workplace injuries",
+                "Improved employee confidence",
+                "Lower insurance costs"
+            ]
         },
         {
             id: "ergonomics",
             title: "Ergonomics & Posture",
             icon: Monitor,
-            color: "#20BF55",
             image: "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?auto=format&fit=crop&w=800&q=80",
-            what: "The science of designing workstations and tasks to fit the worker. Proper ergonomics prevents musculoskeletal disorders, reduces fatigue, and improves comfort and productivity for desk workers and manual laborers alike.",
-            when: "Assess ergonomics when setting up new workstations, when employees report discomfort, during annual health reviews, and whenever work tasks or equipment change. Prevention is always better than treatment.",
-            how: "We evaluate workstation setup, monitor positioning, chair height, keyboard placement, and work habits. We provide personalized adjustments, recommend equipment, and teach proper posture techniques.",
-            why: "Poor ergonomics leads to chronic pain, carpal tunnel syndrome, back problems, and reduced productivity. Investing in ergonomics reduces sick days, workers' compensation claims, and improves employee satisfaction."
+            description: "The science of designing workstations and tasks to fit the worker. Proper ergonomics prevents musculoskeletal disorders, reduces fatigue, and improves comfort and productivity for desk workers and manual laborers alike.",
+            benefits: [
+                "Reduced repetitive strain injuries",
+                "Improved posture and comfort",
+                "Increased productivity",
+                "Lower absenteeism rates",
+                "Better employee satisfaction"
+            ]
         },
         {
             id: "mental-wellness",
             title: "Workplace Mental Wellness",
             icon: Brain,
-            color: "#9B59B6",
             image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80",
-            what: "A holistic approach to supporting mental health in the workplace. We address stress, burnout, anxiety, and depression through prevention programs, counseling services, and organizational culture improvements.",
-            when: "Mental wellness should be an ongoing priority, not just during crises. Implement programs proactively, conduct regular check-ins, and provide resources before problems escalate. Watch for signs of burnout and disengagement.",
-            how: "We offer stress management workshops, Employee Assistance Programs (EAP), confidential counseling, mindfulness training, work-life balance initiatives, and manager training on recognizing mental health concerns.",
-            why: "Mental health issues are the leading cause of disability worldwide. Addressing workplace mental wellness reduces absenteeism, improves focus and creativity, and creates a supportive environment where employees thrive."
+            description: "A holistic approach to supporting mental health in the workplace. We address stress, burnout, anxiety, and depression through prevention programs, counseling services, and organizational culture improvements.",
+            benefits: [
+                "Stress management programs",
+                "Confidential counseling services",
+                "Work-life balance initiatives",
+                "Manager training on mental health",
+                "Reduced burnout and turnover"
+            ]
         },
         {
             id: "health-screening",
             title: "Occupational Health Screening",
             icon: Activity,
-            color: "#01BAEF",
-            image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80",
-            what: "Pre-employment and periodic health screenings tailored to job requirements. We assess physical fitness for specific roles, monitor exposure to occupational hazards, and ensure workers are healthy enough for their duties.",
-            when: "Conduct screenings before employment, annually for high-risk roles, after extended sick leave, and when job requirements change. Specific roles may require more frequent monitoring (hearing tests for noisy environments, lung function for dusty conditions).",
-            how: "Our screenings include vision and hearing tests, lung function tests, blood pressure monitoring, fitness assessments, drug and alcohol testing (where permitted), and role-specific evaluations based on job hazards.",
-            why: "Health screenings protect both employers and employees. They ensure workers are fit for their roles, detect early signs of occupational diseases, and demonstrate your commitment to employee welfare."
+            image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=80",
+            description: "Pre-employment and periodic health screenings tailored to job requirements. We assess physical fitness for specific roles, monitor exposure to occupational hazards, and ensure workers are healthy enough for their duties.",
+            benefits: [
+                "Role-specific fitness assessments",
+                "Early disease detection",
+                "Regulatory compliance",
+                "Return-to-work evaluations",
+                "Drug and alcohol testing"
+            ]
         }
     ];
 
     const faqs = [
         {
             question: "What is occupational health and why is it important?",
-            answer: "Occupational health focuses on the physical and mental well-being of employees in the workplace. It's important because it prevents work-related injuries and illnesses, improves productivity, reduces absenteeism, and ensures legal compliance with health and safety regulations."
+            answer: "Occupational health focuses on employee well-being in the workplace. It prevents work-related injuries, improves productivity, reduces absenteeism, and ensures legal compliance."
         },
         {
             question: "How often should workplace health assessments be conducted?",
-            answer: "We recommend annual comprehensive assessments for most workplaces. However, high-risk industries (construction, manufacturing, healthcare) may need more frequent evaluations. Additionally, assessments should be done after any incidents or when introducing new processes."
+            answer: "We recommend annual comprehensive assessments for most workplaces. High-risk industries may need more frequent evaluations."
         },
         {
             question: "What are the most common occupational health hazards?",
-            answer: "Common hazards include ergonomic issues (poor posture, repetitive strain), environmental factors (noise, air quality), psychological stressors (workload, workplace conflict), and physical hazards (falls, machinery). Our assessments identify and address all these risks."
+            answer: "Common hazards include ergonomic issues, environmental factors (noise, air quality), psychological stressors, and physical hazards like falls."
         },
         {
             question: "How can small businesses implement occupational health programs?",
-            answer: "We offer scalable solutions for businesses of all sizes. Small businesses can start with basic ergonomic assessments, mental health resources, and periodic health screenings. We'll help you prioritize based on your specific risks and budget."
-        },
-        {
-            question: "What's included in pre-employment health screening?",
-            answer: "Pre-employment screenings typically include a general health questionnaire, vision and hearing tests, blood pressure check, and role-specific assessments based on job requirements. We ensure screenings are non-discriminatory and compliant with regulations."
+            answer: "We offer scalable solutions for all business sizes. Start with basic ergonomic assessments, mental health resources, and periodic screenings."
         },
         {
             question: "How do you help with workplace stress and burnout?",
-            answer: "We offer multiple approaches including stress management workshops, confidential counseling services, workload assessments, manager training, and organizational culture consulting. We also help implement work-life balance policies and flexible working arrangements."
+            answer: "We offer stress management workshops, counseling services, workload assessments, and organizational culture consulting."
         }
     ];
 
     return (
-        <div className="min-h-screen">
+        <div className="min-h-screen bg-[#020617]">
             {/* Hero Section */}
-            <section className="relative bg-gradient-to-br from-[#FF7F11] via-[#FFB347] to-[#FF7F11] text-white pt-32 pb-20 overflow-hidden" ref={heroRef}>
-                <div className="absolute inset-0 opacity-10">
-                    <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
-                    <div className="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+            <section className="relative pt-32 pb-20 overflow-hidden" ref={heroRef}>
+                <div className="absolute inset-0">
+                    <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#FACC15]/10 rounded-full blur-3xl"></div>
+                    <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#2563EB]/10 rounded-full blur-3xl"></div>
                 </div>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     <motion.div
@@ -117,37 +121,29 @@ const OccupationalHealth = () => {
                         animate={heroInView ? "visible" : "hidden"}
                         variants={fadeInUp}
                     >
-                        <span className="inline-block bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium mb-4">
+                        <span className="inline-block bg-[#FACC15]/20 border border-[#FACC15]/30 px-4 py-2 rounded-full text-[#FACC15] text-sm font-medium mb-6">
                             Occupational Health Services
                         </span>
-                        <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-                            Healthy Workplace, Thriving Business
+                        <h1 className="text-4xl md:text-5xl font-bold text-[#E5E7EB] mb-6 leading-tight">
+                            Healthy Workplace, <br />
+                            <span className="bg-gradient-to-r from-[#FACC15] to-[#38BDF8] bg-clip-text text-transparent">Thriving Business</span>
                         </h1>
-                        <p className="text-xl text-gray-100 mb-8">
+                        <p className="text-lg text-[#94A3B8] mb-8 max-w-2xl mx-auto">
                             Comprehensive occupational health solutions that protect your employees and optimize your workplace for safety, productivity, and well-being.
                         </p>
-                        <Link to="/contact">
-                            <motion.button
-                                className="px-8 py-4 bg-white text-[#FF7F11] rounded-lg font-bold shadow-lg hover:shadow-xl transition-all"
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                            >
-                                Get Workplace Assessment
-                            </motion.button>
-                        </Link>
                     </motion.div>
                 </div>
             </section>
 
             {/* Quick Navigation */}
-            <section className="py-6 bg-white border-b sticky top-0 z-40 shadow-sm">
+            <section className="py-6 bg-[#0F172A] border-y border-white/5 sticky top-20 z-40">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex flex-wrap justify-center gap-4">
                         {services.map((service, index) => (
                             <a
                                 key={index}
                                 href={`#${service.id}`}
-                                className="px-6 py-3 bg-gray-100 text-[#0B4F6C] rounded-lg font-semibold hover:bg-[#FF7F11] hover:text-white transition-colors"
+                                className="px-6 py-3 bg-[#1E293B] text-[#94A3B8] rounded-xl font-medium hover:bg-[#2563EB]/20 hover:text-[#38BDF8] transition-all"
                             >
                                 {service.title.split(' ')[0]}
                             </a>
@@ -161,11 +157,10 @@ const OccupationalHealth = () => {
                 <section
                     key={index}
                     id={service.id}
-                    className={`py-20 scroll-mt-32 ${index % 2 === 0 ? 'bg-white' : 'bg-gradient-to-br from-gray-50 to-orange-50'}`}
-                    ref={index === 0 ? workplaceRef : index === 1 ? ergonomicsRef : index === 2 ? mentalRef : screeningRef}
+                    className={`py-20 scroll-mt-32 ${index % 2 === 0 ? 'bg-[#020617]' : 'bg-[#0F172A]'}`}
                 >
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center`}>
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                             {/* Content */}
                             <motion.div
                                 className={index % 2 === 1 ? 'order-1 lg:order-2' : ''}
@@ -174,32 +169,30 @@ const OccupationalHealth = () => {
                                 viewport={{ once: true }}
                                 variants={index % 2 === 0 ? fadeInLeft : fadeInRight}
                             >
-                                <div className="w-16 h-16 rounded-full flex items-center justify-center mb-6" style={{ backgroundColor: `${service.color}20` }}>
-                                    <service.icon size={32} style={{ color: service.color }} />
+                                <div className="w-14 h-14 bg-[#FACC15]/10 rounded-xl flex items-center justify-center mb-6">
+                                    <service.icon size={28} className="text-[#FACC15]" />
                                 </div>
-                                <h2 className="text-3xl md:text-4xl font-bold text-[#0B4F6C] mb-6">{service.title}</h2>
+                                <h2 className="text-3xl md:text-4xl font-bold text-[#E5E7EB] mb-6">{service.title}</h2>
 
-                                {/* What, When, How, Why */}
-                                <div className="space-y-4">
-                                    {[
-                                        { label: "What", emoji: "❓", content: service.what },
-                                        { label: "When", emoji: "🕐", content: service.when },
-                                        { label: "How", emoji: "🔧", content: service.how },
-                                        { label: "Why", emoji: "💡", content: service.why }
-                                    ].map((item, idx) => (
+                                <p className="text-[#94A3B8] text-lg leading-relaxed mb-8">
+                                    {service.description}
+                                </p>
+
+                                <div className="space-y-3">
+                                    <h4 className="text-[#E5E7EB] font-semibold mb-3">Key Benefits:</h4>
+                                    {service.benefits.map((benefit, idx) => (
                                         <motion.div
                                             key={idx}
-                                            className="bg-gray-50 p-4 rounded-xl border-l-4"
-                                            style={{ borderLeftColor: service.color }}
+                                            className="flex items-center gap-3"
                                             initial={{ opacity: 0, x: -20 }}
                                             whileInView={{ opacity: 1, x: 0 }}
                                             viewport={{ once: true }}
                                             transition={{ delay: idx * 0.1 }}
                                         >
-                                            <h4 className="font-bold text-[#0B4F6C] flex items-center gap-2 mb-1">
-                                                <span>{item.emoji}</span> {item.label}
-                                            </h4>
-                                            <p className="text-gray-600 text-sm leading-relaxed">{item.content}</p>
+                                            <div className="w-6 h-6 bg-[#22C55E]/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                                <ChevronRight className="text-[#22C55E]" size={14} />
+                                            </div>
+                                            <span className="text-[#94A3B8]">{benefit}</span>
                                         </motion.div>
                                     ))}
                                 </div>
@@ -214,14 +207,17 @@ const OccupationalHealth = () => {
                                 variants={index % 2 === 0 ? fadeInRight : fadeInLeft}
                             >
                                 <motion.div
-                                    className="rounded-2xl overflow-hidden shadow-2xl"
+                                    className="rounded-2xl overflow-hidden border border-white/5"
                                     whileHover={{ scale: 1.02 }}
                                     transition={{ duration: 0.3 }}
                                 >
                                     <img
                                         src={service.image}
                                         alt={service.title}
-                                        className="w-full h-96 object-cover"
+                                        className="w-full h-80 object-cover"
+                                        onError={(e) => {
+                                            e.target.src = `https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80`;
+                                        }}
                                     />
                                 </motion.div>
                             </motion.div>
@@ -231,16 +227,11 @@ const OccupationalHealth = () => {
             ))}
 
             {/* Statistics Section */}
-            <section className="py-16 bg-[#0B4F6C] text-white">
+            <section className="py-16 bg-gradient-to-r from-[#2563EB] to-[#38BDF8]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <motion.div
-                        className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center"
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                    >
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                         {[
-                            { number: "95%", label: "Reduction in Workplace Injuries" },
+                            { number: "95%", label: "Reduction in Injuries" },
                             { number: "40%", label: "Decrease in Sick Leave" },
                             { number: "3x", label: "ROI on Health Programs" },
                             { number: "500+", label: "Companies Served" }
@@ -252,11 +243,11 @@ const OccupationalHealth = () => {
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.1 }}
                             >
-                                <p className="text-4xl md:text-5xl font-bold text-[#20BF55] mb-2">{stat.number}</p>
-                                <p className="text-gray-300 text-sm">{stat.label}</p>
+                                <p className="text-4xl md:text-5xl font-bold text-white mb-2">{stat.number}</p>
+                                <p className="text-white/80 text-sm">{stat.label}</p>
                             </motion.div>
                         ))}
-                    </motion.div>
+                    </div>
                 </div>
             </section>
 
@@ -267,15 +258,15 @@ const OccupationalHealth = () => {
             <TopicQueryForm topic="Occupational Health" subtitle="Have questions about workplace health? Our experts are ready to help." />
 
             {/* CTA Section */}
-            <section className="py-20 bg-gradient-to-r from-[#FF7F11] to-[#FFB347] text-white">
+            <section className="py-20 bg-gradient-to-r from-[#FACC15] to-[#38BDF8]">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-6">Protect Your Most Valuable Asset — Your People</h2>
-                    <p className="text-xl text-gray-100 mb-8">
-                        Start building a healthier, safer workplace today. Our occupational health experts are ready to help.
+                    <h2 className="text-3xl md:text-4xl font-bold text-[#020617] mb-6">Protect Your Most Valuable Asset</h2>
+                    <p className="text-xl text-[#020617]/80 mb-8">
+                        Start building a healthier, safer workplace today.
                     </p>
                     <Link to="/contact">
                         <motion.button
-                            className="px-10 py-4 bg-white text-[#FF7F11] rounded-lg font-bold text-lg shadow-lg"
+                            className="px-10 py-4 bg-[#020617] text-white rounded-xl font-bold text-lg"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                         >

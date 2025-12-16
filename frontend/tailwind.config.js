@@ -1,99 +1,53 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-        darkMode: ["class"],
         content: [
                 "./src/**/*.{js,jsx,ts,tsx}",
-                "./public/index.html"
         ],
         theme: {
-                screens: {
-                        'xs': '475px',
-                        'sm': '640px',
-                        'md': '768px',
-                        'lg': '1024px',
-                        'xl': '1280px',
-                        '2xl': '1536px',
-                },
                 extend: {
+                        colors: {
+                                // ===========================================
+                                // PHYSIOLOGY-BASED MEDICAL COLOR SYSTEM
+                                // ===========================================
+
+                                // Primary Backgrounds (Nervous System Calm)
+                                'neo-bg': '#020617',           // Near-black blue
+                                'neo-bg-card': '#0F172A',      // Elevated card background
+                                'neo-bg-hover': '#1E293B',     // Hover state
+
+                                // Text Colors (High Readability)
+                                'neo-text': '#E5E7EB',         // Soft white
+                                'neo-text-muted': '#94A3B8',   // Secondary info
+                                'neo-text-dim': '#64748B',     // Tertiary info
+
+                                // Primary Colors (Trust & Intelligence)
+                                'neo-primary': '#2563EB',      // Primary blue
+                                'neo-cyan': '#38BDF8',         // Accent cyan
+
+                                // Status Colors (Brain-learned signals)
+                                'neo-success': '#22C55E',      // Healthy / Low risk
+                                'neo-warning': '#FACC15',      // Moderate risk
+                                'neo-danger': '#EF4444',       // High risk
+
+                                // Legacy support (will be phased out)
+                                'primary': '#2563EB',
+                                'secondary': '#38BDF8',
+                        },
                         fontFamily: {
-                                sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+                                sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
                         },
                         borderRadius: {
-                                lg: 'var(--radius)',
-                                md: 'calc(var(--radius) - 2px)',
-                                sm: 'calc(var(--radius) - 4px)'
+                                'neo': '12px',
+                                'neo-lg': '16px',
+                                'neo-xl': '20px',
                         },
-                        colors: {
-                                background: 'hsl(var(--background))',
-                                foreground: 'hsl(var(--foreground))',
-                                card: {
-                                        DEFAULT: 'hsl(var(--card))',
-                                        foreground: 'hsl(var(--card-foreground))'
-                                },
-                                popover: {
-                                        DEFAULT: 'hsl(var(--popover))',
-                                        foreground: 'hsl(var(--popover-foreground))'
-                                },
-                                primary: {
-                                        DEFAULT: 'hsl(var(--primary))',
-                                        foreground: 'hsl(var(--primary-foreground))'
-                                },
-                                secondary: {
-                                        DEFAULT: 'hsl(var(--secondary))',
-                                        foreground: 'hsl(var(--secondary-foreground))'
-                                },
-                                muted: {
-                                        DEFAULT: 'hsl(var(--muted))',
-                                        foreground: 'hsl(var(--muted-foreground))'
-                                },
-                                accent: {
-                                        DEFAULT: 'hsl(var(--accent))',
-                                        foreground: 'hsl(var(--accent-foreground))'
-                                },
-                                destructive: {
-                                        DEFAULT: 'hsl(var(--destructive))',
-                                        foreground: 'hsl(var(--destructive-foreground))'
-                                },
-                                border: 'hsl(var(--border))',
-                                input: 'hsl(var(--input))',
-                                ring: 'hsl(var(--ring))',
-                                chart: {
-                                        '1': 'hsl(var(--chart-1))',
-                                        '2': 'hsl(var(--chart-2))',
-                                        '3': 'hsl(var(--chart-3))',
-                                        '4': 'hsl(var(--chart-4))',
-                                        '5': 'hsl(var(--chart-5))'
-                                }
+                        boxShadow: {
+                                'neo': '0 4px 6px -1px rgba(0, 0, 0, 0.3)',
+                                'neo-lg': '0 10px 15px -3px rgba(0, 0, 0, 0.4)',
+                                'neo-glow': '0 0 20px rgba(37, 99, 235, 0.3)',
+                                'neo-cyan-glow': '0 0 20px rgba(56, 189, 248, 0.3)',
                         },
-                        spacing: {
-                                'safe-top': 'env(safe-area-inset-top)',
-                                'safe-bottom': 'env(safe-area-inset-bottom)',
-                                'safe-left': 'env(safe-area-inset-left)',
-                                'safe-right': 'env(safe-area-inset-right)',
-                        },
-                        keyframes: {
-                                'accordion-down': {
-                                        from: {
-                                                height: '0'
-                                        },
-                                        to: {
-                                                height: 'var(--radix-accordion-content-height)'
-                                        }
-                                },
-                                'accordion-up': {
-                                        from: {
-                                                height: 'var(--radix-accordion-content-height)'
-                                        },
-                                        to: {
-                                                height: '0'
-                                        }
-                                }
-                        },
-                        animation: {
-                                'accordion-down': 'accordion-down 0.2s ease-out',
-                                'accordion-up': 'accordion-up 0.2s ease-out'
-                        }
-                }
+                },
         },
-        plugins: [require("tailwindcss-animate")],
-};
+        plugins: [],
+}

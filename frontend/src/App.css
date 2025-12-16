@@ -1,35 +1,213 @@
-/* NeoOne Health App Styles */
-.App {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+/* ===========================================
+   NEOONE HEALTH - PHYSIOLOGY-BASED DESIGN SYSTEM
+   =========================================== */
+
+/* CSS Variables for the Medical Color System */
+:root {
+  /* Primary Backgrounds (Nervous System Calm) */
+  --neo-bg: #020617;
+  --neo-bg-card: #0F172A;
+  --neo-bg-hover: #1E293B;
+  --neo-bg-elevated: #1E293B;
+
+  /* Text Colors (High Readability) */
+  --neo-text: #E5E7EB;
+  --neo-text-muted: #94A3B8;
+  --neo-text-dim: #64748B;
+
+  /* Primary Colors (Trust & Intelligence) */
+  --neo-primary: #2563EB;
+  --neo-cyan: #38BDF8;
+
+  /* Status Colors (Brain-learned signals) */
+  --neo-success: #22C55E;
+  --neo-warning: #FACC15;
+  --neo-danger: #EF4444;
+
+  /* Gradients */
+  --neo-gradient: linear-gradient(135deg, #2563EB 0%, #38BDF8 100%);
+  --neo-gradient-subtle: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(56, 189, 248, 0.1) 100%);
 }
 
-/* Smooth scrolling */
+/* Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
-/* Ensure proper spacing with fixed navbar */
 body {
-  padding-top: 0;
-  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--neo-bg);
+  color: var(--neo-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom scrollbar */
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--neo-bg);
+}
+
+/* Custom Scrollbar (Medical-grade) */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f5f7fa;
+  background: var(--neo-bg-card);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #20BF55;
-  border-radius: 5px;
+  background: var(--neo-primary);
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #1aa849;
+  background: var(--neo-cyan);
+}
+
+/* Selection */
+::selection {
+  background-color: rgba(37, 99, 235, 0.3);
+  color: var(--neo-text);
+}
+
+/* Focus States */
+*:focus-visible {
+  outline: 2px solid var(--neo-cyan);
+  outline-offset: 2px;
+}
+
+/* Link Styles */
+a {
+  color: var(--neo-cyan);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--neo-primary);
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--neo-text);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+/* Utility Classes */
+.neo-card {
+  background-color: var(--neo-bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.neo-card:hover {
+  border-color: rgba(37, 99, 235, 0.3);
+}
+
+.neo-gradient-text {
+  background: var(--neo-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.neo-glow {
+  box-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
+}
+
+.neo-cyan-glow {
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+}
+
+/* Button Base */
+.neo-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  font-weight: 600;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.neo-button-primary {
+  background: var(--neo-gradient);
+  color: white;
+}
+
+.neo-button-primary:hover {
+  box-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
+  transform: translateY(-2px);
+}
+
+.neo-button-secondary {
+  background: transparent;
+  color: var(--neo-cyan);
+  border: 1px solid var(--neo-cyan);
+}
+
+.neo-button-secondary:hover {
+  background: rgba(56, 189, 248, 0.1);
+}
+
+/* Input Styles */
+input,
+textarea,
+select {
+  background-color: var(--neo-bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--neo-text);
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--neo-cyan);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--neo-text-dim);
+}
+
+/* Status Badges */
+.neo-badge-success {
+  background-color: rgba(34, 197, 94, 0.2);
+  color: var(--neo-success);
+}
+
+.neo-badge-warning {
+  background-color: rgba(250, 204, 21, 0.2);
+  color: var(--neo-warning);
+}
+
+.neo-badge-danger {
+  background-color: rgba(239, 68, 68, 0.2);
+  color: var(--neo-danger);
 }

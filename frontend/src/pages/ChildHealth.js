@@ -2,16 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Baby, Stethoscope, Syringe, TrendingUp, Apple, Heart, Shield, BookOpen, CheckCircle } from 'lucide-react';
+import { Baby, Stethoscope, Syringe, TrendingUp, Apple, Heart, Shield, BookOpen, ChevronRight } from 'lucide-react';
 import FAQSection from '@/components/FAQSection';
 import TopicQueryForm from '@/components/TopicQueryForm';
 
 const ChildHealth = () => {
     const [heroRef, heroInView] = useInView({ triggerOnce: true, threshold: 0.1 });
-    const [pediatricRef, pediatricInView] = useInView({ triggerOnce: true, threshold: 0.1 });
-    const [vaccinationRef, vaccinationInView] = useInView({ triggerOnce: true, threshold: 0.1 });
-    const [growthRef, growthInView] = useInView({ triggerOnce: true, threshold: 0.1 });
-    const [nutritionRef, nutritionInView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
     const fadeInUp = {
         hidden: { opacity: 0, y: 30 },
@@ -33,82 +29,90 @@ const ChildHealth = () => {
             id: "pediatric-care",
             title: "Pediatric Care",
             icon: Stethoscope,
-            color: "#FF6B6B",
-            image: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=800&q=80",
-            what: "Pediatric care is specialized healthcare for infants, children, and adolescents up to age 18. It covers all aspects of physical, mental, and emotional health, tailored to the unique needs of growing bodies and developing minds.",
-            when: "Schedule regular well-child visits: monthly for infants, quarterly for toddlers, and annually for older children. Visit immediately if your child has high fever, difficulty breathing, unusual behavior, or any injury. Don't wait when something seems wrong.",
-            how: "Our pediatricians conduct comprehensive examinations, track growth milestones, provide vaccinations, address concerns, and offer guidance on nutrition, sleep, and development. We create a comfortable, child-friendly environment.",
-            why: "Children aren't just small adults—their bodies and health needs are fundamentally different. Specialized pediatric care ensures proper development, early detection of issues, and builds a foundation for lifelong health."
+            image: "/images/child-health.png",
+            description: "Specialized healthcare for infants, children, and adolescents covering all aspects of physical, mental, and emotional health. Our pediatricians conduct comprehensive examinations, track growth milestones, provide vaccinations, and offer guidance on nutrition, sleep, and development.",
+            benefits: [
+                "Age-appropriate medical examinations",
+                "Growth and development tracking",
+                "Early detection of health issues",
+                "Child-friendly environment",
+                "Parent education and guidance"
+            ]
         },
         {
             id: "vaccination",
             title: "Vaccination Programs",
             icon: Syringe,
-            color: "#20BF55",
             image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&w=800&q=80",
-            what: "Vaccinations protect children from serious, potentially life-threatening diseases by building immunity before exposure. Our vaccination programs follow national and international immunization schedules to provide complete protection.",
-            when: "Vaccinations begin at birth and continue through adolescence according to a recommended schedule. Some vaccines require multiple doses at specific intervals. We provide timely reminders so you never miss a vaccine.",
-            how: "We administer vaccines in a gentle, child-friendly manner, explain expected reactions to parents, provide post-vaccination care guidance, and maintain detailed immunization records. We use only WHO-approved vaccines.",
-            why: "Vaccines are one of the most effective ways to protect children. They prevent outbreaks of deadly diseases, protect vulnerable individuals who can't be vaccinated, and have saved millions of lives worldwide."
+            description: "Protect children from serious diseases through our comprehensive vaccination programs. We follow national and international immunization schedules and use only WHO-approved vaccines administered in a gentle, child-friendly manner.",
+            benefits: [
+                "Complete immunization coverage",
+                "Timely vaccine reminders",
+                "Safe, WHO-approved vaccines",
+                "Minimal discomfort techniques",
+                "Detailed immunization records"
+            ]
         },
         {
             id: "growth-development",
             title: "Growth & Development",
             icon: TrendingUp,
-            color: "#01BAEF",
             image: "https://images.unsplash.com/photo-1587614382346-4ec70e388b28?auto=format&fit=crop&w=800&q=80",
-            what: "Growth and development monitoring tracks a child's physical growth (height, weight, head circumference) and developmental milestones (motor skills, language, cognition, social skills) to ensure they're progressing normally.",
-            when: "Monitor at every well-child visit. Be alert for delays in sitting, walking, speaking, or social interaction. Early detection (before age 3) of developmental delays significantly improves outcomes with intervention.",
-            how: "We use standardized growth charts, developmental screening tools, and observation. Parents receive guidance on age-appropriate activities that promote development. If concerns arise, we provide early intervention referrals.",
-            why: "Every child develops at their own pace, but some delays may indicate underlying issues. Early identification allows for timely intervention, helping children reach their full potential."
+            description: "Monitor your child's physical growth and developmental milestones to ensure they're progressing normally. We use standardized growth charts and developmental screening tools, providing early intervention referrals when needed.",
+            benefits: [
+                "Regular milestone tracking",
+                "Standardized growth assessments",
+                "Early delay detection",
+                "Development-promoting activities",
+                "Intervention referrals when needed"
+            ]
         },
         {
             id: "child-nutrition",
             title: "Child Nutrition",
             icon: Apple,
-            color: "#F59E0B",
             image: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=800&q=80",
-            what: "Child nutrition focuses on providing the right balance of nutrients needed for healthy growth and development. It covers breastfeeding support, introduction of solids, managing picky eating, and addressing nutritional deficiencies.",
-            when: "Nutrition guidance starts from birth (breastfeeding/formula), continues through weaning (around 6 months), and adapts as children grow. Address concerns early if you notice poor weight gain, persistent fatigue, or unusual eating behaviors.",
-            how: "Our nutritionists assess dietary intake, identify deficiencies, create personalized meal plans, and provide practical tips for healthy eating habits. We address common challenges like picky eating, food allergies, and obesity prevention.",
-            why: "Proper nutrition in childhood builds strong bones, healthy organs, sharp minds, and good immune function. Eating habits formed early tend to persist into adulthood, making childhood the critical time to establish healthy patterns."
+            description: "Proper nutrition for healthy growth and development. We provide guidance from breastfeeding through weaning and beyond, addressing picky eating, food allergies, and obesity prevention with personalized meal plans.",
+            benefits: [
+                "Personalized nutrition plans",
+                "Breastfeeding support",
+                "Picky eating solutions",
+                "Allergy management",
+                "Healthy eating habits"
+            ]
         }
     ];
 
     const faqs = [
         {
             question: "When should I bring my child for their first doctor's visit?",
-            answer: "The first pediatric visit should happen within 3-5 days after birth, followed by regular check-ups at 1, 2, 4, 6, 9, and 12 months in the first year. These visits are crucial for monitoring growth, development, and administering timely vaccinations."
+            answer: "The first pediatric visit should happen within 3-5 days after birth, followed by regular check-ups at 1, 2, 4, 6, 9, and 12 months in the first year."
         },
         {
             question: "How do I know if my child's development is normal?",
-            answer: "Every child develops at their own pace, but there are general milestones to watch for. At each well-child visit, we assess development. Warning signs include not responding to sounds, limited eye contact, delays in sitting/walking/talking, or loss of previously acquired skills. When in doubt, consult us."
+            answer: "Every child develops at their own pace, but there are general milestones to watch for. We assess development at each well-child visit and can address any concerns."
         },
         {
             question: "Are vaccines safe for my child?",
-            answer: "Yes, vaccines are extensively tested and monitored for safety. The benefits far outweigh the minimal risks. Common side effects like mild fever or soreness are temporary. We're happy to discuss any specific concerns you have about vaccination."
+            answer: "Yes, vaccines are extensively tested and monitored for safety. The benefits far outweigh the minimal risks. We're happy to discuss any specific concerns."
         },
         {
             question: "My child is a picky eater. Should I be worried?",
-            answer: "Picky eating is common, especially between ages 2-6. It usually resolves with time. However, if your child is losing weight, refusing entire food groups, or showing signs of nutritional deficiency (fatigue, poor concentration), consult our nutritionist for personalized guidance."
+            answer: "Picky eating is common, especially between ages 2-6. However, if your child is losing weight or showing signs of nutritional deficiency, consult our nutritionist."
         },
         {
             question: "How much screen time is appropriate for children?",
-            answer: "Guidelines recommend no screen time for children under 18 months (except video calls), up to 1 hour daily for ages 2-5, and consistent limits for older children. Quality matters—educational content is preferable. Ensure screens don't replace physical play, reading, and social interaction."
-        },
-        {
-            question: "When should I be concerned about my child's weight?",
-            answer: "If your child's growth pattern changes significantly (crossing percentile lines on growth charts), they seem noticeably heavier or lighter than peers, or if they have difficulty with physical activities, it's worth discussing with us. Both underweight and overweight have health implications."
+            answer: "Guidelines recommend no screen time for children under 18 months, up to 1 hour daily for ages 2-5, and consistent limits for older children."
         }
     ];
 
     return (
-        <div className="min-h-screen">
+        <div className="min-h-screen bg-[#020617]">
             {/* Hero Section */}
-            <section className="relative bg-gradient-to-br from-[#FF6B6B] via-[#FF8E8E] to-[#FFB4B4] text-white pt-32 pb-20 overflow-hidden" ref={heroRef}>
-                <div className="absolute inset-0 opacity-10">
-                    <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
-                    <div className="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+            <section className="relative pt-32 pb-20 overflow-hidden" ref={heroRef}>
+                <div className="absolute inset-0">
+                    <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#38BDF8]/10 rounded-full blur-3xl"></div>
+                    <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#22C55E]/10 rounded-full blur-3xl"></div>
                 </div>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     <motion.div
@@ -117,37 +121,28 @@ const ChildHealth = () => {
                         animate={heroInView ? "visible" : "hidden"}
                         variants={fadeInUp}
                     >
-                        <span className="inline-block bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium mb-4">
+                        <span className="inline-block bg-[#38BDF8]/20 border border-[#38BDF8]/30 px-4 py-2 rounded-full text-[#38BDF8] text-sm font-medium mb-6">
                             Child Health Services
                         </span>
-                        <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-                            Nurturing Healthy Futures for Your Little Ones
+                        <h1 className="text-4xl md:text-5xl font-bold text-[#E5E7EB] mb-6 leading-tight">
+                            Nurturing <span className="bg-gradient-to-r from-[#38BDF8] to-[#22C55E] bg-clip-text text-transparent">Healthy Futures</span>
                         </h1>
-                        <p className="text-xl text-gray-100 mb-8">
+                        <p className="text-lg text-[#94A3B8] mb-8 max-w-2xl mx-auto">
                             Comprehensive pediatric care, vaccinations, growth monitoring, and nutrition guidance for children from birth to adolescence.
                         </p>
-                        <Link to="/contact">
-                            <motion.button
-                                className="px-8 py-4 bg-white text-[#FF6B6B] rounded-lg font-bold shadow-lg hover:shadow-xl transition-all"
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                            >
-                                Book a Pediatric Appointment
-                            </motion.button>
-                        </Link>
                     </motion.div>
                 </div>
             </section>
 
             {/* Quick Navigation */}
-            <section className="py-6 bg-white border-b sticky top-0 z-40 shadow-sm">
+            <section className="py-6 bg-[#0F172A] border-y border-white/5 sticky top-20 z-40">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex flex-wrap justify-center gap-4">
                         {sections.map((section, index) => (
                             <a
                                 key={index}
                                 href={`#${section.id}`}
-                                className="px-6 py-3 bg-gray-100 text-[#0B4F6C] rounded-lg font-semibold hover:bg-[#FF6B6B] hover:text-white transition-colors"
+                                className="px-6 py-3 bg-[#1E293B] text-[#94A3B8] rounded-xl font-medium hover:bg-[#2563EB]/20 hover:text-[#38BDF8] transition-all"
                             >
                                 {section.title.split(' ')[0]}
                             </a>
@@ -157,14 +152,9 @@ const ChildHealth = () => {
             </section>
 
             {/* Stats Section */}
-            <section className="py-16 bg-[#0B4F6C] text-white">
+            <section className="py-16 bg-gradient-to-r from-[#2563EB] to-[#38BDF8]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <motion.div
-                        className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center"
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                    >
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                         {[
                             { number: "10,000+", label: "Children Cared For" },
                             { number: "98%", label: "Parent Satisfaction" },
@@ -178,11 +168,11 @@ const ChildHealth = () => {
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.1 }}
                             >
-                                <p className="text-3xl md:text-4xl font-bold text-[#20BF55] mb-2">{stat.number}</p>
-                                <p className="text-gray-300 text-sm">{stat.label}</p>
+                                <p className="text-3xl md:text-4xl font-bold text-white mb-2">{stat.number}</p>
+                                <p className="text-white/80 text-sm">{stat.label}</p>
                             </motion.div>
                         ))}
-                    </motion.div>
+                    </div>
                 </div>
             </section>
 
@@ -191,11 +181,10 @@ const ChildHealth = () => {
                 <section
                     key={index}
                     id={section.id}
-                    className={`py-20 scroll-mt-32 ${index % 2 === 0 ? 'bg-white' : 'bg-gradient-to-br from-gray-50 to-pink-50'}`}
-                    ref={index === 0 ? pediatricRef : index === 1 ? vaccinationRef : index === 2 ? growthRef : nutritionRef}
+                    className={`py-20 scroll-mt-32 ${index % 2 === 0 ? 'bg-[#020617]' : 'bg-[#0F172A]'}`}
                 >
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center`}>
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                             {/* Content */}
                             <motion.div
                                 className={index % 2 === 1 ? 'order-1 lg:order-2' : ''}
@@ -204,31 +193,30 @@ const ChildHealth = () => {
                                 viewport={{ once: true }}
                                 variants={index % 2 === 0 ? fadeInLeft : fadeInRight}
                             >
-                                <div className="w-16 h-16 rounded-full flex items-center justify-center mb-6" style={{ backgroundColor: `${section.color}20` }}>
-                                    <section.icon size={32} style={{ color: section.color }} />
+                                <div className="w-14 h-14 bg-[#2563EB]/10 rounded-xl flex items-center justify-center mb-6">
+                                    <section.icon size={28} className="text-[#38BDF8]" />
                                 </div>
-                                <h2 className="text-3xl md:text-4xl font-bold text-[#0B4F6C] mb-6">{section.title}</h2>
+                                <h2 className="text-3xl md:text-4xl font-bold text-[#E5E7EB] mb-6">{section.title}</h2>
 
-                                <div className="space-y-4">
-                                    {[
-                                        { label: "What", emoji: "❓", content: section.what },
-                                        { label: "When", emoji: "🕐", content: section.when },
-                                        { label: "How", emoji: "🔧", content: section.how },
-                                        { label: "Why", emoji: "💡", content: section.why }
-                                    ].map((item, idx) => (
+                                <p className="text-[#94A3B8] text-lg leading-relaxed mb-8">
+                                    {section.description}
+                                </p>
+
+                                <div className="space-y-3">
+                                    <h4 className="text-[#E5E7EB] font-semibold mb-3">Key Benefits:</h4>
+                                    {section.benefits.map((benefit, idx) => (
                                         <motion.div
                                             key={idx}
-                                            className="bg-gray-50 p-4 rounded-xl border-l-4"
-                                            style={{ borderLeftColor: section.color }}
+                                            className="flex items-center gap-3"
                                             initial={{ opacity: 0, x: -20 }}
                                             whileInView={{ opacity: 1, x: 0 }}
                                             viewport={{ once: true }}
                                             transition={{ delay: idx * 0.1 }}
                                         >
-                                            <h4 className="font-bold text-[#0B4F6C] flex items-center gap-2 mb-1">
-                                                <span>{item.emoji}</span> {item.label}
-                                            </h4>
-                                            <p className="text-gray-600 text-sm leading-relaxed">{item.content}</p>
+                                            <div className="w-6 h-6 bg-[#22C55E]/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                                <ChevronRight className="text-[#22C55E]" size={14} />
+                                            </div>
+                                            <span className="text-[#94A3B8]">{benefit}</span>
                                         </motion.div>
                                     ))}
                                 </div>
@@ -243,14 +231,17 @@ const ChildHealth = () => {
                                 variants={index % 2 === 0 ? fadeInRight : fadeInLeft}
                             >
                                 <motion.div
-                                    className="rounded-2xl overflow-hidden shadow-2xl"
+                                    className="rounded-2xl overflow-hidden border border-white/5"
                                     whileHover={{ scale: 1.02 }}
                                     transition={{ duration: 0.3 }}
                                 >
                                     <img
                                         src={section.image}
                                         alt={section.title}
-                                        className="w-full h-96 object-cover"
+                                        className="w-full h-80 object-cover"
+                                        onError={(e) => {
+                                            e.target.src = `https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=800&q=80`;
+                                        }}
                                     />
                                 </motion.div>
                             </motion.div>
@@ -259,8 +250,8 @@ const ChildHealth = () => {
                 </section>
             ))}
 
-            {/* Why Choose Us for Child Health */}
-            <section className="py-20 bg-gradient-to-r from-[#FF6B6B] to-[#FF8E8E] text-white">
+            {/* Why Parents Trust Us */}
+            <section className="py-20 bg-[#0F172A]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <motion.div
                         className="text-center mb-12"
@@ -268,10 +259,8 @@ const ChildHealth = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Parents Trust Us</h2>
-                        <p className="text-xl text-gray-100 max-w-3xl mx-auto">
-                            We understand that choosing healthcare for your child is one of the most important decisions you'll make
-                        </p>
+                        <span className="text-[#38BDF8] font-medium text-sm uppercase tracking-wider">Why Choose Us</span>
+                        <h2 className="text-3xl md:text-4xl font-bold text-[#E5E7EB] mt-2 mb-4">Why Parents Trust Us</h2>
                     </motion.div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -283,16 +272,18 @@ const ChildHealth = () => {
                         ].map((item, index) => (
                             <motion.div
                                 key={index}
-                                className="bg-white/10 backdrop-blur-sm p-6 rounded-xl text-center"
+                                className="bg-[#020617] border border-white/5 p-6 rounded-2xl text-center hover:border-[#2563EB]/30 transition-all"
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.1 }}
                                 whileHover={{ y: -5 }}
                             >
-                                <item.icon className="mx-auto mb-4" size={40} />
-                                <h3 className="font-bold text-lg mb-2">{item.title}</h3>
-                                <p className="text-gray-200 text-sm">{item.desc}</p>
+                                <div className="w-14 h-14 bg-[#2563EB]/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+                                    <item.icon className="text-[#38BDF8]" size={28} />
+                                </div>
+                                <h3 className="font-bold text-[#E5E7EB] text-lg mb-2">{item.title}</h3>
+                                <p className="text-[#64748B] text-sm">{item.desc}</p>
                             </motion.div>
                         ))}
                     </div>
@@ -306,15 +297,15 @@ const ChildHealth = () => {
             <TopicQueryForm topic="Child Health" subtitle="Have questions about your child's health? We're here to help." />
 
             {/* CTA Section */}
-            <section className="py-20 bg-gradient-to-r from-[#FF6B6B] to-[#FFB4B4] text-white">
+            <section className="py-20 bg-gradient-to-r from-[#2563EB] to-[#38BDF8]">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-6">Give Your Child the Best Start in Life</h2>
-                    <p className="text-xl text-gray-100 mb-8">
-                        Book a consultation with our pediatric specialists today and ensure your child's healthy development.
+                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Give Your Child the Best Start in Life</h2>
+                    <p className="text-xl text-white/80 mb-8">
+                        Book a consultation with our pediatric specialists today.
                     </p>
                     <Link to="/contact">
                         <motion.button
-                            className="px-10 py-4 bg-white text-[#FF6B6B] rounded-lg font-bold text-lg shadow-lg"
+                            className="px-10 py-4 bg-white text-[#2563EB] rounded-xl font-bold text-lg"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                         >

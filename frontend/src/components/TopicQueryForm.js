@@ -54,17 +54,19 @@ const TopicQueryForm = ({ topic, subtitle = "Have questions? We're here to help!
 
     if (submitted) {
         return (
-            <div className="py-16 bg-white">
+            <div className="py-20 bg-[#020617]">
                 <div className="max-w-2xl mx-auto px-4 text-center">
                     <motion.div
                         initial={{ scale: 0.8, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         transition={{ duration: 0.5 }}
-                        className="bg-gradient-to-br from-[#20BF55]/10 to-[#01BAEF]/10 p-12 rounded-2xl"
+                        className="bg-[#0F172A] border border-white/5 p-12 rounded-2xl"
                     >
-                        <CheckCircle2 className="text-[#20BF55] mx-auto mb-4" size={64} />
-                        <h3 className="text-2xl font-bold text-[#0B4F6C] mb-2">Thank You!</h3>
-                        <p className="text-gray-600">We've received your query about {topic}. Our team will contact you within 24 hours.</p>
+                        <div className="w-16 h-16 bg-[#22C55E]/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <CheckCircle2 className="text-[#22C55E]" size={32} />
+                        </div>
+                        <h3 className="text-2xl font-bold text-[#E5E7EB] mb-2">Thank You!</h3>
+                        <p className="text-[#94A3B8]">We've received your query about {topic}. Our team will contact you within 24 hours.</p>
                     </motion.div>
                 </div>
             </div>
@@ -72,7 +74,7 @@ const TopicQueryForm = ({ topic, subtitle = "Have questions? We're here to help!
     }
 
     return (
-        <div className="py-16 bg-white">
+        <div className="py-20 bg-[#020617]">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <motion.div
                     className="text-center mb-10"
@@ -80,24 +82,24 @@ const TopicQueryForm = ({ topic, subtitle = "Have questions? We're here to help!
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                 >
-                    <span className="text-[#20BF55] font-semibold text-sm uppercase tracking-wider">Get In Touch</span>
-                    <h2 className="text-3xl md:text-4xl font-bold text-[#0B4F6C] mt-2 mb-2">
+                    <span className="text-[#38BDF8] font-medium text-sm uppercase tracking-wider">Get In Touch</span>
+                    <h2 className="text-3xl md:text-4xl font-bold text-[#E5E7EB] mt-2 mb-2">
                         Ask About {topic}
                     </h2>
-                    <p className="text-gray-600">{subtitle}</p>
+                    <p className="text-[#94A3B8]">{subtitle}</p>
                 </motion.div>
 
                 <motion.form
                     onSubmit={handleSubmit}
-                    className="bg-gradient-to-br from-gray-50 to-blue-50 p-8 rounded-2xl shadow-lg"
+                    className="bg-[#0F172A] border border-white/5 p-8 rounded-2xl"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                 >
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                         <div>
-                            <label className="block text-sm font-semibold text-[#0B4F6C] mb-2 flex items-center gap-2">
-                                <User size={16} /> Your Name *
+                            <label className="block text-sm font-semibold text-[#E5E7EB] mb-2 flex items-center gap-2">
+                                <User size={16} className="text-[#38BDF8]" /> Your Name *
                             </label>
                             <input
                                 type="text"
@@ -106,12 +108,12 @@ const TopicQueryForm = ({ topic, subtitle = "Have questions? We're here to help!
                                 onChange={handleChange}
                                 required
                                 placeholder="John Doe"
-                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#20BF55] focus:border-transparent"
+                                className="w-full px-4 py-3 bg-[#020617] border border-white/10 rounded-xl text-[#E5E7EB] placeholder-[#64748B] focus:outline-none focus:border-[#38BDF8] transition-colors"
                             />
                         </div>
                         <div>
-                            <label className="block text-sm font-semibold text-[#0B4F6C] mb-2 flex items-center gap-2">
-                                <Mail size={16} /> Email Address *
+                            <label className="block text-sm font-semibold text-[#E5E7EB] mb-2 flex items-center gap-2">
+                                <Mail size={16} className="text-[#38BDF8]" /> Email Address *
                             </label>
                             <input
                                 type="email"
@@ -120,12 +122,12 @@ const TopicQueryForm = ({ topic, subtitle = "Have questions? We're here to help!
                                 onChange={handleChange}
                                 required
                                 placeholder="john@example.com"
-                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#20BF55] focus:border-transparent"
+                                className="w-full px-4 py-3 bg-[#020617] border border-white/10 rounded-xl text-[#E5E7EB] placeholder-[#64748B] focus:outline-none focus:border-[#38BDF8] transition-colors"
                             />
                         </div>
                         <div className="md:col-span-2">
-                            <label className="block text-sm font-semibold text-[#0B4F6C] mb-2 flex items-center gap-2">
-                                <Phone size={16} /> Phone Number
+                            <label className="block text-sm font-semibold text-[#E5E7EB] mb-2 flex items-center gap-2">
+                                <Phone size={16} className="text-[#38BDF8]" /> Phone Number
                             </label>
                             <input
                                 type="tel"
@@ -133,12 +135,12 @@ const TopicQueryForm = ({ topic, subtitle = "Have questions? We're here to help!
                                 value={formData.phone}
                                 onChange={handleChange}
                                 placeholder="+91 98765 43210"
-                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#20BF55] focus:border-transparent"
+                                className="w-full px-4 py-3 bg-[#020617] border border-white/10 rounded-xl text-[#E5E7EB] placeholder-[#64748B] focus:outline-none focus:border-[#38BDF8] transition-colors"
                             />
                         </div>
                         <div className="md:col-span-2">
-                            <label className="block text-sm font-semibold text-[#0B4F6C] mb-2 flex items-center gap-2">
-                                <MessageSquare size={16} /> Your Question *
+                            <label className="block text-sm font-semibold text-[#E5E7EB] mb-2 flex items-center gap-2">
+                                <MessageSquare size={16} className="text-[#38BDF8]" /> Your Question *
                             </label>
                             <textarea
                                 name="message"
@@ -147,13 +149,13 @@ const TopicQueryForm = ({ topic, subtitle = "Have questions? We're here to help!
                                 required
                                 rows={4}
                                 placeholder={`Ask us anything about ${topic}...`}
-                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#20BF55] focus:border-transparent resize-none"
+                                className="w-full px-4 py-3 bg-[#020617] border border-white/10 rounded-xl text-[#E5E7EB] placeholder-[#64748B] focus:outline-none focus:border-[#38BDF8] transition-colors resize-none"
                             />
                         </div>
                     </div>
 
                     {error && (
-                        <div className="mb-4 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+                        <div className="mb-4 bg-[#EF4444]/10 border border-[#EF4444]/30 text-[#EF4444] px-4 py-3 rounded-xl text-sm">
                             {error}
                         </div>
                     )}
@@ -161,8 +163,8 @@ const TopicQueryForm = ({ topic, subtitle = "Have questions? We're here to help!
                     <motion.button
                         type="submit"
                         disabled={loading}
-                        className="w-full bg-gradient-to-r from-[#20BF55] to-[#01BAEF] text-white py-4 rounded-lg font-bold text-lg flex items-center justify-center gap-2 hover:shadow-lg transition-shadow"
-                        whileHover={{ scale: 1.02 }}
+                        className="w-full bg-gradient-to-r from-[#2563EB] to-[#38BDF8] text-white py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-2 disabled:opacity-50"
+                        whileHover={{ scale: 1.02, boxShadow: '0 0 30px rgba(37, 99, 235, 0.3)' }}
                         whileTap={{ scale: 0.98 }}
                     >
                         {loading ? (

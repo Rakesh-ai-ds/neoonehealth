@@ -1,266 +1,163 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Heart, Users, Activity, Shield, Award, Clock, Phone, MapPin, Mail, CheckCircle2, ArrowRight, Stethoscope, Microscope, Ambulance } from 'lucide-react';
-import Button from '@/components/ui/Button';
-import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowRight, Heart, Shield, Users, Activity, Baby, Briefcase, UserCheck, ChevronRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
 const Home = () => {
   const [heroRef, heroInView] = useInView({ triggerOnce: true, threshold: 0.1 });
-  const [aboutRef, aboutInView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const [servicesRef, servicesInView] = useInView({ triggerOnce: true, threshold: 0.1 });
-  const [programsRef, programsInView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const [statsRef, statsInView] = useInView({ triggerOnce: true, threshold: 0.1 });
-  const [teamRef, teamInView] = useInView({ triggerOnce: true, threshold: 0.1 });
-
-  // Background image slider state
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  const heroImages = [
-    {
-      url: 'https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?auto=format&fit=crop&w=1920&q=80',
-      alt: 'Modern Hospital'
-    },
-    {
-      url: 'https://images.unsplash.com/photo-1551190822-a9333d879b1f?auto=format&fit=crop&w=1920&q=80',
-      alt: 'Medical Team'
-    },
-    {
-      url: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1920&q=80',
-      alt: 'Healthcare Technology'
-    },
-    {
-      url: 'https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&w=1920&q=80',
-      alt: 'Patient Care'
-    }
-  ];
-
-  // Auto-rotate images every 5 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % heroImages.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [heroImages.length]);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.2 }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut" }
-    }
-  };
+  const [whyRef, whyInView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: "easeOut" }
-    }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
   };
 
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+  };
+
+  const services = [
+    {
+      icon: Heart,
+      title: 'Personal Wellness',
+      desc: 'Comprehensive health programs for individuals including fitness, nutrition, and mental wellness.',
+      path: '/personal-wellness',
+      color: '#22C55E'
+    },
+    {
+      icon: Baby,
+      title: 'Child Health',
+      desc: 'Pediatric care, vaccinations, growth monitoring, and nutritional guidance for children.',
+      path: '/child-health',
+      color: '#38BDF8'
+    },
+    {
+      icon: Briefcase,
+      title: 'Occupational Health',
+      desc: 'Workplace safety, ergonomics, mental wellness, and health screening for organizations.',
+      path: '/occupational-health',
+      color: '#FACC15'
+    },
+    {
+      icon: UserCheck,
+      title: 'Elderly Health',
+      desc: 'The 3F approach: Feel, Fall Prevention, and Flexibility for healthy aging.',
+      path: '/elderly-health',
+      color: '#A78BFA'
+    }
+  ];
+
+  const stats = [
+    { number: '15+', label: 'Years Experience' },
+    { number: '50,000+', label: 'Patients Served' },
+    { number: '98%', label: 'Satisfaction Rate' },
+    { number: '24/7', label: 'Support Available' }
+  ];
+
+  const whyChooseUs = [
+    { icon: Shield, title: 'Trusted Experts', desc: 'Board-certified professionals with decades of experience' },
+    { icon: Activity, title: 'Science-Based', desc: 'Evidence-based approaches backed by research' },
+    { icon: Users, title: 'Personalized Care', desc: 'Tailored solutions for your unique needs' },
+    { icon: Heart, title: 'Holistic Approach', desc: 'Mind, body, and lifestyle integration' }
+  ];
+
   return (
-    <div className="min-h-screen">
-      {/* Hero Section with Background Image Slider */}
-      <section className="relative min-h-screen flex items-center overflow-hidden" ref={heroRef}>
-        {/* Static Dark Overlay - Always visible to prevent flash */}
-        <div className="absolute inset-0 bg-[#0B4F6C] z-0"></div>
-
-        {/* Background Image Slider */}
-        <div className="absolute inset-0 z-[1]">
-          {heroImages.map((image, index) => (
-            <div
-              key={index}
-              className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'
-                }`}
-            >
-              <img
-                src={image.url}
-                alt={image.alt}
-                className="w-full h-full object-cover"
-              />
-            </div>
-          ))}
-          {/* Dark overlay for text readability - Always on top of images */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0B4F6C]/85 via-[#0B4F6C]/70 to-[#0B4F6C]/50 z-[2]"></div>
+    <div className="min-h-screen bg-[#020617]">
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex items-center pt-20" ref={heroRef}>
+        {/* Background */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-[#020617] via-[#0F172A] to-[#020617]"></div>
+          {/* Gradient Orbs */}
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#2563EB]/20 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#38BDF8]/10 rounded-full blur-3xl"></div>
         </div>
 
-        {/* Image Indicators */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex space-x-3">
-          {heroImages.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentImageIndex(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentImageIndex
-                ? 'bg-white w-8'
-                : 'bg-white/50 hover:bg-white/70'
-                }`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </div>
-
-        {/* Hero Content */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-32">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left Content */}
             <motion.div
               initial="hidden"
               animate={heroInView ? "visible" : "hidden"}
-              variants={containerVariants}
+              variants={fadeInUp}
             >
-              <motion.div className="inline-block mb-4" variants={itemVariants}>
-                <span className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium text-white">
-                  Trusted Healthcare Partner
-                </span>
-              </motion.div>
-
+              <motion.span
+                className="inline-block bg-[#2563EB]/20 border border-[#2563EB]/30 px-4 py-2 rounded-full text-[#38BDF8] text-sm font-medium mb-6"
+                variants={fadeInUp}
+              >
+                Medical-Grade Wellness Solutions
+              </motion.span>
               <motion.h1
-                className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-white"
-                variants={itemVariants}
+                className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#E5E7EB] mb-6 leading-tight"
+                variants={fadeInUp}
               >
-                Your Health, Our Priority
+                Your Health, <br />
+                <span className="bg-gradient-to-r from-[#2563EB] to-[#38BDF8] bg-clip-text text-transparent">
+                  Our Priority
+                </span>
               </motion.h1>
-
               <motion.p
-                className="text-xl text-gray-200 mb-8 leading-relaxed"
-                variants={itemVariants}
+                className="text-lg text-[#94A3B8] mb-8 max-w-lg"
+                variants={fadeInUp}
               >
-                Comprehensive healthcare services with compassionate care. Experience world-class medical treatment with our team of expert doctors and modern facilities.
+                Comprehensive wellness solutions for individuals, families, and organizations.
+                Science-backed approaches for lasting health improvements.
               </motion.p>
-
               <motion.div
-                className="flex flex-col sm:flex-row gap-4"
-                variants={itemVariants}
+                className="flex flex-wrap gap-4"
+                variants={fadeInUp}
               >
                 <Link to="/contact">
-                  <Button size="lg" className="bg-[#20BF55] text-white hover:bg-[#1aa548] hover-lift shadow-lg">
-                    <Phone className="mr-2" size={20} />
-                    Book Appointment
-                  </Button>
+                  <motion.button
+                    className="px-8 py-4 bg-gradient-to-r from-[#2563EB] to-[#38BDF8] text-white rounded-xl font-bold flex items-center gap-2"
+                    whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(37, 99, 235, 0.4)' }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Get Started <ArrowRight size={20} />
+                  </motion.button>
                 </Link>
                 <Link to="/about">
-                  <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-[#0B4F6C] hover-lift">
+                  <motion.button
+                    className="px-8 py-4 border border-[#38BDF8] text-[#38BDF8] rounded-xl font-bold"
+                    whileHover={{ backgroundColor: 'rgba(56, 189, 248, 0.1)' }}
+                  >
                     Learn More
-                    <ArrowRight className="ml-2" size={20} />
-                  </Button>
+                  </motion.button>
                 </Link>
-              </motion.div>
-
-              <motion.div
-                className="mt-8 flex flex-wrap gap-6"
-                variants={itemVariants}
-              >
-                <div className="flex items-center gap-2 text-white">
-                  <CheckCircle2 className="text-[#20BF55]" size={24} />
-                  <span className="text-sm">24/7 Emergency Care</span>
-                </div>
-                <div className="flex items-center gap-2 text-white">
-                  <CheckCircle2 className="text-[#20BF55]" size={24} />
-                  <span className="text-sm">Expert Doctors</span>
-                </div>
-                <div className="flex items-center gap-2 text-white">
-                  <CheckCircle2 className="text-[#20BF55]" size={24} />
-                  <span className="text-sm">Modern Equipment</span>
-                </div>
               </motion.div>
             </motion.div>
 
-            {/* Right side - Feature Cards (visible on desktop) */}
+            {/* Right - Feature Cards */}
             <motion.div
               className="hidden lg:block"
               initial={{ opacity: 0, x: 50 }}
-              animate={heroInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
+              animate={heroInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.3 }}
             >
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
-                  <Heart className="text-[#20BF55] mb-4" size={40} />
-                  <h3 className="text-white font-bold text-lg mb-2">Personal Wellness</h3>
-                  <p className="text-gray-200 text-sm">Personalized health programs for your lifestyle</p>
-                </div>
-                <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
-                  <Users className="text-[#FFE66D] mb-4" size={40} />
-                  <h3 className="text-white font-bold text-lg mb-2">Child Health</h3>
-                  <p className="text-gray-200 text-sm">Complete pediatric care for your little ones</p>
-                </div>
-                <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
-                  <Shield className="text-[#01BAEF] mb-4" size={40} />
-                  <h3 className="text-white font-bold text-lg mb-2">Corporate Health</h3>
-                  <p className="text-gray-200 text-sm">Comprehensive wellness for organizations</p>
-                </div>
-                <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
-                  <Activity className="text-[#FF6B6B] mb-4" size={40} />
-                  <h3 className="text-white font-bold text-lg mb-2">Diagnostics</h3>
-                  <p className="text-gray-200 text-sm">Advanced testing and health assessments</p>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* About Section */}
-      <section className="py-20 bg-white" ref={aboutRef}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial="hidden"
-              animate={aboutInView ? "visible" : "hidden"}
-              variants={fadeInUp}
-            >
-              <div className="relative rounded-2xl overflow-hidden shadow-xl">
-                <img
-                  src="https://images.unsplash.com/photo-1551190822-a9333d879b1f?auto=format&fit=crop&w=800&q=80"
-                  alt="Our Medical Team"
-                  className="w-full h-auto"
-                />
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial="hidden"
-              animate={aboutInView ? "visible" : "hidden"}
-              variants={fadeInUp}
-            >
-              <span className="text-[#20BF55] font-semibold text-sm uppercase tracking-wider">About NeoOne Health</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#0B4F6C] mt-2 mb-6">
-                Committed to Excellence in Healthcare
-              </h2>
-              <p className="text-gray-600 mb-6 leading-relaxed">
-                At NeoOne Health, we believe in providing accessible, affordable, and quality healthcare to everyone. Our state-of-the-art facilities combined with our compassionate medical professionals ensure you receive the best care possible.
-              </p>
-              <p className="text-gray-600 mb-8 leading-relaxed">
-                With years of experience serving communities across India, we understand the unique healthcare needs of our patients and strive to exceed their expectations every day.
-              </p>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-[#0B4F6C]/10 rounded-lg flex items-center justify-center">
-                    <Award className="text-[#0B4F6C]" size={24} />
-                  </div>
-                  <div>
-                    <p className="font-bold text-[#0B4F6C]">15+ Years</p>
-                    <p className="text-sm text-gray-500">Experience</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-[#0B4F6C]/10 rounded-lg flex items-center justify-center">
-                    <Users className="text-[#0B4F6C]" size={24} />
-                  </div>
-                  <div>
-                    <p className="font-bold text-[#0B4F6C]">50,000+</p>
-                    <p className="text-sm text-gray-500">Happy Patients</p>
-                  </div>
-                </div>
+                {services.map((service, index) => (
+                  <motion.div
+                    key={index}
+                    className="bg-[#0F172A] border border-white/5 p-6 rounded-2xl hover:border-[#2563EB]/30 transition-all"
+                    whileHover={{ y: -5, boxShadow: '0 0 30px rgba(37, 99, 235, 0.1)' }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={heroInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ delay: 0.4 + index * 0.1 }}
+                  >
+                    <div
+                      className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
+                      style={{ backgroundColor: `${service.color}20` }}
+                    >
+                      <service.icon size={24} style={{ color: service.color }} />
+                    </div>
+                    <h3 className="text-[#E5E7EB] font-bold mb-2">{service.title}</h3>
+                    <p className="text-[#64748B] text-sm">{service.desc.substring(0, 60)}...</p>
+                  </motion.div>
+                ))}
               </div>
             </motion.div>
           </div>
@@ -268,7 +165,7 @@ const Home = () => {
       </section>
 
       {/* Services Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50" ref={servicesRef}>
+      <section className="py-20 bg-[#0F172A]" ref={servicesRef}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-16"
@@ -276,41 +173,42 @@ const Home = () => {
             animate={servicesInView ? "visible" : "hidden"}
             variants={fadeInUp}
           >
-            <span className="text-[#20BF55] font-semibold text-sm uppercase tracking-wider">Our Services</span>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#0B4F6C] mt-2 mb-4">
-              Comprehensive Healthcare Solutions
+            <span className="text-[#38BDF8] font-medium text-sm uppercase tracking-wider">Our Services</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#E5E7EB] mt-2 mb-4">
+              Comprehensive Health Solutions
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              From preventive care to specialized treatments, we offer a wide range of healthcare services tailored to your needs.
+            <p className="text-[#94A3B8] max-w-2xl mx-auto">
+              From personal wellness to corporate health programs, we provide end-to-end solutions for every stage of life.
             </p>
           </motion.div>
 
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
             initial="hidden"
             animate={servicesInView ? "visible" : "hidden"}
-            variants={containerVariants}
+            variants={staggerContainer}
           >
-            {[
-              { icon: Stethoscope, title: 'General Checkups', desc: 'Regular health assessments to keep you in optimal condition', color: '#20BF55', link: '/personal-wellness' },
-              { icon: Heart, title: 'Personal Wellness', desc: 'Customized wellness programs for a healthier lifestyle', color: '#FF6B6B', link: '/personal-wellness' },
-              { icon: Users, title: 'Child Health', desc: 'Complete pediatric care from infancy to adolescence', color: '#FFE66D', link: '/child-health' },
-              { icon: Shield, title: 'Corporate Health', desc: 'Workplace health solutions for organizations', color: '#0B4F6C', link: '/corporate-health' },
-              { icon: Microscope, title: 'Diagnostics', desc: 'Advanced laboratory testing and imaging services', color: '#9B59B6', link: '/contact' },
-              { icon: Ambulance, title: 'Emergency Care', desc: '24/7 emergency medical services when you need them most', color: '#E74C3C', link: '/contact' }
-            ].map((service, index) => (
+            {services.map((service, index) => (
               <motion.div
                 key={index}
-                variants={itemVariants}
-                whileHover={{ y: -10, transition: { duration: 0.3 } }}
+                variants={fadeInUp}
+                whileHover={{ y: -10 }}
               >
-                <Link to={service.link}>
-                  <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 h-full">
-                    <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6" style={{ backgroundColor: `${service.color}15` }}>
-                      <service.icon size={32} style={{ color: service.color }} />
+                <Link to={service.path}>
+                  <div className="bg-[#020617] border border-white/5 p-6 rounded-2xl h-full hover:border-[#2563EB]/30 transition-all group">
+                    <div
+                      className="w-14 h-14 rounded-xl flex items-center justify-center mb-4"
+                      style={{ backgroundColor: `${service.color}15` }}
+                    >
+                      <service.icon size={28} style={{ color: service.color }} />
                     </div>
-                    <h3 className="text-xl font-bold text-[#0B4F6C] mb-3">{service.title}</h3>
-                    <p className="text-gray-600">{service.desc}</p>
+                    <h3 className="text-[#E5E7EB] font-bold text-lg mb-2 group-hover:text-[#38BDF8] transition-colors">
+                      {service.title}
+                    </h3>
+                    <p className="text-[#64748B] text-sm mb-4">{service.desc}</p>
+                    <div className="flex items-center text-[#38BDF8] text-sm font-medium">
+                      Learn More <ChevronRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform" />
+                    </div>
                   </div>
                 </Link>
               </motion.div>
@@ -320,66 +218,63 @@ const Home = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 bg-[#0B4F6C] text-white" ref={statsRef}>
+      <section className="py-16 bg-gradient-to-r from-[#2563EB] to-[#38BDF8]" ref={statsRef}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
-            className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center"
+            className="grid grid-cols-2 md:grid-cols-4 gap-8"
             initial="hidden"
             animate={statsInView ? "visible" : "hidden"}
-            variants={containerVariants}
+            variants={staggerContainer}
           >
-            {[
-              { number: '15+', label: 'Years Experience' },
-              { number: '50,000+', label: 'Happy Patients' },
-              { number: '100+', label: 'Expert Doctors' },
-              { number: '24/7', label: 'Emergency Service' }
-            ].map((stat, index) => (
-              <motion.div key={index} variants={itemVariants}>
-                <p className="text-4xl md:text-5xl font-bold text-[#20BF55] mb-2">{stat.number}</p>
-                <p className="text-gray-300">{stat.label}</p>
+            {stats.map((stat, index) => (
+              <motion.div
+                key={index}
+                className="text-center"
+                variants={fadeInUp}
+              >
+                <p className="text-4xl md:text-5xl font-bold text-white mb-2">{stat.number}</p>
+                <p className="text-white/80">{stat.label}</p>
               </motion.div>
             ))}
           </motion.div>
         </div>
       </section>
 
-      {/* Why Choose Us Section */}
-      <section className="py-20 bg-white" ref={teamRef}>
+      {/* Why Choose Us */}
+      <section className="py-20 bg-[#020617]" ref={whyRef}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-16"
             initial="hidden"
-            animate={teamInView ? "visible" : "hidden"}
+            animate={whyInView ? "visible" : "hidden"}
             variants={fadeInUp}
           >
-            <span className="text-[#20BF55] font-semibold text-sm uppercase tracking-wider">Why Choose Us</span>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#0B4F6C] mt-2 mb-4">
-              What Makes Us Different
+            <span className="text-[#38BDF8] font-medium text-sm uppercase tracking-wider">Why Choose Us</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#E5E7EB] mt-2 mb-4">
+              Trusted by Thousands
             </h2>
+            <p className="text-[#94A3B8] max-w-2xl mx-auto">
+              We combine medical expertise with technology to deliver results that matter.
+            </p>
           </motion.div>
 
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
             initial="hidden"
-            animate={teamInView ? "visible" : "hidden"}
-            variants={containerVariants}
+            animate={whyInView ? "visible" : "hidden"}
+            variants={staggerContainer}
           >
-            {[
-              { icon: Heart, title: 'Compassionate Care', desc: 'We treat every patient with empathy and understanding' },
-              { icon: Award, title: 'Quality Excellence', desc: 'Highest standards of medical care and service' },
-              { icon: Clock, title: '24/7 Availability', desc: 'Round the clock medical support for emergencies' },
-              { icon: Shield, title: 'Patient Safety', desc: 'Your health and safety is our top priority' }
-            ].map((item, index) => (
+            {whyChooseUs.map((item, index) => (
               <motion.div
                 key={index}
-                variants={itemVariants}
-                className="text-center"
+                className="text-center p-6"
+                variants={fadeInUp}
               >
-                <div className="w-20 h-20 bg-gradient-to-br from-[#20BF55] to-[#01BAEF] rounded-full flex items-center justify-center mx-auto mb-6">
-                  <item.icon className="text-white" size={36} />
+                <div className="w-16 h-16 bg-[#2563EB]/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <item.icon className="text-[#38BDF8]" size={32} />
                 </div>
-                <h3 className="text-xl font-bold text-[#0B4F6C] mb-3">{item.title}</h3>
-                <p className="text-gray-600">{item.desc}</p>
+                <h3 className="text-[#E5E7EB] font-bold text-lg mb-2">{item.title}</h3>
+                <p className="text-[#64748B] text-sm">{item.desc}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -387,56 +282,29 @@ const Home = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-[#20BF55] to-[#01BAEF] text-white">
+      <section className="py-20 bg-[#0F172A]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Take Control of Your Health?</h2>
-          <p className="text-xl text-gray-100 mb-8">
-            Book an appointment today and experience healthcare the way it should be.
-          </p>
-          <Link to="/contact">
-            <motion.button
-              className="px-10 py-4 bg-white text-[#0B4F6C] rounded-lg font-bold text-lg shadow-lg"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Book Your Appointment
-            </motion.button>
-          </Link>
-        </div>
-      </section>
-
-      {/* Contact Info Strip */}
-      <section className="py-12 bg-[#0B4F6C] text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="flex items-center gap-4">
-              <div className="w-14 h-14 bg-white/10 rounded-full flex items-center justify-center">
-                <Phone className="text-[#20BF55]" size={24} />
-              </div>
-              <div>
-                <p className="text-sm text-gray-300">Call Us</p>
-                <p className="font-bold">+91 98765 43210</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-4">
-              <div className="w-14 h-14 bg-white/10 rounded-full flex items-center justify-center">
-                <Mail className="text-[#20BF55]" size={24} />
-              </div>
-              <div>
-                <p className="text-sm text-gray-300">Email Us</p>
-                <p className="font-bold">contact@neoonehealth.in</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-4">
-              <div className="w-14 h-14 bg-white/10 rounded-full flex items-center justify-center">
-                <MapPin className="text-[#20BF55]" size={24} />
-              </div>
-              <div>
-                <p className="text-sm text-gray-300">Visit Us</p>
-                <p className="font-bold">Chennai, Tamil Nadu, India</p>
-              </div>
-            </div>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-[#E5E7EB] mb-6">
+              Ready to Transform Your Health?
+            </h2>
+            <p className="text-[#94A3B8] text-lg mb-8">
+              Take the first step towards a healthier, more fulfilling life. Our experts are ready to guide you.
+            </p>
+            <Link to="/contact">
+              <motion.button
+                className="px-10 py-4 bg-gradient-to-r from-[#2563EB] to-[#38BDF8] text-white rounded-xl font-bold text-lg"
+                whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(37, 99, 235, 0.4)' }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Book a Consultation
+              </motion.button>
+            </Link>
+          </motion.div>
         </div>
       </section>
     </div>

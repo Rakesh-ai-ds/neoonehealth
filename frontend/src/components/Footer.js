@@ -40,7 +40,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-[#0B4F6C] text-white" ref={footerRef}>
+    <footer className="bg-[#0F172A] border-t border-white/5" ref={footerRef}>
       <motion.div
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12"
         initial="hidden"
@@ -51,26 +51,25 @@ const Footer = () => {
 
           {/* Company Info */}
           <motion.div variants={itemVariants}>
-            <div className="flex items-center space-x-2 mb-4">
+            <div className="flex items-center space-x-3 mb-4">
               <motion.div
-                className="w-10 h-10 bg-gradient-to-br from-[#01BAEF] via-[#20BF55] to-[#0B4F6C] rounded-full flex items-center justify-center"
-                whileHover={{ rotate: 360, scale: 1.1 }}
-                transition={{ duration: 0.5 }}
+                className="w-10 h-10 bg-gradient-to-br from-[#2563EB] to-[#38BDF8] rounded-xl flex items-center justify-center"
+                whileHover={{ scale: 1.05 }}
               >
                 <span className="text-white font-bold text-xl">N</span>
               </motion.div>
-              <span className="text-white font-bold text-xl">NeoOne Health</span>
+              <span className="text-[#E5E7EB] font-bold text-xl">NeoOne Health</span>
             </div>
-            <p className="text-gray-300 text-sm mb-6">
-              Your trusted healthcare partner. Comprehensive wellness solutions for individuals, families, workplaces, and elderly care.
+            <p className="text-[#94A3B8] text-sm mb-6 leading-relaxed">
+              Your trusted healthcare partner. Medical-grade wellness solutions backed by science and designed for results.
             </p>
             <div className="flex space-x-3">
               {[Facebook, Twitter, Linkedin, Instagram].map((Icon, index) => (
                 <motion.a
                   key={index}
                   href="#"
-                  className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-gray-300 hover:bg-[#20BF55] hover:text-white transition-all"
-                  whileHover={{ scale: 1.2, y: -3 }}
+                  className="w-10 h-10 bg-[#1E293B] rounded-xl flex items-center justify-center text-[#94A3B8] hover:bg-[#2563EB] hover:text-white transition-all"
+                  whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   <Icon size={18} />
@@ -81,7 +80,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <motion.div variants={itemVariants}>
-            <h3 className="text-white font-bold mb-4">Quick Links</h3>
+            <h3 className="text-[#E5E7EB] font-bold mb-4">Quick Links</h3>
             <ul className="space-y-3">
               {quickLinks.map((link, index) => (
                 <motion.li
@@ -89,7 +88,7 @@ const Footer = () => {
                   whileHover={{ x: 5 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <Link to={link.path} className="text-gray-300 hover:text-[#20BF55] transition-colors text-sm">
+                  <Link to={link.path} className="text-[#94A3B8] hover:text-[#38BDF8] transition-colors text-sm">
                     {link.label}
                   </Link>
                 </motion.li>
@@ -99,7 +98,7 @@ const Footer = () => {
 
           {/* Services */}
           <motion.div variants={itemVariants}>
-            <h3 className="text-white font-bold mb-4">Our Services</h3>
+            <h3 className="text-[#E5E7EB] font-bold mb-4">Our Services</h3>
             <ul className="space-y-3">
               {services.map((link, index) => (
                 <motion.li
@@ -107,7 +106,7 @@ const Footer = () => {
                   whileHover={{ x: 5 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <Link to={link.path} className="text-gray-300 hover:text-[#20BF55] transition-colors text-sm">
+                  <Link to={link.path} className="text-[#94A3B8] hover:text-[#38BDF8] transition-colors text-sm">
                     {link.label}
                   </Link>
                 </motion.li>
@@ -117,7 +116,7 @@ const Footer = () => {
 
           {/* Contact Info */}
           <motion.div variants={itemVariants}>
-            <h3 className="text-white font-bold mb-4">Contact Us</h3>
+            <h3 className="text-[#E5E7EB] font-bold mb-4">Contact Us</h3>
             <ul className="space-y-4">
               {[
                 { icon: Phone, label: "Phone", value: "+91 98765 43210" },
@@ -130,15 +129,12 @@ const Footer = () => {
                   whileHover={{ x: 3 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <motion.div
-                    className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5"
-                    whileHover={{ scale: 1.1, backgroundColor: "rgba(32, 191, 85, 0.3)" }}
-                  >
-                    <item.icon className="text-[#20BF55]" size={16} />
-                  </motion.div>
+                  <div className="w-8 h-8 bg-[#1E293B] rounded-lg flex items-center justify-center flex-shrink-0">
+                    <item.icon className="text-[#38BDF8]" size={16} />
+                  </div>
                   <div>
-                    <p className="text-sm text-gray-400">{item.label}</p>
-                    <p className="text-gray-200 text-sm">{item.value}</p>
+                    <p className="text-xs text-[#64748B]">{item.label}</p>
+                    <p className="text-[#E5E7EB] text-sm">{item.value}</p>
                   </div>
                 </motion.li>
               ))}
@@ -148,19 +144,21 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <motion.div
-          className="border-t border-white/10 mt-10 pt-8 flex flex-col md:flex-row justify-between items-center"
+          className="border-t border-white/5 mt-10 pt-8 flex flex-col md:flex-row justify-between items-center"
           variants={itemVariants}
         >
-          <p className="text-gray-400 text-sm mb-4 md:mb-0">
+          <p className="text-[#64748B] text-sm mb-4 md:mb-0">
             © 2025 NeoOne Health. All rights reserved.
           </p>
           <div className="flex space-x-6">
             {["Privacy Policy", "Terms of Service"].map((text, index) => (
-              <motion.div key={index} whileHover={{ scale: 1.05 }}>
-                <Link to={index === 0 ? "/privacy" : "/terms"} className="text-gray-400 hover:text-[#20BF55] transition-colors text-sm">
-                  {text}
-                </Link>
-              </motion.div>
+              <Link
+                key={index}
+                to={index === 0 ? "/privacy" : "/terms"}
+                className="text-[#64748B] hover:text-[#38BDF8] transition-colors text-sm"
+              >
+                {text}
+              </Link>
             ))}
           </div>
         </motion.div>

@@ -73,7 +73,9 @@ const Navbar = () => {
   return (
     <>
       <motion.nav
-        className={`fixed w-full top-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-lg' : 'bg-white shadow-md'
+        className={`fixed w-full top-0 z-50 transition-all duration-300 ${scrolled
+            ? 'bg-[#0F172A]/95 backdrop-blur-md shadow-lg border-b border-white/5'
+            : 'bg-[#020617]/80 backdrop-blur-sm'
           }`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -82,16 +84,15 @@ const Navbar = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             {/* Logo */}
-            <Link to="/" className="flex items-center space-x-2 md:space-x-3">
+            <Link to="/" className="flex items-center space-x-3">
               <motion.div
-                className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-[#01BAEF] via-[#20BF55] to-[#0B4F6C] rounded-full flex items-center justify-center shadow-lg"
-                whileHover={{ rotate: 360, scale: 1.1 }}
+                className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-[#2563EB] to-[#38BDF8] rounded-xl flex items-center justify-center shadow-lg"
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                transition={{ duration: 0.6, type: "spring" }}
               >
                 <span className="text-white font-bold text-xl md:text-2xl">N</span>
               </motion.div>
-              <span className="text-[#0B4F6C] font-bold text-lg md:text-xl">NeoOne Health</span>
+              <span className="text-[#E5E7EB] font-bold text-lg md:text-xl">NeoOne Health</span>
             </Link>
 
             {/* Desktop Navigation */}
@@ -101,16 +102,16 @@ const Navbar = () => {
                   {item.submenu ? (
                     <>
                       <button
-                        className={`flex items-center px-3 py-2 text-[#0B4F6C] hover:text-[#20BF55] font-medium transition-colors ${isActive(item.path) ? 'text-[#20BF55]' : ''
+                        className={`flex items-center px-3 py-2 text-[#94A3B8] hover:text-[#38BDF8] font-medium transition-colors ${isActive(item.path) ? 'text-[#38BDF8]' : ''
                           }`}
                       >
                         {item.label}
                         <ChevronDown className="ml-1 h-4 w-4 transition-transform group-hover:rotate-180" />
                       </button>
-                      <div className="absolute left-0 mt-0 w-64 bg-white shadow-xl rounded-xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform group-hover:translate-y-0 translate-y-2">
+                      <div className="absolute left-0 mt-0 w-64 bg-[#0F172A] border border-white/10 shadow-xl rounded-xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform group-hover:translate-y-0 translate-y-2">
                         <Link
                           to={item.path}
-                          className="block px-4 py-3 text-[#0B4F6C] hover:bg-[#F5F7FA] hover:text-[#20BF55] font-medium border-b border-gray-100"
+                          className="block px-4 py-3 text-[#E5E7EB] hover:bg-[#1E293B] hover:text-[#38BDF8] font-medium border-b border-white/5"
                         >
                           View All {item.label}
                         </Link>
@@ -118,7 +119,7 @@ const Navbar = () => {
                           <Link
                             key={subIndex}
                             to={subItem.path}
-                            className="block px-4 py-2.5 text-gray-600 hover:bg-[#F5F7FA] hover:text-[#20BF55] text-sm"
+                            className="block px-4 py-2.5 text-[#94A3B8] hover:bg-[#1E293B] hover:text-[#38BDF8] text-sm"
                           >
                             {subItem.label}
                           </Link>
@@ -128,7 +129,7 @@ const Navbar = () => {
                   ) : (
                     <Link
                       to={item.path}
-                      className={`px-3 py-2 text-[#0B4F6C] hover:text-[#20BF55] font-medium transition-colors ${isActive(item.path) ? 'text-[#20BF55]' : ''
+                      className={`px-3 py-2 text-[#94A3B8] hover:text-[#38BDF8] font-medium transition-colors ${isActive(item.path) ? 'text-[#38BDF8]' : ''
                         }`}
                     >
                       {item.label}
@@ -140,13 +141,13 @@ const Navbar = () => {
 
             {/* Mobile Menu Button */}
             <button
-              className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+              className="lg:hidden p-2 rounded-lg bg-[#1E293B] hover:bg-[#2563EB]/20 transition-colors"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? (
-                <X className="text-[#0B4F6C]" size={24} />
+                <X className="text-[#E5E7EB]" size={24} />
               ) : (
-                <Menu className="text-[#0B4F6C]" size={24} />
+                <Menu className="text-[#E5E7EB]" size={24} />
               )}
             </button>
           </div>
@@ -158,14 +159,14 @@ const Navbar = () => {
         {mobileMenuOpen && (
           <>
             <motion.div
-              className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+              className="fixed inset-0 bg-black/70 z-40 lg:hidden"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setMobileMenuOpen(false)}
             />
             <motion.div
-              className="fixed right-0 top-0 h-full w-80 bg-white shadow-2xl z-50 lg:hidden overflow-y-auto"
+              className="fixed right-0 top-0 h-full w-80 bg-[#0F172A] border-l border-white/10 shadow-2xl z-50 lg:hidden overflow-y-auto"
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
@@ -173,12 +174,12 @@ const Navbar = () => {
             >
               <div className="p-6">
                 <div className="flex justify-between items-center mb-8">
-                  <span className="text-xl font-bold text-[#0B4F6C]">Menu</span>
+                  <span className="text-xl font-bold text-[#E5E7EB]">Menu</span>
                   <button
                     onClick={() => setMobileMenuOpen(false)}
-                    className="p-2 rounded-lg hover:bg-gray-100"
+                    className="p-2 rounded-lg bg-[#1E293B] hover:bg-[#2563EB]/20"
                   >
-                    <X size={24} className="text-[#0B4F6C]" />
+                    <X size={24} className="text-[#E5E7EB]" />
                   </button>
                 </div>
 
@@ -189,11 +190,11 @@ const Navbar = () => {
                         <>
                           <button
                             onClick={() => setActiveDropdown(activeDropdown === index ? null : index)}
-                            className="w-full flex items-center justify-between py-3 px-4 text-[#0B4F6C] hover:bg-gray-50 rounded-lg font-medium"
+                            className="w-full flex items-center justify-between py-3 px-4 text-[#E5E7EB] hover:bg-[#1E293B] rounded-lg font-medium"
                           >
                             {item.label}
                             <ChevronRight
-                              className={`transition-transform ${activeDropdown === index ? 'rotate-90' : ''}`}
+                              className={`transition-transform text-[#94A3B8] ${activeDropdown === index ? 'rotate-90' : ''}`}
                               size={20}
                             />
                           </button>
@@ -208,7 +209,7 @@ const Navbar = () => {
                                 <div className="pl-4 pb-2">
                                   <Link
                                     to={item.path}
-                                    className="block py-2 px-4 text-[#20BF55] font-medium"
+                                    className="block py-2 px-4 text-[#38BDF8] font-medium"
                                     onClick={() => setMobileMenuOpen(false)}
                                   >
                                     View All
@@ -217,7 +218,7 @@ const Navbar = () => {
                                     <Link
                                       key={subIndex}
                                       to={subItem.path}
-                                      className="block py-2 px-4 text-gray-600 hover:text-[#20BF55] text-sm"
+                                      className="block py-2 px-4 text-[#94A3B8] hover:text-[#38BDF8] text-sm"
                                       onClick={() => setMobileMenuOpen(false)}
                                     >
                                       {subItem.label}
@@ -232,8 +233,8 @@ const Navbar = () => {
                         <Link
                           to={item.path}
                           className={`block py-3 px-4 rounded-lg font-medium ${isActive(item.path)
-                              ? 'bg-[#20BF55]/10 text-[#20BF55]'
-                              : 'text-[#0B4F6C] hover:bg-gray-50'
+                              ? 'bg-[#2563EB]/20 text-[#38BDF8]'
+                              : 'text-[#E5E7EB] hover:bg-[#1E293B]'
                             }`}
                           onClick={() => setMobileMenuOpen(false)}
                         >
@@ -245,9 +246,9 @@ const Navbar = () => {
                 </div>
 
                 {/* CTA Button */}
-                <div className="mt-8 pt-6 border-t">
+                <div className="mt-8 pt-6 border-t border-white/10">
                   <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>
-                    <button className="w-full bg-gradient-to-r from-[#20BF55] to-[#01BAEF] text-white py-3 rounded-lg font-bold">
+                    <button className="w-full bg-gradient-to-r from-[#2563EB] to-[#38BDF8] text-white py-3 rounded-xl font-bold">
                       Book Appointment
                     </button>
                   </Link>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Heart, Apple, Brain, Shield, Dumbbell, Salad, Smile, Stethoscope, CheckCircle, ArrowRight } from 'lucide-react';
+import { Heart, Apple, Brain, Shield, Dumbbell, Salad, Smile, Stethoscope, ChevronRight, ArrowRight } from 'lucide-react';
 import FAQSection from '@/components/FAQSection';
 import TopicQueryForm from '@/components/TopicQueryForm';
 import BMICalculator from '@/components/BMICalculator';
@@ -13,7 +13,6 @@ const PersonalWellness = () => {
     const [nutritionRef, nutritionInView] = useInView({ triggerOnce: true, threshold: 0.1 });
     const [mentalRef, mentalInView] = useInView({ triggerOnce: true, threshold: 0.1 });
     const [preventiveRef, preventiveInView] = useInView({ triggerOnce: true, threshold: 0.1 });
-    const [quizRef, quizInView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
     // Wellness Quiz State
     const [quizStep, setQuizStep] = useState(0);
@@ -67,45 +66,57 @@ const PersonalWellness = () => {
             id: "fitness",
             title: "Fitness & Exercise",
             icon: Dumbbell,
-            color: "#FF6B6B",
-            image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=800&q=80",
-            what: "Physical fitness involves regular movement and exercise tailored to your body's needs. It includes cardiovascular health, strength training, flexibility, and endurance. A well-rounded fitness routine helps maintain healthy body weight and improves overall energy levels.",
-            when: "Aim for at least 150 minutes of moderate exercise per week. Morning workouts boost metabolism, while evening exercises help release daily stress. Listen to your body—rest when needed, and gradually increase intensity over time.",
-            how: "Start with activities you enjoy—walking, swimming, cycling, or dancing. Mix cardio with strength training. Use apps to track progress. Consider working with a fitness coach for personalized guidance. Consistency matters more than intensity.",
-            why: "Regular exercise reduces risk of chronic diseases, improves mood through endorphin release, enhances sleep quality, boosts confidence, and increases longevity. It's the foundation of personal wellness."
+            image: "/images/fitness.png",
+            description: "Physical fitness involves regular movement and exercise tailored to your body's needs. A well-rounded fitness routine includes cardiovascular health, strength training, flexibility, and endurance. Regular exercise reduces risk of chronic diseases, improves mood through endorphin release, enhances sleep quality, boosts confidence, and increases longevity.",
+            benefits: [
+                "Reduces risk of heart disease and diabetes",
+                "Improves mental health and reduces anxiety",
+                "Increases energy levels and productivity",
+                "Builds stronger bones and muscles",
+                "Enhances sleep quality"
+            ]
         },
         {
             id: "nutrition",
             title: "Nutrition & Diet",
             icon: Salad,
-            color: "#20BF55",
-            image: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=800&q=80",
-            what: "Nutrition is about fueling your body with the right balance of nutrients—proteins, carbohydrates, healthy fats, vitamins, and minerals. Good nutrition isn't about strict diets; it's about making informed food choices that support your health goals.",
-            when: "Eat regular meals—don't skip breakfast. Have smaller, frequent meals if that suits you. Hydrate throughout the day. Plan meals ahead to avoid unhealthy choices. Adjust portions based on your activity level.",
-            how: "Fill half your plate with vegetables, quarter with lean protein, quarter with whole grains. Limit processed foods and added sugars. Read nutrition labels. Cook more at home. Consider consulting a nutritionist for personalized plans.",
-            why: "Proper nutrition boosts immunity, maintains healthy weight, provides sustained energy, improves mental clarity, and reduces risk of diet-related diseases like diabetes and heart disease."
+            image: "/images/nutrition.png",
+            description: "Nutrition is about fueling your body with the right balance of proteins, carbohydrates, healthy fats, vitamins, and minerals. Good nutrition isn't about strict diets—it's about making informed food choices that support your health goals. Fill half your plate with vegetables, quarter with lean protein, and quarter with whole grains.",
+            benefits: [
+                "Boosts immune system function",
+                "Maintains healthy body weight",
+                "Provides sustained energy throughout the day",
+                "Improves mental clarity and focus",
+                "Reduces risk of diet-related diseases"
+            ]
         },
         {
             id: "mental-health",
             title: "Mental Health",
             icon: Brain,
-            color: "#9B59B6",
-            image: "https://images.unsplash.com/photo-1499209974431-9dddcece7f88?auto=format&fit=crop&w=800&q=80",
-            what: "Mental health encompasses your emotional, psychological, and social well-being. It affects how you think, feel, and act. Good mental health isn't just the absence of mental illness—it's about thriving, coping with stress, and maintaining positive relationships.",
-            when: "Prioritize mental health daily, not just during crises. Take breaks when overwhelmed. Seek help when feelings persist for weeks. Regular self-check-ins help catch issues early. Don't wait until you're 'broken' to seek support.",
-            how: "Practice mindfulness and meditation. Maintain social connections. Set healthy boundaries. Limit screen time. Exercise regularly (it boosts mood). Journal your thoughts. Seek professional help when needed—therapy is self-care, not weakness.",
-            why: "Mental health affects every aspect of life—relationships, work performance, physical health, and quality of life. Investing in mental wellness leads to better decision-making, resilience, and overall happiness."
+            image: "/images/mental-health.png",
+            description: "Mental health encompasses your emotional, psychological, and social well-being. It affects how you think, feel, and act. Good mental health involves practicing mindfulness, maintaining social connections, setting healthy boundaries, and seeking professional help when needed. Mental health is just as important as physical health.",
+            benefits: [
+                "Better stress management",
+                "Improved relationships and communication",
+                "Enhanced decision-making abilities",
+                "Greater resilience to challenges",
+                "Overall improved quality of life"
+            ]
         },
         {
             id: "preventive-care",
             title: "Preventive Care",
             icon: Stethoscope,
-            color: "#01BAEF",
-            image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=80",
-            what: "Preventive care focuses on maintaining health and catching potential issues early through regular check-ups, screenings, and vaccinations. It's about being proactive rather than reactive with your health.",
-            when: "Schedule annual health check-ups. Get age-appropriate screenings (blood pressure, cholesterol, cancer screenings). Stay up-to-date on vaccinations. Don't ignore warning signs—early detection saves lives.",
-            how: "Build a relationship with a primary care provider. Keep track of your health records. Know your family health history. Follow recommended screening schedules. Take preventive measures like wearing sunscreen and practicing safe habits.",
-            why: "Prevention is always better (and cheaper) than cure. Regular screenings detect issues before symptoms appear. Preventive care extends lifespan, reduces healthcare costs, and gives peace of mind."
+            image: "/images/preventive-care.png",
+            description: "Preventive care focuses on maintaining health and catching potential issues early through regular check-ups, screenings, and vaccinations. Being proactive rather than reactive with your health saves lives and reduces healthcare costs. Schedule annual health check-ups and stay up-to-date on age-appropriate screenings.",
+            benefits: [
+                "Early detection of health issues",
+                "Lower healthcare costs long-term",
+                "Extended lifespan and quality of life",
+                "Peace of mind about your health",
+                "Better management of chronic conditions"
+            ]
         }
     ];
 
@@ -137,12 +148,12 @@ const PersonalWellness = () => {
     ];
 
     return (
-        <div className="min-h-screen">
+        <div className="min-h-screen bg-[#020617]">
             {/* Hero Section */}
-            <section className="relative bg-gradient-to-br from-[#FF6B6B] via-[#FF8E8E] to-[#FFB4B4] text-white pt-32 pb-20 overflow-hidden" ref={heroRef}>
-                <div className="absolute inset-0 opacity-10">
-                    <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
-                    <div className="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+            <section className="relative pt-32 pb-20 overflow-hidden" ref={heroRef}>
+                <div className="absolute inset-0">
+                    <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#22C55E]/10 rounded-full blur-3xl"></div>
+                    <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#2563EB]/10 rounded-full blur-3xl"></div>
                 </div>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     <motion.div
@@ -151,22 +162,25 @@ const PersonalWellness = () => {
                         animate={heroInView ? "visible" : "hidden"}
                         variants={fadeInUp}
                     >
-                        <span className="inline-block bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium mb-4">
+                        <span className="inline-block bg-[#22C55E]/20 border border-[#22C55E]/30 px-4 py-2 rounded-full text-[#22C55E] text-sm font-medium mb-6">
                             Personal Wellness
                         </span>
-                        <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-                            Your Journey to a Healthier, Happier You
+                        <h1 className="text-4xl md:text-5xl font-bold text-[#E5E7EB] mb-6 leading-tight">
+                            Your Journey to a <br />
+                            <span className="bg-gradient-to-r from-[#22C55E] to-[#38BDF8] bg-clip-text text-transparent">
+                                Healthier, Happier You
+                            </span>
                         </h1>
-                        <p className="text-xl text-gray-100 mb-8">
-                            Discover personalized wellness solutions for fitness, nutrition, mental health, and preventive care. Start your transformation today.
+                        <p className="text-lg text-[#94A3B8] mb-8 max-w-2xl mx-auto">
+                            Discover personalized wellness solutions for fitness, nutrition, mental health, and preventive care. Science-backed approaches for lasting results.
                         </p>
                         <Link to="/contact">
                             <motion.button
-                                className="px-8 py-4 bg-white text-[#FF6B6B] rounded-lg font-bold shadow-lg hover:shadow-xl transition-all"
-                                whileHover={{ scale: 1.05 }}
+                                className="px-8 py-4 bg-gradient-to-r from-[#22C55E] to-[#38BDF8] text-white rounded-xl font-bold flex items-center gap-2 mx-auto"
+                                whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(34, 197, 94, 0.4)' }}
                                 whileTap={{ scale: 0.95 }}
                             >
-                                Start Your Wellness Journey
+                                Start Your Journey <ArrowRight size={20} />
                             </motion.button>
                         </Link>
                     </motion.div>
@@ -174,27 +188,27 @@ const PersonalWellness = () => {
             </section>
 
             {/* Quick Navigation */}
-            <section className="py-6 bg-white border-b sticky top-0 z-40 shadow-sm">
+            <section className="py-6 bg-[#0F172A] border-y border-white/5 sticky top-20 z-40">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex flex-wrap justify-center gap-4">
                         {sections.map((section, index) => (
                             <a
                                 key={index}
                                 href={`#${section.id}`}
-                                className="px-6 py-3 bg-gray-100 text-[#0B4F6C] rounded-lg font-semibold hover:bg-[#FF6B6B] hover:text-white transition-colors"
+                                className="px-6 py-3 bg-[#1E293B] text-[#94A3B8] rounded-xl font-medium hover:bg-[#2563EB]/20 hover:text-[#38BDF8] transition-all"
                             >
                                 {section.title.split(' ')[0]}
                             </a>
                         ))}
-                        <a href="#wellness-quiz" className="px-6 py-3 bg-[#20BF55]/10 text-[#20BF55] rounded-lg font-semibold hover:bg-[#20BF55] hover:text-white transition-colors">
+                        <a href="#wellness-quiz" className="px-6 py-3 bg-[#22C55E]/20 text-[#22C55E] rounded-xl font-medium hover:bg-[#22C55E]/30 transition-all">
                             Take Quiz
                         </a>
                     </div>
                 </div>
             </section>
 
-            {/* Why Personal Wellness is Important */}
-            <section className="py-20 bg-white">
+            {/* Why Personal Wellness Section */}
+            <section className="py-20 bg-[#0F172A]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <motion.div
                         className="text-center mb-12"
@@ -202,31 +216,31 @@ const PersonalWellness = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <span className="text-[#FF6B6B] font-semibold text-sm uppercase tracking-wider">The Foundation of a Good Life</span>
-                        <h2 className="text-3xl md:text-4xl font-bold text-[#0B4F6C] mt-2 mb-4">Why Personal Wellness is Important</h2>
+                        <span className="text-[#38BDF8] font-medium text-sm uppercase tracking-wider">The Foundation</span>
+                        <h2 className="text-3xl md:text-4xl font-bold text-[#E5E7EB] mt-2 mb-4">Why Personal Wellness Matters</h2>
                     </motion.div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {[
-                            { icon: Heart, title: "Live Longer", desc: "Healthy habits add years to your life and life to your years" },
-                            { icon: Smile, title: "Feel Better", desc: "More energy, better mood, and greater confidence daily" },
-                            { icon: Shield, title: "Prevent Disease", desc: "Reduce risk of chronic conditions through proactive care" },
-                            { icon: Brain, title: "Think Clearer", desc: "Improved focus, memory, and mental sharpness" }
+                            { icon: Heart, title: "Live Longer", desc: "Healthy habits add years to your life" },
+                            { icon: Smile, title: "Feel Better", desc: "More energy, better mood daily" },
+                            { icon: Shield, title: "Prevent Disease", desc: "Reduce risk of chronic conditions" },
+                            { icon: Brain, title: "Think Clearer", desc: "Improved focus and mental sharpness" }
                         ].map((item, index) => (
                             <motion.div
                                 key={index}
-                                className="bg-gradient-to-br from-gray-50 to-pink-50 p-6 rounded-xl text-center"
+                                className="bg-[#020617] border border-white/5 p-6 rounded-2xl text-center hover:border-[#2563EB]/30 transition-all"
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.1 }}
                                 whileHover={{ y: -5 }}
                             >
-                                <div className="w-16 h-16 bg-[#FF6B6B]/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                                    <item.icon className="text-[#FF6B6B]" size={32} />
+                                <div className="w-14 h-14 bg-[#2563EB]/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+                                    <item.icon className="text-[#38BDF8]" size={28} />
                                 </div>
-                                <h3 className="font-bold text-[#0B4F6C] text-lg mb-2">{item.title}</h3>
-                                <p className="text-gray-600 text-sm">{item.desc}</p>
+                                <h3 className="font-bold text-[#E5E7EB] text-lg mb-2">{item.title}</h3>
+                                <p className="text-[#64748B] text-sm">{item.desc}</p>
                             </motion.div>
                         ))}
                     </div>
@@ -238,7 +252,7 @@ const PersonalWellness = () => {
                 <section
                     key={index}
                     id={section.id}
-                    className={`py-20 scroll-mt-32 ${index % 2 === 0 ? 'bg-gradient-to-br from-gray-50 to-pink-50' : 'bg-white'}`}
+                    className={`py-20 scroll-mt-32 ${index % 2 === 0 ? 'bg-[#020617]' : 'bg-[#0F172A]'}`}
                     ref={index === 0 ? fitnessRef : index === 1 ? nutritionRef : index === 2 ? mentalRef : preventiveRef}
                 >
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -251,31 +265,30 @@ const PersonalWellness = () => {
                                 viewport={{ once: true }}
                                 variants={index % 2 === 0 ? fadeInLeft : fadeInRight}
                             >
-                                <div className="w-16 h-16 rounded-full flex items-center justify-center mb-6" style={{ backgroundColor: `${section.color}20` }}>
-                                    <section.icon size={32} style={{ color: section.color }} />
+                                <div className="w-14 h-14 bg-[#2563EB]/10 rounded-xl flex items-center justify-center mb-6">
+                                    <section.icon size={28} className="text-[#38BDF8]" />
                                 </div>
-                                <h2 className="text-3xl md:text-4xl font-bold text-[#0B4F6C] mb-6">{section.title}</h2>
+                                <h2 className="text-3xl md:text-4xl font-bold text-[#E5E7EB] mb-6">{section.title}</h2>
 
-                                <div className="space-y-4">
-                                    {[
-                                        { label: "What", emoji: "❓", content: section.what },
-                                        { label: "When", emoji: "🕐", content: section.when },
-                                        { label: "How", emoji: "🔧", content: section.how },
-                                        { label: "Why", emoji: "💡", content: section.why }
-                                    ].map((item, idx) => (
+                                <p className="text-[#94A3B8] text-lg leading-relaxed mb-8">
+                                    {section.description}
+                                </p>
+
+                                <div className="space-y-3">
+                                    <h4 className="text-[#E5E7EB] font-semibold mb-3">Key Benefits:</h4>
+                                    {section.benefits.map((benefit, idx) => (
                                         <motion.div
                                             key={idx}
-                                            className="bg-white p-4 rounded-xl shadow-sm border-l-4"
-                                            style={{ borderLeftColor: section.color }}
+                                            className="flex items-center gap-3"
                                             initial={{ opacity: 0, x: -20 }}
                                             whileInView={{ opacity: 1, x: 0 }}
                                             viewport={{ once: true }}
                                             transition={{ delay: idx * 0.1 }}
                                         >
-                                            <h4 className="font-bold text-[#0B4F6C] flex items-center gap-2 mb-1">
-                                                <span>{item.emoji}</span> {item.label}
-                                            </h4>
-                                            <p className="text-gray-600 text-sm leading-relaxed">{item.content}</p>
+                                            <div className="w-6 h-6 bg-[#22C55E]/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                                <ChevronRight className="text-[#22C55E]" size={14} />
+                                            </div>
+                                            <span className="text-[#94A3B8]">{benefit}</span>
                                         </motion.div>
                                     ))}
                                 </div>
@@ -290,14 +303,17 @@ const PersonalWellness = () => {
                                 variants={index % 2 === 0 ? fadeInRight : fadeInLeft}
                             >
                                 <motion.div
-                                    className="rounded-2xl overflow-hidden shadow-2xl"
+                                    className="rounded-2xl overflow-hidden border border-white/5"
                                     whileHover={{ scale: 1.02 }}
                                     transition={{ duration: 0.3 }}
                                 >
                                     <img
                                         src={section.image}
                                         alt={section.title}
-                                        className="w-full h-96 object-cover"
+                                        className="w-full h-80 object-cover"
+                                        onError={(e) => {
+                                            e.target.src = `https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=800&q=80`;
+                                        }}
                                     />
                                 </motion.div>
                             </motion.div>
@@ -307,29 +323,30 @@ const PersonalWellness = () => {
             ))}
 
             {/* Wellness Quiz */}
-            <section id="wellness-quiz" className="py-20 bg-gradient-to-r from-[#FF6B6B] to-[#FF8E8E] scroll-mt-32" ref={quizRef}>
+            <section id="wellness-quiz" className="py-20 bg-[#0F172A] scroll-mt-32">
                 <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
                     <motion.div
-                        initial="hidden"
-                        animate={quizInView ? "visible" : "hidden"}
-                        variants={fadeInUp}
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
                     >
-                        <div className="text-center text-white mb-8">
-                            <h2 className="text-3xl md:text-4xl font-bold mb-4">Test Your Personal Wellness</h2>
-                            <p className="text-gray-100">Answer a few questions to get your wellness score</p>
+                        <div className="text-center mb-8">
+                            <span className="text-[#22C55E] font-medium text-sm uppercase tracking-wider">Self Assessment</span>
+                            <h2 className="text-3xl md:text-4xl font-bold text-[#E5E7EB] mt-2 mb-4">Test Your Wellness Score</h2>
+                            <p className="text-[#94A3B8]">Answer a few questions to get your personalized wellness score</p>
                         </div>
 
-                        <div className="bg-white rounded-2xl shadow-xl p-8">
+                        <div className="bg-[#020617] border border-white/5 rounded-2xl p-8">
                             {!quizComplete ? (
                                 <>
                                     <div className="mb-6">
-                                        <div className="flex justify-between text-sm text-gray-500 mb-2">
+                                        <div className="flex justify-between text-sm text-[#64748B] mb-2">
                                             <span>Question {quizStep + 1} of {wellnessQuestions.length}</span>
                                             <span>{Math.round(((quizStep + 1) / wellnessQuestions.length) * 100)}%</span>
                                         </div>
-                                        <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                                        <div className="h-2 bg-[#1E293B] rounded-full overflow-hidden">
                                             <motion.div
-                                                className="h-full bg-[#FF6B6B]"
+                                                className="h-full bg-gradient-to-r from-[#2563EB] to-[#38BDF8]"
                                                 initial={{ width: 0 }}
                                                 animate={{ width: `${((quizStep + 1) / wellnessQuestions.length) * 100}%` }}
                                                 transition={{ duration: 0.3 }}
@@ -337,7 +354,7 @@ const PersonalWellness = () => {
                                         </div>
                                     </div>
 
-                                    <h3 className="text-xl font-bold text-[#0B4F6C] mb-6 text-center">
+                                    <h3 className="text-xl font-bold text-[#E5E7EB] mb-6 text-center">
                                         {wellnessQuestions[quizStep].question}
                                     </h3>
 
@@ -346,11 +363,11 @@ const PersonalWellness = () => {
                                             <motion.button
                                                 key={index}
                                                 onClick={() => handleQuizAnswer(option)}
-                                                className="w-full p-4 border-2 border-gray-200 rounded-xl text-left hover:border-[#FF6B6B] hover:bg-[#FF6B6B]/5 transition-all"
+                                                className="w-full p-4 border border-white/10 rounded-xl text-left text-[#E5E7EB] hover:border-[#2563EB] hover:bg-[#2563EB]/10 transition-all"
                                                 whileHover={{ x: 10 }}
                                                 whileTap={{ scale: 0.98 }}
                                             >
-                                                <span className="text-[#0B4F6C] font-medium">{option}</span>
+                                                {option}
                                             </motion.button>
                                         ))}
                                     </div>
@@ -363,10 +380,10 @@ const PersonalWellness = () => {
                                 >
                                     <div className="w-32 h-32 mx-auto mb-6 relative">
                                         <svg className="w-full h-full transform -rotate-90">
-                                            <circle cx="64" cy="64" r="56" stroke="#E5E7EB" strokeWidth="12" fill="none" />
+                                            <circle cx="64" cy="64" r="56" stroke="#1E293B" strokeWidth="12" fill="none" />
                                             <motion.circle
                                                 cx="64" cy="64" r="56"
-                                                stroke={getWellnessScore() >= 70 ? "#20BF55" : getWellnessScore() >= 40 ? "#FFB347" : "#FF6B6B"}
+                                                stroke={getWellnessScore() >= 70 ? "#22C55E" : getWellnessScore() >= 40 ? "#FACC15" : "#EF4444"}
                                                 strokeWidth="12"
                                                 fill="none"
                                                 strokeLinecap="round"
@@ -375,12 +392,12 @@ const PersonalWellness = () => {
                                                 transition={{ duration: 1, delay: 0.5 }}
                                             />
                                         </svg>
-                                        <span className="absolute inset-0 flex items-center justify-center text-3xl font-bold text-[#0B4F6C]">
+                                        <span className="absolute inset-0 flex items-center justify-center text-3xl font-bold text-[#E5E7EB]">
                                             {getWellnessScore()}%
                                         </span>
                                     </div>
-                                    <h3 className="text-2xl font-bold text-[#0B4F6C] mb-2">Your Wellness Score</h3>
-                                    <p className="text-gray-600 mb-6">
+                                    <h3 className="text-2xl font-bold text-[#E5E7EB] mb-2">Your Wellness Score</h3>
+                                    <p className="text-[#94A3B8] mb-6">
                                         {getWellnessScore() >= 70
                                             ? "Excellent! You're on the right track. Keep up the great work!"
                                             : getWellnessScore() >= 40
@@ -390,12 +407,12 @@ const PersonalWellness = () => {
                                     <div className="flex gap-4 justify-center">
                                         <button
                                             onClick={() => { setQuizStep(0); setQuizAnswers({}); setQuizComplete(false); }}
-                                            className="px-6 py-3 border-2 border-[#FF6B6B] text-[#FF6B6B] rounded-lg font-semibold hover:bg-[#FF6B6B] hover:text-white transition-colors"
+                                            className="px-6 py-3 border border-[#38BDF8] text-[#38BDF8] rounded-xl font-semibold hover:bg-[#38BDF8]/10 transition-colors"
                                         >
                                             Retake Quiz
                                         </button>
                                         <Link to="/contact">
-                                            <button className="px-6 py-3 bg-[#FF6B6B] text-white rounded-lg font-semibold hover:bg-[#e55555] transition-colors">
+                                            <button className="px-6 py-3 bg-gradient-to-r from-[#2563EB] to-[#38BDF8] text-white rounded-xl font-semibold">
                                                 Get Personalized Plan
                                             </button>
                                         </Link>
@@ -417,15 +434,15 @@ const PersonalWellness = () => {
             <TopicQueryForm topic="Personal Wellness" subtitle="Have questions about your wellness journey? We're here to guide you." />
 
             {/* CTA Section */}
-            <section className="py-20 bg-gradient-to-r from-[#FF6B6B] to-[#FF8E8E] text-white">
+            <section className="py-20 bg-gradient-to-r from-[#2563EB] to-[#38BDF8]">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-6">Your Healthier Life Starts Today</h2>
-                    <p className="text-xl text-gray-100 mb-8">
+                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Your Healthier Life Starts Today</h2>
+                    <p className="text-xl text-white/80 mb-8">
                         Don't wait for tomorrow. Take the first step towards a healthier, happier you.
                     </p>
                     <Link to="/contact">
                         <motion.button
-                            className="px-10 py-4 bg-white text-[#FF6B6B] rounded-lg font-bold text-lg shadow-lg"
+                            className="px-10 py-4 bg-white text-[#2563EB] rounded-xl font-bold text-lg"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                         >
