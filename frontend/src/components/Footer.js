@@ -20,6 +20,25 @@ const Footer = () => {
     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
   };
 
+  const quickLinks = [
+    { label: 'Home', path: '/' },
+    { label: 'About Us', path: '/about' },
+    { label: 'Personal Wellness', path: '/personal-wellness' },
+    { label: 'Child Health', path: '/child-health' },
+    { label: 'Occupational Health', path: '/occupational-health' },
+    { label: 'Elderly Health', path: '/elderly-health' },
+    { label: 'Contact Us', path: '/contact' }
+  ];
+
+  const services = [
+    { label: 'Fitness & Exercise', path: '/personal-wellness#fitness' },
+    { label: 'Nutrition & Diet', path: '/personal-wellness#nutrition' },
+    { label: 'Mental Wellness', path: '/personal-wellness#mental-health' },
+    { label: 'Pediatric Care', path: '/child-health#pediatric-care' },
+    { label: 'Workplace Safety', path: '/occupational-health#workplace-safety' },
+    { label: '3F Elderly Care', path: '/elderly-health' }
+  ];
+
   return (
     <footer className="bg-[#0B4F6C] text-white" ref={footerRef}>
       <motion.div
@@ -43,7 +62,7 @@ const Footer = () => {
               <span className="text-white font-bold text-xl">NeoOne Health</span>
             </div>
             <p className="text-gray-300 text-sm mb-6">
-              Your trusted healthcare partner. Comprehensive wellness solutions for individuals, children, and corporate organizations.
+              Your trusted healthcare partner. Comprehensive wellness solutions for individuals, families, workplaces, and elderly care.
             </p>
             <div className="flex space-x-3">
               {[Facebook, Twitter, Linkedin, Instagram].map((Icon, index) => (
@@ -64,21 +83,13 @@ const Footer = () => {
           <motion.div variants={itemVariants}>
             <h3 className="text-white font-bold mb-4">Quick Links</h3>
             <ul className="space-y-3">
-              {[
-                { to: "/", label: "Home" },
-                { to: "/about", label: "About Us" },
-                { to: "/personal-wellness", label: "Personal Wellness" },
-                { to: "/child-health", label: "Child Health" },
-                { to: "/corporate-health", label: "Corporate Health" },
-                { to: "/contact", label: "Contact Us" }
-              ].map((link, index) => (
+              {quickLinks.map((link, index) => (
                 <motion.li
                   key={index}
                   whileHover={{ x: 5 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <Link to={link.to} className="text-gray-300 hover:text-[#20BF55] transition-colors text-sm flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 bg-[#20BF55] rounded-full opacity-0 group-hover:opacity-100"></span>
+                  <Link to={link.path} className="text-gray-300 hover:text-[#20BF55] transition-colors text-sm">
                     {link.label}
                   </Link>
                 </motion.li>
@@ -90,20 +101,13 @@ const Footer = () => {
           <motion.div variants={itemVariants}>
             <h3 className="text-white font-bold mb-4">Our Services</h3>
             <ul className="space-y-3">
-              {[
-                { to: "/personal-wellness#fitness", label: "Fitness & Exercise" },
-                { to: "/personal-wellness#nutrition", label: "Nutrition & Diet" },
-                { to: "/child-health#pediatric-care", label: "Pediatric Care" },
-                { to: "/child-health#vaccination", label: "Vaccination Programs" },
-                { to: "/corporate-health#screening", label: "Health Screening" },
-                { to: "/corporate-health#wellness-programs", label: "Wellness Programs" }
-              ].map((link, index) => (
+              {services.map((link, index) => (
                 <motion.li
                   key={index}
                   whileHover={{ x: 5 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <Link to={link.to} className="text-gray-300 hover:text-[#20BF55] transition-colors text-sm">
+                  <Link to={link.path} className="text-gray-300 hover:text-[#20BF55] transition-colors text-sm">
                     {link.label}
                   </Link>
                 </motion.li>

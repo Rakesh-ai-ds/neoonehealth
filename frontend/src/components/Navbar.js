@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [personalWellnessOpen, setPersonalWellnessOpen] = useState(false);
-  const [childHealthOpen, setChildHealthOpen] = useState(false);
-  const [corporateHealthOpen, setCorporateHealthOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState(null);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
@@ -19,7 +17,58 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    setMobileMenuOpen(false);
+    setActiveDropdown(null);
+  }, [location]);
+
   const isActive = (path) => location.pathname === path;
+
+  const menuItems = [
+    { label: 'Home', path: '/' },
+    { label: 'About Us', path: '/about' },
+    {
+      label: 'Personal Wellness',
+      path: '/personal-wellness',
+      submenu: [
+        { label: 'Fitness & Exercise', path: '/personal-wellness#fitness' },
+        { label: 'Nutrition & Diet', path: '/personal-wellness#nutrition' },
+        { label: 'Mental Health', path: '/personal-wellness#mental-health' },
+        { label: 'Preventive Care', path: '/personal-wellness#preventive-care' },
+        { label: 'BMI Calculator', path: '/personal-wellness#bmi-calculator' }
+      ]
+    },
+    {
+      label: 'Child Health',
+      path: '/child-health',
+      submenu: [
+        { label: 'Pediatric Care', path: '/child-health#pediatric-care' },
+        { label: 'Vaccination Programs', path: '/child-health#vaccination' },
+        { label: 'Growth & Development', path: '/child-health#growth-development' },
+        { label: 'Child Nutrition', path: '/child-health#child-nutrition' }
+      ]
+    },
+    {
+      label: 'Occupational Health',
+      path: '/occupational-health',
+      submenu: [
+        { label: 'Workplace Safety', path: '/occupational-health#workplace-safety' },
+        { label: 'Ergonomics & Posture', path: '/occupational-health#ergonomics' },
+        { label: 'Mental Wellness', path: '/occupational-health#mental-wellness' },
+        { label: 'Health Screening', path: '/occupational-health#health-screening' }
+      ]
+    },
+    {
+      label: 'Elderly Health',
+      path: '/elderly-health',
+      submenu: [
+        { label: 'Feel - Emotional Wellness', path: '/elderly-health#feel' },
+        { label: 'Fall Prevention', path: '/elderly-health#fall' },
+        { label: 'Flexibility & Mobility', path: '/elderly-health#flexibility' }
+      ]
+    },
+    { label: 'Contact Us', path: '/contact' }
+  ];
 
   return (
     <>
@@ -42,188 +91,170 @@ const Navbar = () => {
               >
                 <span className="text-white font-bold text-xl md:text-2xl">N</span>
               </motion.div>
-              <span className="text-[#082C4A] font-bold text-lg md:text-xl">NeoOne Health</span>
+              <span className="text-[#0B4F6C] font-bold text-lg md:text-xl">NeoOne Health</span>
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-6">
-              <Link to="/" className={`text-[#082C4A] hover:text-[#20BF55] font-medium transition-colors ${isActive('/') ? 'text-[#20BF55]' : ''}`}>Home</Link>
-
-              <Link to="/about" className={`text-[#082C4A] hover:text-[#20BF55] font-medium transition-colors ${isActive('/about') ? 'text-[#20BF55]' : ''}`}>About Us</Link>
-
-              {/* Personal Wellness Dropdown */}
-              <div className="relative group">
-                <button className="flex items-center text-[#082C4A] hover:text-[#20BF55] font-medium transition-colors">
-                  Personal Wellness <ChevronDown className="ml-1 h-4 w-4" />
-                </button>
-                <div className="absolute left-0 mt-2 w-64 bg-white shadow-lg rounded-md py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                  <Link to="/personal-wellness#fitness" className="block px-4 py-2 text-[#082C4A] hover:bg-[#F5F7FA] hover:text-[#20BF55]">Fitness & Exercise</Link>
-                  <Link to="/personal-wellness#nutrition" className="block px-4 py-2 text-[#082C4A] hover:bg-[#F5F7FA] hover:text-[#20BF55]">Nutrition & Diet</Link>
-                  <Link to="/personal-wellness#mental-health" className="block px-4 py-2 text-[#082C4A] hover:bg-[#F5F7FA] hover:text-[#20BF55]">Mental Health</Link>
-                  <Link to="/personal-wellness#preventive-care" className="block px-4 py-2 text-[#082C4A] hover:bg-[#F5F7FA] hover:text-[#20BF55]">Preventive Care</Link>
+            <div className="hidden lg:flex items-center space-x-1">
+              {menuItems.map((item, index) => (
+                <div key={index} className="relative group">
+                  {item.submenu ? (
+                    <>
+                      <button
+                        className={`flex items-center px-3 py-2 text-[#0B4F6C] hover:text-[#20BF55] font-medium transition-colors ${isActive(item.path) ? 'text-[#20BF55]' : ''
+                          }`}
+                      >
+                        {item.label}
+                        <ChevronDown className="ml-1 h-4 w-4 transition-transform group-hover:rotate-180" />
+                      </button>
+                      <div className="absolute left-0 mt-0 w-64 bg-white shadow-xl rounded-xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform group-hover:translate-y-0 translate-y-2">
+                        <Link
+                          to={item.path}
+                          className="block px-4 py-3 text-[#0B4F6C] hover:bg-[#F5F7FA] hover:text-[#20BF55] font-medium border-b border-gray-100"
+                        >
+                          View All {item.label}
+                        </Link>
+                        {item.submenu.map((subItem, subIndex) => (
+                          <Link
+                            key={subIndex}
+                            to={subItem.path}
+                            className="block px-4 py-2.5 text-gray-600 hover:bg-[#F5F7FA] hover:text-[#20BF55] text-sm"
+                          >
+                            {subItem.label}
+                          </Link>
+                        ))}
+                      </div>
+                    </>
+                  ) : (
+                    <Link
+                      to={item.path}
+                      className={`px-3 py-2 text-[#0B4F6C] hover:text-[#20BF55] font-medium transition-colors ${isActive(item.path) ? 'text-[#20BF55]' : ''
+                        }`}
+                    >
+                      {item.label}
+                    </Link>
+                  )}
                 </div>
-              </div>
-
-              {/* Child Health Dropdown */}
-              <div className="relative group">
-                <button className="flex items-center text-[#082C4A] hover:text-[#20BF55] font-medium transition-colors">
-                  Child Health <ChevronDown className="ml-1 h-4 w-4" />
-                </button>
-                <div className="absolute left-0 mt-2 w-64 bg-white shadow-lg rounded-md py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                  <Link to="/child-health#pediatric-care" className="block px-4 py-2 text-[#082C4A] hover:bg-[#F5F7FA] hover:text-[#20BF55]">Pediatric Care</Link>
-                  <Link to="/child-health#vaccination" className="block px-4 py-2 text-[#082C4A] hover:bg-[#F5F7FA] hover:text-[#20BF55]">Vaccination Programs</Link>
-                  <Link to="/child-health#growth-development" className="block px-4 py-2 text-[#082C4A] hover:bg-[#F5F7FA] hover:text-[#20BF55]">Growth & Development</Link>
-                  <Link to="/child-health#child-nutrition" className="block px-4 py-2 text-[#082C4A] hover:bg-[#F5F7FA] hover:text-[#20BF55]">Child Nutrition</Link>
-                </div>
-              </div>
-
-              {/* Corporate Health Dropdown */}
-              <div className="relative group">
-                <button className="flex items-center text-[#082C4A] hover:text-[#20BF55] font-medium transition-colors">
-                  Corporate Health <ChevronDown className="ml-1 h-4 w-4" />
-                </button>
-                <div className="absolute left-0 mt-2 w-64 bg-white shadow-lg rounded-md py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                  <Link to="/corporate-health#screening" className="block px-4 py-2 text-[#082C4A] hover:bg-[#F5F7FA] hover:text-[#20BF55]">Health Screening</Link>
-                  <Link to="/corporate-health#wellness-programs" className="block px-4 py-2 text-[#082C4A] hover:bg-[#F5F7FA] hover:text-[#20BF55]">Wellness Programs</Link>
-                  <Link to="/corporate-health#mental-wellness" className="block px-4 py-2 text-[#082C4A] hover:bg-[#F5F7FA] hover:text-[#20BF55]">Mental Wellness</Link>
-                  <Link to="/corporate-health#health-audits" className="block px-4 py-2 text-[#082C4A] hover:bg-[#F5F7FA] hover:text-[#20BF55]">Health Audits</Link>
-                </div>
-              </div>
-
-              <Link to="/contact" className={`text-[#082C4A] hover:text-[#20BF55] font-medium transition-colors ${isActive('/contact') ? 'text-[#20BF55]' : ''}`}>Contact Us</Link>
+              ))}
             </div>
 
             {/* Mobile Menu Button */}
             <button
+              className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden text-[#082C4A] p-2"
-              data-testid="mobile-menu-button"
             >
-              {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+              {mobileMenuOpen ? (
+                <X className="text-[#0B4F6C]" size={24} />
+              ) : (
+                <Menu className="text-[#0B4F6C]" size={24} />
+              )}
             </button>
           </div>
         </div>
       </motion.nav>
 
-      {/* Mobile Sidebar Menu */}
+      {/* Mobile Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div
-            className="fixed inset-y-0 right-0 z-50 w-80 bg-white shadow-2xl lg:hidden"
-            data-testid="mobile-sidebar"
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-          >
-            <div className="flex flex-col h-full">
-              {/* Header */}
-              <div className="flex items-center justify-between p-6 border-b">
-                <span className="text-[#082C4A] font-bold text-xl">Menu</span>
-                <button onClick={() => setMobileMenuOpen(false)} className="text-[#082C4A]">
-                  <X size={24} />
-                </button>
-              </div>
+          <>
+            <motion.div
+              className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setMobileMenuOpen(false)}
+            />
+            <motion.div
+              className="fixed right-0 top-0 h-full w-80 bg-white shadow-2xl z-50 lg:hidden overflow-y-auto"
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            >
+              <div className="p-6">
+                <div className="flex justify-between items-center mb-8">
+                  <span className="text-xl font-bold text-[#0B4F6C]">Menu</span>
+                  <button
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="p-2 rounded-lg hover:bg-gray-100"
+                  >
+                    <X size={24} className="text-[#0B4F6C]" />
+                  </button>
+                </div>
 
-              {/* Menu Items */}
-              <div className="flex-1 overflow-y-auto p-6">
-                <div className="space-y-4">
-                  <Link to="/" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] font-medium py-2">Home</Link>
-                  <Link to="/about" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] font-medium py-2">About Us</Link>
-
-                  {/* Personal Wellness */}
-                  <div>
-                    <button
-                      onClick={() => setPersonalWellnessOpen(!personalWellnessOpen)}
-                      className="flex items-center justify-between w-full text-[#082C4A] font-medium py-2"
-                    >
-                      Personal Wellness <ChevronDown className={`h-4 w-4 transition-transform ${personalWellnessOpen ? 'rotate-180' : ''}`} />
-                    </button>
-                    <AnimatePresence>
-                      {personalWellnessOpen && (
-                        <motion.div
-                          className="ml-4 mt-2 space-y-2"
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: 'auto' }}
-                          exit={{ opacity: 0, height: 0 }}
+                <div className="space-y-2">
+                  {menuItems.map((item, index) => (
+                    <div key={index}>
+                      {item.submenu ? (
+                        <>
+                          <button
+                            onClick={() => setActiveDropdown(activeDropdown === index ? null : index)}
+                            className="w-full flex items-center justify-between py-3 px-4 text-[#0B4F6C] hover:bg-gray-50 rounded-lg font-medium"
+                          >
+                            {item.label}
+                            <ChevronRight
+                              className={`transition-transform ${activeDropdown === index ? 'rotate-90' : ''}`}
+                              size={20}
+                            />
+                          </button>
+                          <AnimatePresence>
+                            {activeDropdown === index && (
+                              <motion.div
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: 'auto', opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                className="overflow-hidden"
+                              >
+                                <div className="pl-4 pb-2">
+                                  <Link
+                                    to={item.path}
+                                    className="block py-2 px-4 text-[#20BF55] font-medium"
+                                    onClick={() => setMobileMenuOpen(false)}
+                                  >
+                                    View All
+                                  </Link>
+                                  {item.submenu.map((subItem, subIndex) => (
+                                    <Link
+                                      key={subIndex}
+                                      to={subItem.path}
+                                      className="block py-2 px-4 text-gray-600 hover:text-[#20BF55] text-sm"
+                                      onClick={() => setMobileMenuOpen(false)}
+                                    >
+                                      {subItem.label}
+                                    </Link>
+                                  ))}
+                                </div>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </>
+                      ) : (
+                        <Link
+                          to={item.path}
+                          className={`block py-3 px-4 rounded-lg font-medium ${isActive(item.path)
+                              ? 'bg-[#20BF55]/10 text-[#20BF55]'
+                              : 'text-[#0B4F6C] hover:bg-gray-50'
+                            }`}
+                          onClick={() => setMobileMenuOpen(false)}
                         >
-                          <Link to="/personal-wellness#fitness" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] py-2">Fitness & Exercise</Link>
-                          <Link to="/personal-wellness#nutrition" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] py-2">Nutrition & Diet</Link>
-                          <Link to="/personal-wellness#mental-health" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] py-2">Mental Health</Link>
-                          <Link to="/personal-wellness#preventive-care" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] py-2">Preventive Care</Link>
-                        </motion.div>
+                          {item.label}
+                        </Link>
                       )}
-                    </AnimatePresence>
-                  </div>
+                    </div>
+                  ))}
+                </div>
 
-                  {/* Child Health */}
-                  <div>
-                    <button
-                      onClick={() => setChildHealthOpen(!childHealthOpen)}
-                      className="flex items-center justify-between w-full text-[#082C4A] font-medium py-2"
-                    >
-                      Child Health <ChevronDown className={`h-4 w-4 transition-transform ${childHealthOpen ? 'rotate-180' : ''}`} />
+                {/* CTA Button */}
+                <div className="mt-8 pt-6 border-t">
+                  <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>
+                    <button className="w-full bg-gradient-to-r from-[#20BF55] to-[#01BAEF] text-white py-3 rounded-lg font-bold">
+                      Book Appointment
                     </button>
-                    <AnimatePresence>
-                      {childHealthOpen && (
-                        <motion.div
-                          className="ml-4 mt-2 space-y-2"
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: 'auto' }}
-                          exit={{ opacity: 0, height: 0 }}
-                        >
-                          <Link to="/child-health#pediatric-care" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] py-2">Pediatric Care</Link>
-                          <Link to="/child-health#vaccination" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] py-2">Vaccination Programs</Link>
-                          <Link to="/child-health#growth-development" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] py-2">Growth & Development</Link>
-                          <Link to="/child-health#child-nutrition" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] py-2">Child Nutrition</Link>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-
-                  {/* Corporate Health */}
-                  <div>
-                    <button
-                      onClick={() => setCorporateHealthOpen(!corporateHealthOpen)}
-                      className="flex items-center justify-between w-full text-[#082C4A] font-medium py-2"
-                    >
-                      Corporate Health <ChevronDown className={`h-4 w-4 transition-transform ${corporateHealthOpen ? 'rotate-180' : ''}`} />
-                    </button>
-                    <AnimatePresence>
-                      {corporateHealthOpen && (
-                        <motion.div
-                          className="ml-4 mt-2 space-y-2"
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: 'auto' }}
-                          exit={{ opacity: 0, height: 0 }}
-                        >
-                          <Link to="/corporate-health#screening" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] py-2">Health Screening</Link>
-                          <Link to="/corporate-health#wellness-programs" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] py-2">Wellness Programs</Link>
-                          <Link to="/corporate-health#mental-wellness" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] py-2">Mental Wellness</Link>
-                          <Link to="/corporate-health#health-audits" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] py-2">Health Audits</Link>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-
-                  <Link to="/contact" onClick={() => setMobileMenuOpen(false)} className="block text-[#082C4A] font-medium py-2">Contact Us</Link>
+                  </Link>
                 </div>
               </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Overlay */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
-            onClick={() => setMobileMenuOpen(false)}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          />
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>

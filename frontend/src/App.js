@@ -15,6 +15,8 @@ import HealthAudits from "@/pages/HealthAudits";
 import PersonalWellness from "@/pages/PersonalWellness";
 import ChildHealth from "@/pages/ChildHealth";
 import CorporateHealth from "@/pages/CorporateHealth";
+import OccupationalHealth from "@/pages/OccupationalHealth";
+import ElderlyHealth from "@/pages/ElderlyHealth";
 
 // Component to scroll to top on route change
 function ScrollToTop() {
@@ -24,6 +26,14 @@ function ScrollToTop() {
     // Only scroll to top if there's no hash (section link)
     if (!hash) {
       window.scrollTo(0, 0);
+    } else {
+      // If there's a hash, scroll to the element after a short delay
+      setTimeout(() => {
+        const element = document.querySelector(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
     }
   }, [pathname, hash]);
 
@@ -42,6 +52,8 @@ function App() {
           <Route path="/personal-wellness" element={<PersonalWellness />} />
           <Route path="/child-health" element={<ChildHealth />} />
           <Route path="/corporate-health" element={<CorporateHealth />} />
+          <Route path="/occupational-health" element={<OccupationalHealth />} />
+          <Route path="/elderly-health" element={<ElderlyHealth />} />
           <Route path="/corporate-screening" element={<CorporateScreening />} />
           <Route path="/digital-platform" element={<DigitalPlatform />} />
           <Route path="/health-audits" element={<HealthAudits />} />
