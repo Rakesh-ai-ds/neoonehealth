@@ -93,8 +93,7 @@ const Home = () => {
               alt={heroSlides[currentSlide].title}
               className="w-full h-full object-cover"
             />
-            {/* Overlay for readability - minimal */}
-            <div className="absolute inset-0 bg-gradient-to-r from-white/60 via-white/30 to-transparent md:from-white/50 md:via-white/20 md:to-transparent"></div>
+            {/* No overlay - clean image display */}
           </motion.div>
         </AnimatePresence>
 
