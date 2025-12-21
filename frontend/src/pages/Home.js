@@ -79,24 +79,24 @@ const Home = () => {
       {/* Hero Section with Background Slider */}
       <section className="relative min-h-[100svh] flex items-center pt-16 md:pt-20 overflow-hidden">
         {/* Background Image Slider */}
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="sync">
           <motion.div
             key={currentSlide}
             className="absolute inset-0 z-0"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.8, ease: "easeInOut" }}
+            transition={{ duration: 1, ease: "linear" }}
           >
             <img
               src={heroSlides[currentSlide].image}
               alt={heroSlides[currentSlide].title}
               className="w-full h-full object-cover"
             />
-            {/* Dark overlay for text readability - no bright flash */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/30 to-transparent"></div>
           </motion.div>
         </AnimatePresence>
+        {/* Permanent dark overlay - prevents bright flash during transitions */}
+        <div className="absolute inset-0 z-[1] bg-gradient-to-r from-black/70 via-black/50 to-black/30"></div>
 
         {/* Hero Content */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full py-8 md:py-0">
