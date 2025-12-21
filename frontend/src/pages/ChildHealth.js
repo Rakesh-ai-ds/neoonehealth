@@ -40,7 +40,7 @@ const ChildHealth = () => {
             </section>
 
             {/* Quick Navigation */}
-            <section className="py-6 bg-white border-y border-gray-100 sticky top-20 z-40">
+            <section className="py-6 bg-white border-y border-gray-100">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex flex-wrap justify-center gap-4">
                         {sections.map((section, index) => (<a key={index} href={`#${section.id}`} className="px-6 py-3 bg-[#F8FAFC] text-[#64748B] rounded-xl font-medium hover:bg-[#2563EB]/10 hover:text-[#2563EB] transition-all">{section.title.split(' ')[0]}</a>))}

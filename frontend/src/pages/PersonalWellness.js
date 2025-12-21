@@ -75,7 +75,7 @@ const PersonalWellness = () => {
             </section>
 
             {/* Quick Navigation */}
-            <section className="py-6 bg-white border-y border-gray-100 sticky top-20 z-40">
+            <section className="py-6 bg-white border-y border-gray-100">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex flex-wrap justify-center gap-4">
                         {sections.map((section, index) => (
