@@ -16,7 +16,7 @@ const Home = () => {
   const heroSlides = [
     { image: '/images/hero-antigravity.png', title: 'Advanced Care', subtitle: 'Future of Physiotherapy' },
     { image: '/images/health-numbers.png', title: 'Health Intelligence', subtitle: 'Track Your Vital Numbers' },
-    { image: '/images/hero-1.png', title: 'Personal Wellness', subtitle: 'Yoga & Fitness for a healthier you' },
+    { image: '/images/hero-1.png', title: 'HEP', subtitle: 'Home Exercise Program - Tailored for You' },
     { image: '/images/hero-2.png', title: 'Family Health', subtitle: 'Caring for your entire family' },
     { image: '/images/hero-5.png', title: 'Active Aging', subtitle: 'Stay healthy at every age' }
   ];
@@ -231,6 +231,86 @@ const Home = () => {
               </motion.div>
             ))}
           </motion.div>
+        </div>
+      </section>
+
+      {/* Health Numbers Dashboard */}
+      <section className="py-12 md:py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            className="text-center mb-8 md:mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <span className="text-[#2563EB] font-medium text-xs md:text-sm uppercase tracking-wider">Your Health Dashboard</span>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1E293B] mt-2 mb-3">Track Your <span className="bg-gradient-to-r from-[#2563EB] to-[#38BDF8] bg-clip-text text-transparent">Health Numbers</span></h2>
+            <p className="text-sm md:text-base text-[#64748B] max-w-2xl mx-auto">Monitor your vital health metrics for better wellness awareness.</p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+            {/* BMI Card */}
+            <motion.div
+              className="bg-gradient-to-br from-[#22C55E]/10 to-[#22C55E]/5 border border-[#22C55E]/20 p-6 md:p-8 rounded-2xl text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -5 }}
+            >
+              <div className="w-16 h-16 bg-[#22C55E]/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Calculator className="text-[#22C55E]" size={28} />
+              </div>
+              <h3 className="text-[#1E293B] font-bold text-xl mb-2">BMI</h3>
+              <p className="text-[#64748B] text-sm mb-4">Body Mass Index</p>
+              <p className="text-3xl font-bold text-[#22C55E] mb-2">18.5 - 24.9</p>
+              <p className="text-xs text-[#94A3B8]">Healthy Range</p>
+              <button onClick={scrollToBMI} className="mt-4 px-6 py-2 bg-[#22C55E] text-white rounded-lg font-medium text-sm hover:bg-[#16A34A] transition-colors">
+                Calculate Now
+              </button>
+            </motion.div>
+
+            {/* BP Card */}
+            <motion.div
+              className="bg-gradient-to-br from-[#2563EB]/10 to-[#2563EB]/5 border border-[#2563EB]/20 p-6 md:p-8 rounded-2xl text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              whileHover={{ y: -5 }}
+            >
+              <div className="w-16 h-16 bg-[#2563EB]/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Activity className="text-[#2563EB]" size={28} />
+              </div>
+              <h3 className="text-[#1E293B] font-bold text-xl mb-2">Blood Pressure</h3>
+              <p className="text-[#64748B] text-sm mb-4">Systolic / Diastolic</p>
+              <p className="text-3xl font-bold text-[#2563EB] mb-2">120/80</p>
+              <p className="text-xs text-[#94A3B8]">mmHg - Normal</p>
+              <Link to="/contact" className="mt-4 inline-block px-6 py-2 bg-[#2563EB] text-white rounded-lg font-medium text-sm hover:bg-[#1D4ED8] transition-colors">
+                Get Checked
+              </Link>
+            </motion.div>
+
+            {/* HR Card */}
+            <motion.div
+              className="bg-gradient-to-br from-[#EF4444]/10 to-[#EF4444]/5 border border-[#EF4444]/20 p-6 md:p-8 rounded-2xl text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              whileHover={{ y: -5 }}
+            >
+              <div className="w-16 h-16 bg-[#EF4444]/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Heart className="text-[#EF4444]" size={28} />
+              </div>
+              <h3 className="text-[#1E293B] font-bold text-xl mb-2">Heart Rate</h3>
+              <p className="text-[#64748B] text-sm mb-4">Resting BPM</p>
+              <p className="text-3xl font-bold text-[#EF4444] mb-2">60 - 100</p>
+              <p className="text-xs text-[#94A3B8]">BPM - Healthy Range</p>
+              <Link to="/personal-wellness" className="mt-4 inline-block px-6 py-2 bg-[#EF4444] text-white rounded-lg font-medium text-sm hover:bg-[#DC2626] transition-colors">
+                Learn More
+              </Link>
+            </motion.div>
+          </div>
         </div>
       </section>
 

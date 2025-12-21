@@ -75,11 +75,13 @@ const Navbar = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16 md:h-20">
             {/* Logo */}
-            <Link to="/" className="flex items-center space-x-2">
-              <motion.div className="w-9 h-9 md:w-10 md:h-10 bg-gradient-to-br from-[#2563EB] to-[#38BDF8] rounded-xl flex items-center justify-center" whileTap={{ scale: 0.95 }}>
-                <span className="text-white font-bold text-lg md:text-xl">N</span>
-              </motion.div>
-              <span className="text-[#1E293B] font-bold text-base md:text-lg">NeoOne</span>
+            <Link to="/" className="flex items-center">
+              <motion.img
+                src="/images/logo.png"
+                alt="NeoOne Health"
+                className="h-10 md:h-12 w-auto"
+                whileTap={{ scale: 0.95 }}
+              />
             </Link>
 
             {/* Desktop Navigation */}
@@ -127,10 +129,10 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-      </motion.nav>
+      </motion.nav >
 
       {/* Mobile Menu - Full Screen */}
-      <AnimatePresence>
+      < AnimatePresence >
         {mobileMenuOpen && (
           <>
             <motion.div className="fixed inset-0 bg-black/40 z-40 lg:hidden" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setMobileMenuOpen(false)} />
@@ -197,8 +199,9 @@ const Navbar = () => {
               </div>
             </motion.div>
           </>
-        )}
-      </AnimatePresence>
+        )
+        }
+      </AnimatePresence >
     </>
   );
 };

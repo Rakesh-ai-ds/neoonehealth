@@ -29,11 +29,8 @@ const Footer = () => {
             animate={footerInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
           >
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-gradient-to-br from-[#2563EB] to-[#38BDF8] rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">N</span>
-              </div>
-              <span className="text-white font-bold text-lg">NeoOne Health</span>
+            <div className="flex items-center mb-4">
+              <img src="/images/logo.png" alt="NeoOne Health" className="h-10 w-auto" />
             </div>
             <p className="text-gray-400 text-sm mb-4 leading-relaxed">
               Your trusted healthcare partner for comprehensive wellness solutions.
