@@ -222,7 +222,7 @@ const Workshops = () => {
                 </div>
             </section>
 
-            {/* Upcoming Events */}
+            {/* Why Attend Our Workshops */}
             <section className="py-16 md:py-24 bg-white" ref={eventsRef}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <motion.div
@@ -231,8 +231,9 @@ const Workshops = () => {
                         animate={eventsInView ? "visible" : "hidden"}
                         variants={fadeInUp}
                     >
-                        <span className="text-[#22C55E] font-medium text-sm uppercase tracking-wider">Schedule</span>
-                        <h2 className="text-3xl md:text-4xl font-bold text-[#1E293B] mt-2 mb-4">Upcoming Events</h2>
+                        <span className="text-[#22C55E] font-medium text-sm uppercase tracking-wider">Benefits</span>
+                        <h2 className="text-3xl md:text-4xl font-bold text-[#1E293B] mt-2 mb-4">Why Attend Our Workshops</h2>
+                        <p className="text-[#64748B] max-w-2xl mx-auto">Gain practical knowledge and skills from certified professionals</p>
                     </motion.div>
 
                     <motion.div
@@ -241,32 +242,38 @@ const Workshops = () => {
                         animate={eventsInView ? "visible" : "hidden"}
                         variants={staggerContainer}
                     >
-                        {upcomingEvents.map((event, index) => (
-                            <motion.div
-                                key={index}
-                                className="bg-gradient-to-br from-white to-[#F8FAFC] border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all"
-                                variants={fadeInUp}
-                            >
-                                <div className="flex items-center gap-3 mb-4">
-                                    <div className="w-12 h-12 bg-[#22C55E]/10 rounded-xl flex items-center justify-center">
-                                        <Calendar className="text-[#22C55E]" size={24} />
-                                    </div>
-                                    <div>
-                                        <p className="text-[#22C55E] font-bold">{event.date}</p>
-                                        <p className="text-[#94A3B8] text-xs">{event.time}</p>
-                                    </div>
-                                </div>
-                                <h3 className="text-[#1E293B] font-bold text-lg mb-2">{event.title}</h3>
-                                <div className="flex items-center gap-2 text-sm text-[#64748B] mb-4">
-                                    <MapPin size={14} />
-                                    <span>{event.location}</span>
-                                </div>
-                                <div className="flex items-center justify-between">
-                                    <span className="text-xs text-[#94A3B8]">{event.spots} spots available</span>
-                                    <a href="#inquiry" className="text-[#2563EB] text-sm font-medium hover:underline">Reserve →</a>
-                                </div>
-                            </motion.div>
-                        ))}
+                        <motion.div
+                            className="bg-gradient-to-br from-white to-[#F8FAFC] border border-gray-200 rounded-2xl p-6 text-center hover:shadow-lg transition-all"
+                            variants={fadeInUp}
+                        >
+                            <div className="w-14 h-14 bg-[#2563EB]/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+                                <Users className="text-[#2563EB]" size={28} />
+                            </div>
+                            <h3 className="text-[#1E293B] font-bold text-lg mb-2">Expert-Led Sessions</h3>
+                            <p className="text-[#64748B] text-sm">Learn directly from certified physiotherapists and health professionals with years of experience.</p>
+                        </motion.div>
+
+                        <motion.div
+                            className="bg-gradient-to-br from-white to-[#F8FAFC] border border-gray-200 rounded-2xl p-6 text-center hover:shadow-lg transition-all"
+                            variants={fadeInUp}
+                        >
+                            <div className="w-14 h-14 bg-[#22C55E]/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+                                <ClipboardList className="text-[#22C55E]" size={28} />
+                            </div>
+                            <h3 className="text-[#1E293B] font-bold text-lg mb-2">Personalized Plans</h3>
+                            <p className="text-[#64748B] text-sm">Receive tailored exercise protocols and health recommendations based on your specific conditions.</p>
+                        </motion.div>
+
+                        <motion.div
+                            className="bg-gradient-to-br from-white to-[#F8FAFC] border border-gray-200 rounded-2xl p-6 text-center hover:shadow-lg transition-all"
+                            variants={fadeInUp}
+                        >
+                            <div className="w-14 h-14 bg-[#7C3AED]/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+                                <Heart className="text-[#7C3AED]" size={28} />
+                            </div>
+                            <h3 className="text-[#1E293B] font-bold text-lg mb-2">Lasting Health Skills</h3>
+                            <p className="text-[#64748B] text-sm">Take home practical knowledge and techniques you can apply daily for long-term wellness.</p>
+                        </motion.div>
                     </motion.div>
                 </div>
             </section>
