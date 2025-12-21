@@ -17,6 +17,7 @@ import ChildHealth from "@/pages/ChildHealth";
 import CorporateHealth from "@/pages/CorporateHealth";
 import OccupationalHealth from "@/pages/OccupationalHealth";
 import ElderlyHealth from "@/pages/ElderlyHealth";
+import Workshops from "@/pages/Workshops";
 
 // Component to scroll to top on route change
 function ScrollToTop() {
@@ -61,6 +62,7 @@ function App() {
           <Route path="/careers" element={<Careers />} />
           <Route path="/partnerships" element={<Partnerships />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/workshops" element={<Workshops />} />
         </Routes>
         <Footer />
       </BrowserRouter>

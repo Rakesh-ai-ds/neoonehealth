@@ -61,6 +61,7 @@ const Navbar = () => {
         { label: 'Flexibility', path: '/elderly-health#flexibility' }
       ]
     },
+    { label: 'Workshops', path: '/workshops' },
     { label: 'Contact', path: '/contact' }
   ];
 
@@ -74,14 +75,19 @@ const Navbar = () => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16 md:h-20">
-            {/* Logo */}
-            <Link to="/" className="flex items-center">
-              <motion.img
-                src="/images/logo.png"
-                alt="NeoOne Health"
-                className="h-10 md:h-12 w-auto"
+            {/* Logo - Circular */}
+            <Link to="/" className="flex items-center gap-2">
+              <motion.div
+                className="w-11 h-11 md:w-12 md:h-12 rounded-full bg-white shadow-md border border-gray-100 overflow-hidden flex items-center justify-center p-1"
                 whileTap={{ scale: 0.95 }}
-              />
+              >
+                <img
+                  src="/images/logo.png"
+                  alt="NeoOne Health"
+                  className="w-full h-full object-contain scale-125"
+                />
+              </motion.div>
+              <span className="text-[#1E293B] font-bold text-lg hidden sm:block">NeoOne</span>
             </Link>
 
             {/* Desktop Navigation */}
