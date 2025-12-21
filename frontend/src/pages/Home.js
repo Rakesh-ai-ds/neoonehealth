@@ -12,12 +12,12 @@ const Home = () => {
   const [whyRef, whyInView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const [bmiRef, bmiInView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
-  // Hero background images - Anti-gravity themed
+  // Hero background images
   const heroSlides = [
-    { image: '/images/hero-antigravity.png', title: 'Advanced Care', subtitle: 'Future of Physiotherapy' },
-    { image: '/images/health-numbers.png', title: 'Health Intelligence', subtitle: 'Track Your Vital Numbers' },
     { image: '/images/hero-1.png', title: 'HEP', subtitle: 'Home Exercise Program - Tailored for You' },
     { image: '/images/hero-2.png', title: 'Family Health', subtitle: 'Caring for your entire family' },
+    { image: '/images/hero-3.png', title: 'Nutrition', subtitle: 'Fuel your body right' },
+    { image: '/images/hero-4.png', title: 'Mental Wellness', subtitle: 'Peace of mind matters' },
     { image: '/images/hero-5.png', title: 'Active Aging', subtitle: 'Stay healthy at every age' }
   ];
 
@@ -93,8 +93,8 @@ const Home = () => {
               alt={heroSlides[currentSlide].title}
               className="w-full h-full object-cover"
             />
-            {/* Overlay for readability */}
-            <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-white/40 md:from-white/90 md:via-white/70 md:to-transparent"></div>
+            {/* Overlay for readability - reduced brightness */}
+            <div className="absolute inset-0 bg-gradient-to-r from-white/80 via-white/60 to-transparent md:from-white/75 md:via-white/50 md:to-transparent"></div>
           </motion.div>
         </AnimatePresence>
 
