@@ -83,17 +83,18 @@ const Home = () => {
           <motion.div
             key={currentSlide}
             className="absolute inset-0 z-0"
-            initial={{ opacity: 0, scale: 1.1 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 1.05 }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
           >
             <img
               src={heroSlides[currentSlide].image}
               alt={heroSlides[currentSlide].title}
               className="w-full h-full object-cover"
             />
-            {/* No overlay - clean image display */}
+            {/* Dark overlay for text readability - no bright flash */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/30 to-transparent"></div>
           </motion.div>
         </AnimatePresence>
 
@@ -109,7 +110,7 @@ const Home = () => {
               <AnimatePresence mode="wait">
                 <motion.span
                   key={currentSlide}
-                  className="inline-block bg-[#2563EB]/10 border border-[#2563EB]/20 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-[#2563EB] text-xs md:text-sm font-medium mb-4 md:mb-6"
+                  className="inline-block bg-white/90 border border-white/20 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-[#2563EB] text-xs md:text-sm font-medium mb-4 md:mb-6 shadow-sm"
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 10 }}
@@ -119,11 +120,11 @@ const Home = () => {
                 </motion.span>
               </AnimatePresence>
 
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#1E293B] mb-4 md:mb-6 leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight drop-shadow-lg">
                 Your Health, <br />
-                <span className="bg-gradient-to-r from-[#2563EB] to-[#38BDF8] bg-clip-text text-transparent">Our Priority</span>
+                <span className="bg-gradient-to-r from-[#38BDF8] to-[#22C55E] bg-clip-text text-transparent">Our Priority</span>
               </h1>
-              <p className="text-base md:text-lg text-[#64748B] mb-6 md:mb-8 leading-relaxed">
+              <p className="text-base md:text-lg text-white/90 mb-6 md:mb-8 leading-relaxed drop-shadow-md">
                 Comprehensive wellness solutions for you and your family. Science-backed approaches for lasting health.
               </p>
 
