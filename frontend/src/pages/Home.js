@@ -1,21 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Heart, Shield, Users, Activity, Baby, Briefcase, UserCheck, ChevronRight, Phone } from 'lucide-react';
+import { ArrowRight, Heart, Shield, Users, Activity, Baby, Briefcase, UserCheck, ChevronRight, Phone, Calculator } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import BMICalculator from '../components/BMICalculator';
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [servicesRef, servicesInView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const [statsRef, statsInView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const [whyRef, whyInView] = useInView({ triggerOnce: true, threshold: 0.1 });
+  const [bmiRef, bmiInView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
-  // Hero background images with topics
+  // Hero background images - Anti-gravity themed
   const heroSlides = [
+    { image: '/images/hero-antigravity.png', title: 'Advanced Care', subtitle: 'Future of Physiotherapy' },
+    { image: '/images/health-numbers.png', title: 'Health Intelligence', subtitle: 'Track Your Vital Numbers' },
     { image: '/images/hero-1.png', title: 'Personal Wellness', subtitle: 'Yoga & Fitness for a healthier you' },
     { image: '/images/hero-2.png', title: 'Family Health', subtitle: 'Caring for your entire family' },
-    { image: '/images/hero-3.png', title: 'Nutrition & Diet', subtitle: 'Fuel your body right' },
-    { image: '/images/hero-4.png', title: 'Mental Wellness', subtitle: 'Peace of mind matters' },
     { image: '/images/hero-5.png', title: 'Active Aging', subtitle: 'Stay healthy at every age' }
   ];
 
@@ -23,16 +25,23 @@ const Home = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => {
-        // Random next slide (not same as current)
         let next = Math.floor(Math.random() * heroSlides.length);
         while (next === prev) {
           next = Math.floor(Math.random() * heroSlides.length);
         }
         return next;
       });
-    }, 5000); // Change every 5 seconds
+    }, 5000);
     return () => clearInterval(interval);
   }, [heroSlides.length]);
+
+  // Smooth scroll to BMI section
+  const scrollToBMI = () => {
+    const bmiSection = document.getElementById('bmi-section');
+    if (bmiSection) {
+      bmiSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
@@ -130,15 +139,14 @@ const Home = () => {
                     Get Started <ArrowRight size={18} />
                   </motion.button>
                 </Link>
-                <a href="tel:+919876543210" className="w-full sm:w-auto">
-                  <motion.button
-                    className="w-full sm:w-auto px-6 py-3.5 md:px-8 md:py-4 border-2 border-[#2563EB] text-[#2563EB] rounded-xl font-bold flex items-center justify-center gap-2 text-sm md:text-base"
-                    whileHover={{ backgroundColor: '#2563EB', color: 'white' }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <Phone size={18} /> Call Now
-                  </motion.button>
-                </a>
+                <motion.button
+                  onClick={scrollToBMI}
+                  className="w-full sm:w-auto px-6 py-3.5 md:px-8 md:py-4 border-2 border-[#22C55E] text-[#22C55E] rounded-xl font-bold flex items-center justify-center gap-2 text-sm md:text-base bg-white/80 backdrop-blur-sm"
+                  whileHover={{ backgroundColor: '#22C55E', color: 'white' }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <Calculator size={18} /> Check Your BMI
+                </motion.button>
               </div>
             </motion.div>
           </div>
@@ -174,7 +182,6 @@ const Home = () => {
             <p className="text-sm md:text-base text-[#64748B] max-w-2xl mx-auto">Comprehensive care for every stage of life.</p>
           </motion.div>
 
-          {/* Mobile: 2 columns, Desktop: 4 columns */}
           <motion.div
             className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6"
             initial="hidden"
@@ -208,7 +215,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Stats Section - Compact for mobile */}
+      {/* Stats Section */}
       <section className="py-10 md:py-16 bg-gradient-to-r from-[#2563EB] to-[#38BDF8]" ref={statsRef}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -227,7 +234,18 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Why Choose Us - Mobile Grid */}
+      {/* BMI Calculator Section */}
+      <section id="bmi-section" className="scroll-mt-20" ref={bmiRef}>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={bmiInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+        >
+          <BMICalculator />
+        </motion.div>
+      </section>
+
+      {/* Why Choose Us */}
       <section className="py-12 md:py-20 bg-white" ref={whyRef}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -259,7 +277,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* CTA Section - Mobile optimized */}
+      {/* CTA Section */}
       <section className="py-12 md:py-20 bg-[#F8FAFC]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
