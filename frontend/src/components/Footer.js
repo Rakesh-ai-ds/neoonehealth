@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Twitter, Linkedin, Instagram, Phone, Mail, MapPin } from 'lucide-react';
+import { Facebook, Linkedin, Instagram, Phone, Mail, MapPin } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
@@ -39,11 +39,15 @@ const Footer = () => {
               Your trusted healthcare partner for comprehensive wellness solutions.
             </p>
             <div className="flex space-x-2">
-              {[Facebook, Twitter, Linkedin, Instagram].map((Icon, index) => (
-                <a key={index} href="#" className="w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center text-gray-400 hover:bg-[#2563EB] hover:text-white transition-all">
-                  <Icon size={16} />
-                </a>
-              ))}
+              <a href="https://www.facebook.com/profile.php?id=61585766368576" target="_blank" rel="noopener noreferrer" className="w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center text-gray-400 hover:bg-[#1877F2] hover:text-white transition-all">
+                <Facebook size={16} />
+              </a>
+              <a href="https://in.linkedin.com/in/neoonehealth-undefined-9685863a3" target="_blank" rel="noopener noreferrer" className="w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center text-gray-400 hover:bg-[#0A66C2] hover:text-white transition-all">
+                <Linkedin size={16} />
+              </a>
+              <a href="https://www.instagram.com/neoonehealth/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center text-gray-400 hover:bg-gradient-to-r hover:from-[#833AB4] hover:via-[#FD1D1D] hover:to-[#F77737] hover:text-white transition-all">
+                <Instagram size={16} />
+              </a>
             </div>
           </motion.div>
 
