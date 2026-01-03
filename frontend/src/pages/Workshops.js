@@ -398,8 +398,8 @@ const Workshops = () => {
                             <a href="tel:+919876543210" className="flex items-center gap-2 text-[#64748B] hover:text-[#2563EB]">
                                 <Phone size={16} /> +91 98765 43210
                             </a>
-                            <a href="mailto:workshops@neoonehealth.com" className="flex items-center gap-2 text-[#64748B] hover:text-[#2563EB]">
-                                <Mail size={16} /> workshops@neoonehealth.com
+                            <a href="mailto:neoonehealth@gmail.com" className="flex items-center gap-2 text-[#64748B] hover:text-[#2563EB]">
+                                <Mail size={16} /> neoonehealth@gmail.com
                             </a>
                         </div>
                     </motion.div>

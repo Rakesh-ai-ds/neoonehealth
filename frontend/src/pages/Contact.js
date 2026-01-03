@@ -85,7 +85,7 @@ const Contact = () => {
           <a href="tel:+919876543210" className="flex-1 flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-[#2563EB] to-[#38BDF8] text-white rounded-xl font-bold text-sm">
             <Phone size={16} /> Call Now
           </a>
-          <a href="mailto:contact@neoonehealth.in" className="flex-1 flex items-center justify-center gap-2 py-3 border-2 border-[#2563EB] text-[#2563EB] rounded-xl font-bold text-sm">
+          <a href="mailto:neoonehealth@gmail.com" className="flex-1 flex items-center justify-center gap-2 py-3 border-2 border-[#2563EB] text-[#2563EB] rounded-xl font-bold text-sm">
             <Mail size={16} /> Email
           </a>
         </div>
@@ -101,7 +101,7 @@ const Contact = () => {
               <div className="bg-[#F8FAFC] border border-gray-100 p-6 rounded-2xl">
                 <h3 className="text-lg font-bold text-[#1E293B] mb-4">Contact Info</h3>
                 <div className="space-y-4">
-                  {[{ icon: Phone, label: "Phone", value: "+91 98765 43210" }, { icon: Mail, label: "Email", value: "contact@neoonehealth.in" }, { icon: MapPin, label: "Address", value: "Chennai, Tamil Nadu" }, { icon: Clock, label: "Hours", value: "Mon-Sat: 9AM - 8PM" }].map((item, index) => (
+                  {[{ icon: Phone, label: "Phone", value: "+91 98765 43210" }, { icon: Mail, label: "Email", value: "neoonehealth@gmail.com" }, { icon: MapPin, label: "Address", value: "Chennai, Tamil Nadu" }, { icon: Clock, label: "Hours", value: "Mon-Sat: 9AM - 8PM" }].map((item, index) => (
                     <div key={index} className="flex items-start gap-3">
                       <div className="w-9 h-9 bg-[#2563EB]/10 rounded-lg flex items-center justify-center flex-shrink-0"><item.icon className="text-[#2563EB]" size={16} /></div>
                       <div><p className="text-[#94A3B8] text-xs">{item.label}</p><p className="text-[#1E293B] text-sm">{item.value}</p></div>
