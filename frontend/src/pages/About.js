@@ -22,9 +22,7 @@ const About = () => {
   ];
 
   const team = [
-    { name: 'Dr. Sarah Mitchell', role: 'Chief Executive Officer', desc: 'Former Chief Medical Officer with 20+ years in preventative medicine.', img: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=300&q=80' },
-    { name: 'Dr. James Chen', role: 'Chief Medical Officer', desc: 'Board-certified physician specializing in occupational health.', img: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=300&q=80' },
-    { name: 'Michael Rodriguez', role: 'Chief Technology Officer', desc: 'Expert in HIPAA-compliant systems and healthcare platforms.', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80' }
+    { name: 'Sangeetha R', role: 'Director cum Chief Nutritionist', desc: 'Expert nutritionist with 20+ years of experience in musculoskeletal nutrition and holistic wellness.', img: '/images/sangeetha-r.png' }
   ];
 
   return (
@@ -44,7 +42,7 @@ const About = () => {
       <section className="py-8 bg-white border-y border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center" initial="hidden" animate="visible" variants={staggerContainer}>
-            {[{ number: '15+', label: 'Years Experience', icon: Award }, { number: '50,000+', label: 'Happy Patients', icon: Users }, { number: '100+', label: 'Expert Doctors', icon: Heart }, { number: '24/7', label: 'Support Available', icon: Clock }].map((stat, index) => (
+            {[{ number: '20+', label: 'Years Experience', icon: Award }, { number: '5,000+', label: 'Happy Patients', icon: Users }, { number: 'Expert', label: 'Care Team', icon: Heart }, { number: 'Online & Offline', label: 'Services', icon: Clock }].map((stat, index) => (
               <motion.div key={index} variants={fadeInUp} className="flex flex-col items-center">
                 <stat.icon className="text-[#2563EB] mb-2" size={28} />
                 <p className="text-2xl md:text-3xl font-bold text-[#1E293B]">{stat.number}</p>
@@ -100,17 +98,17 @@ const About = () => {
       <section className="py-20 bg-white" ref={teamRef}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div className="text-center mb-16" initial="hidden" animate={teamInView ? "visible" : "hidden"} variants={fadeInUp}>
-            <span className="text-[#2563EB] font-medium text-sm uppercase tracking-wider">Meet Our Team</span>
+            <span className="text-[#2563EB] font-medium text-sm uppercase tracking-wider">Meet Our Leader</span>
             <h2 className="text-4xl font-bold text-[#1E293B] mt-2 mb-4">Leadership & Expertise</h2>
             <p className="text-xl text-[#64748B]">Backed by clinical excellence and dedication</p>
           </motion.div>
-          <motion.div className="grid grid-cols-1 md:grid-cols-3 gap-8" initial="hidden" animate={teamInView ? "visible" : "hidden"} variants={staggerContainer}>
+          <motion.div className="flex justify-center" initial="hidden" animate={teamInView ? "visible" : "hidden"} variants={staggerContainer}>
             {team.map((member, index) => (
-              <motion.div key={index} className="bg-[#F8FAFC] border border-gray-100 p-8 rounded-2xl text-center group hover:shadow-lg transition-all" variants={fadeInUp} whileHover={{ y: -10 }}>
-                <div className="relative w-28 h-28 mx-auto mb-6 rounded-full overflow-hidden border-2 border-gray-200"><img src={member.img} alt={member.name} className="w-full h-full object-cover" /></div>
-                <h3 className="text-xl font-bold text-[#1E293B] mb-2">{member.name}</h3>
-                <p className="text-[#2563EB] font-semibold mb-4">{member.role}</p>
-                <p className="text-[#64748B] text-sm">{member.desc}</p>
+              <motion.div key={index} className="bg-[#F8FAFC] border border-gray-100 p-10 rounded-2xl text-center group hover:shadow-xl transition-all max-w-md" variants={fadeInUp} whileHover={{ y: -10 }}>
+                <div className="relative w-40 h-40 mx-auto mb-6 rounded-full overflow-hidden border-4 border-[#2563EB]/20 shadow-lg"><img src={member.img} alt={member.name} className="w-full h-full object-cover object-top" /></div>
+                <h3 className="text-2xl font-bold text-[#1E293B] mb-2">{member.name}</h3>
+                <p className="text-[#2563EB] font-semibold mb-4 text-lg">{member.role}</p>
+                <p className="text-[#64748B]">{member.desc}</p>
               </motion.div>
             ))}
           </motion.div>
