@@ -22,7 +22,7 @@ const About = () => {
   ];
 
   const team = [
-    { name: 'Sangeetha R', role: 'Director cum Chief Nutritionist', desc: 'Expert nutritionist with 20+ years of experience in musculoskeletal nutrition and holistic wellness.', img: '/images/sangeetha-r.png' }
+    { name: 'Sangeetha R', role: 'Director cum Chief Nutritionist', desc: 'MSc Foods & Nutrition with 20+ years experience in clinical nutrition. Expert in diabetic meal planning, vegan diets, and healthy weight management. Featured on Polimer, Sun TV & Sun News as a health speaker.', img: '/images/sangeetha-r.png' }
   ];
 
   return (
