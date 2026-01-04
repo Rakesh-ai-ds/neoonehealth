@@ -30,10 +30,10 @@ const Footer = () => {
             transition={{ duration: 0.5 }}
           >
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-full bg-white shadow-md overflow-hidden flex items-center justify-center p-1">
-                <img src="/images/logo.png" alt="NeoOne Health" className="w-full h-full object-contain scale-125" />
+              <div className="w-14 h-14 rounded-full bg-white shadow-lg border-2 border-[#2563EB]/20 overflow-hidden flex items-center justify-center p-1.5">
+                <img src="/images/logo.png" alt="NeoOne Health" className="w-full h-full object-contain scale-110" />
               </div>
-              <span className="text-white font-bold text-lg">NeoOne Health</span>
+              <span className="text-white font-bold text-xl">NeoOne<span className="text-[#38BDF8]">Health</span></span>
             </div>
             <p className="text-gray-400 text-sm mb-4 leading-relaxed">
               Your trusted healthcare partner for comprehensive wellness solutions.

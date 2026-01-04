@@ -55,16 +55,16 @@ const Home = () => {
 
   const services = [
     { icon: Heart, title: 'Personal Wellness', desc: 'Fitness, nutrition, and mental health programs.', path: '/personal-wellness', color: '#22C55E' },
-    { icon: Baby, title: 'Child Health', desc: 'Pediatric care and vaccinations.', path: '/child-health', color: '#38BDF8' },
+    { icon: Baby, title: 'Child Health', desc: 'Nutrition-led musculoskeletal care.', path: '/child-health', color: '#38BDF8' },
     { icon: Briefcase, title: 'Occupational Health', desc: 'Workplace safety and wellness.', path: '/occupational-health', color: '#D97706' },
     { icon: UserCheck, title: 'Elderly Health', desc: '3F approach for healthy aging.', path: '/elderly-health', color: '#7C3AED' }
   ];
 
   const stats = [
-    { number: '15+', label: 'Years' },
-    { number: '50K+', label: 'Patients' },
+    { number: '20+', label: 'Years' },
+    { number: '5K+', label: 'Patients' },
     { number: '98%', label: 'Satisfaction' },
-    { number: '24/7', label: 'Support' }
+    { number: 'Online & Offline', label: 'Services' }
   ];
 
   const whyChooseUs = [

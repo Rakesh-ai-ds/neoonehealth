@@ -75,19 +75,20 @@ const Navbar = () => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16 md:h-20">
-            {/* Logo - Circular */}
-            <Link to="/" className="flex items-center gap-2">
+            {/* Logo - Larger and Attractive */}
+            <Link to="/" className="flex items-center gap-3">
               <motion.div
-                className="w-11 h-11 md:w-12 md:h-12 rounded-full bg-white shadow-md border border-gray-100 overflow-hidden flex items-center justify-center p-1"
+                className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-white shadow-lg border-2 border-[#2563EB]/20 overflow-hidden flex items-center justify-center p-1.5"
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <img
                   src="/images/logo.png"
                   alt="NeoOne Health"
-                  className="w-full h-full object-contain scale-125"
+                  className="w-full h-full object-contain scale-110"
                 />
               </motion.div>
-              <span className="text-[#1E293B] font-bold text-lg hidden sm:block">NeoOne</span>
+              <span className="text-[#1E293B] font-bold text-xl hidden sm:block">NeoOne<span className="text-[#2563EB]">Health</span></span>
             </Link>
 
             {/* Desktop Navigation */}

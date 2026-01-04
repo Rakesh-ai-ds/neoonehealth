@@ -110,8 +110,8 @@ const Contact = () => {
                 </div>
               </div>
               <div className="bg-gradient-to-br from-[#2563EB] to-[#38BDF8] p-6 rounded-2xl">
-                <h3 className="text-lg font-bold text-white mb-2">Urgent Help?</h3>
-                <p className="text-white/80 text-sm mb-4">24/7 helpline available.</p>
+                <h3 className="text-lg font-bold text-white mb-2">Need Help?</h3>
+                <p className="text-white/80 text-sm mb-4">Call us for any queries.</p>
                 <a href="tel:+919876543210" className="inline-block bg-white text-[#2563EB] px-5 py-2.5 rounded-lg font-bold text-sm">Call Now</a>
               </div>
             </motion.div>
