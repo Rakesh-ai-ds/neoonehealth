@@ -19,6 +19,7 @@ import OccupationalHealth from "@/pages/OccupationalHealth";
 import ElderlyHealth from "@/pages/ElderlyHealth";
 import Workshops from "@/pages/Workshops";
 import Associates from "@/pages/Associates";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 // Component to scroll to top on route change
 function ScrollToTop() {
@@ -67,6 +68,7 @@ function App() {
           <Route path="/associates" element={<Associates />} />
         </Routes>
         <Footer />
+        <WhatsAppButton />
       </BrowserRouter>
     </div>
   );
