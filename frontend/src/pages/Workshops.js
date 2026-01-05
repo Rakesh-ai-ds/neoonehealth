@@ -342,7 +342,7 @@ const Workshops = () => {
                                         value={formData.phone}
                                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                                         className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#2563EB] focus:border-transparent outline-none transition-all"
-                                        placeholder="+91 98765 43210"
+                                        placeholder="+91 90477 34110"
                                     />
                                 </div>
                             </div>
@@ -395,8 +395,8 @@ const Workshops = () => {
                         </form>
 
                         <div className="mt-8 pt-6 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-center gap-6 text-sm">
-                            <a href="tel:+919876543210" className="flex items-center gap-2 text-[#64748B] hover:text-[#2563EB]">
-                                <Phone size={16} /> +91 98765 43210
+                            <a href="tel:+919047734110" className="flex items-center gap-2 text-[#64748B] hover:text-[#2563EB]">
+                                <Phone size={16} /> +91 90477 34110
                             </a>
                             <a href="mailto:neoonehealth@gmail.com" className="flex items-center gap-2 text-[#64748B] hover:text-[#2563EB]">
                                 <Mail size={16} /> neoonehealth@gmail.com

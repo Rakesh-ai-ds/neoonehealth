@@ -40,13 +40,7 @@ const Navbar = () => {
         { label: 'BMI Calculator', path: '/personal-wellness#bmi-calculator' }
       ]
     },
-    {
-      label: 'Child Health', path: '/child-health', shortLabel: 'Child', submenu: [
-        { label: 'Pediatric Care', path: '/child-health#pediatric-care' },
-        { label: 'Vaccination', path: '/child-health#vaccination' },
-        { label: 'Growth', path: '/child-health#growth-development' }
-      ]
-    },
+    { label: 'Child Health', path: '/child-health', shortLabel: 'Child' },
     {
       label: 'Occupational', path: '/occupational-health', submenu: [
         { label: 'Workplace Safety', path: '/occupational-health#workplace-safety' },
@@ -62,6 +56,7 @@ const Navbar = () => {
       ]
     },
     { label: 'Workshops', path: '/workshops' },
+    { label: 'Associates', path: '/associates' },
     { label: 'Contact', path: '/contact' }
   ];
 
@@ -116,7 +111,7 @@ const Navbar = () => {
                 </div>
               ))}
               {/* Call Button - Desktop */}
-              <a href="tel:+919876543210" className="ml-2">
+              <a href="tel:+919047734110" className="ml-2">
                 <button className="px-4 py-2 bg-gradient-to-r from-[#2563EB] to-[#38BDF8] text-white rounded-lg font-medium text-sm flex items-center gap-1.5">
                   <Phone size={14} /> Call
                 </button>
@@ -125,7 +120,7 @@ const Navbar = () => {
 
             {/* Mobile: Call + Menu */}
             <div className="flex items-center gap-2 lg:hidden">
-              <a href="tel:+919876543210">
+              <a href="tel:+919047734110">
                 <motion.button className="p-2.5 bg-gradient-to-r from-[#2563EB] to-[#38BDF8] text-white rounded-lg" whileTap={{ scale: 0.95 }}>
                   <Phone size={18} />
                 </motion.button>
@@ -197,9 +192,9 @@ const Navbar = () => {
                       Book Appointment
                     </button>
                   </Link>
-                  <a href="tel:+919876543210" className="block">
+                  <a href="tel:+919047734110" className="block">
                     <button className="w-full border-2 border-[#2563EB] text-[#2563EB] py-3 rounded-xl font-bold flex items-center justify-center gap-2">
-                      <Phone size={18} /> +91 98765 43210
+                      <Phone size={18} /> +91 90477 34110
                     </button>
                   </a>
                 </div>

@@ -86,7 +86,7 @@ const TopicQueryForm = ({ topic, subtitle = "Have questions? We're here to help!
                                 <label className="block text-sm font-semibold text-[#1E293B] mb-2 flex items-center gap-2">
                                     <Phone size={14} className="text-[#2563EB]" /> Phone
                                 </label>
-                                <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="+91 98765 43210" className="w-full px-4 py-3.5 bg-white border border-gray-200 rounded-xl text-[#1E293B] placeholder-[#94A3B8] focus:outline-none focus:border-[#2563EB]" />
+                                <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="+91 90477 34110" className="w-full px-4 py-3.5 bg-white border border-gray-200 rounded-xl text-[#1E293B] placeholder-[#94A3B8] focus:outline-none focus:border-[#2563EB]" />
                             </div>
                         </div>
                         <div>

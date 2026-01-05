@@ -82,7 +82,7 @@ const Contact = () => {
       {/* Quick Contact - Mobile */}
       <section className="py-4 md:hidden bg-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 flex gap-3">
-          <a href="tel:+919876543210" className="flex-1 flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-[#2563EB] to-[#38BDF8] text-white rounded-xl font-bold text-sm">
+          <a href="tel:+919047734110" className="flex-1 flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-[#2563EB] to-[#38BDF8] text-white rounded-xl font-bold text-sm">
             <Phone size={16} /> Call Now
           </a>
           <a href="mailto:neoonehealth@gmail.com" className="flex-1 flex items-center justify-center gap-2 py-3 border-2 border-[#2563EB] text-[#2563EB] rounded-xl font-bold text-sm">
@@ -101,7 +101,7 @@ const Contact = () => {
               <div className="bg-[#F8FAFC] border border-gray-100 p-6 rounded-2xl">
                 <h3 className="text-lg font-bold text-[#1E293B] mb-4">Contact Info</h3>
                 <div className="space-y-4">
-                  {[{ icon: Phone, label: "Phone", value: "+91 98765 43210" }, { icon: Mail, label: "Email", value: "neoonehealth@gmail.com" }, { icon: MapPin, label: "Address", value: "Chennai, Tamil Nadu" }, { icon: Clock, label: "Hours", value: "Mon-Sat: 9AM - 8PM" }].map((item, index) => (
+                  {[{ icon: Phone, label: "Phone", value: "+91 90477 34110" }, { icon: Mail, label: "Email", value: "neoonehealth@gmail.com" }, { icon: MapPin, label: "Address", value: "Chennai, Tamil Nadu" }, { icon: Clock, label: "Hours", value: "Mon-Sat: 9AM - 8PM" }].map((item, index) => (
                     <div key={index} className="flex items-start gap-3">
                       <div className="w-9 h-9 bg-[#2563EB]/10 rounded-lg flex items-center justify-center flex-shrink-0"><item.icon className="text-[#2563EB]" size={16} /></div>
                       <div><p className="text-[#94A3B8] text-xs">{item.label}</p><p className="text-[#1E293B] text-sm">{item.value}</p></div>
@@ -112,7 +112,7 @@ const Contact = () => {
               <div className="bg-gradient-to-br from-[#2563EB] to-[#38BDF8] p-6 rounded-2xl">
                 <h3 className="text-lg font-bold text-white mb-2">Need Help?</h3>
                 <p className="text-white/80 text-sm mb-4">Call us for any queries.</p>
-                <a href="tel:+919876543210" className="inline-block bg-white text-[#2563EB] px-5 py-2.5 rounded-lg font-bold text-sm">Call Now</a>
+                <a href="tel:+919047734110" className="inline-block bg-white text-[#2563EB] px-5 py-2.5 rounded-lg font-bold text-sm">Call Now</a>
               </div>
             </motion.div>
 
@@ -150,7 +150,7 @@ const Contact = () => {
                       </div>
                       <div>
                         <label className="block text-[#1E293B] text-sm font-medium mb-2">Phone *</label>
-                        <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} placeholder="+91 98765 43210" className={`w-full px-4 py-3.5 bg-white border rounded-xl text-[#1E293B] placeholder-[#94A3B8] focus:outline-none focus:border-[#2563EB] ${validationErrors.phone ? 'border-[#EF4444]' : 'border-gray-200'}`} />
+                        <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} placeholder="+91 90477 34110" className={`w-full px-4 py-3.5 bg-white border rounded-xl text-[#1E293B] placeholder-[#94A3B8] focus:outline-none focus:border-[#2563EB] ${validationErrors.phone ? 'border-[#EF4444]' : 'border-gray-200'}`} />
                         {validationErrors.phone && <p className="text-[#EF4444] text-xs mt-1">{validationErrors.phone}</p>}
                       </div>
                     </div>

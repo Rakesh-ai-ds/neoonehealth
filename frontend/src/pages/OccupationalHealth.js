@@ -81,7 +81,7 @@ const OccupationalHealth = () => {
             <section className="py-16 bg-gradient-to-r from-[#2563EB] to-[#38BDF8]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                        {[{ number: "95%", label: "Reduction in Injuries" }, { number: "40%", label: "Decrease in Sick Leave" }, { number: "3x", label: "ROI on Health Programs" }, { number: "500+", label: "Companies Served" }].map((stat, index) => (
+                        {[{ number: "95%", label: "Reduction in Injuries" }, { number: "40%", label: "Decrease in Sick Leave" }, { number: "3x", label: "ROI on Health Programs" }].map((stat, index) => (
                             <motion.div key={index} initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: index * 0.1 }}>
                                 <p className="text-4xl md:text-5xl font-bold text-white mb-2">{stat.number}</p>
                                 <p className="text-white/80 text-sm">{stat.label}</p>
@@ -99,7 +99,7 @@ const OccupationalHealth = () => {
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                     <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Protect Your Most Valuable Asset</h2>
                     <p className="text-xl text-white/80 mb-8">Start building a healthier, safer workplace today.</p>
-                    <Link to="/contact"><motion.button className="px-10 py-4 bg-white text-[#D97706] rounded-xl font-bold text-lg" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>Request a Free Consultation</motion.button></Link>
+                    <Link to="/contact"><motion.button className="px-10 py-4 bg-white text-[#D97706] rounded-xl font-bold text-lg" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>Request a Consultation</motion.button></Link>
                 </div>
             </section>
         </div>

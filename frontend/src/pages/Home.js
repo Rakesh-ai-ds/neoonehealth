@@ -539,7 +539,7 @@ const Home = () => {
                   Book a Consultation
                 </motion.button>
               </Link>
-              <a href="tel:+919876543210">
+              <a href="tel:+919047734110">
                 <motion.button
                   className="w-full sm:w-auto px-8 py-3.5 md:px-10 md:py-4 border-2 border-[#2563EB] text-[#2563EB] rounded-xl font-bold text-sm md:text-lg flex items-center justify-center gap-2"
                   whileHover={{ backgroundColor: '#2563EB', color: 'white' }}
