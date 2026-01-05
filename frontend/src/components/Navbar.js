@@ -40,7 +40,13 @@ const Navbar = () => {
         { label: 'BMI Calculator', path: '/personal-wellness#bmi-calculator' }
       ]
     },
-    { label: 'Child Health', path: '/child-health', shortLabel: 'Child' },
+    {
+      label: 'Child Health', path: '/child-health', shortLabel: 'Child', submenu: [
+        { label: 'Assessment', path: '/child-health#assessment' },
+        { label: 'Early Detection', path: '/child-health#detection' },
+        { label: 'Planning', path: '/child-health#planning' }
+      ]
+    },
     {
       label: 'Occupational', path: '/occupational-health', submenu: [
         { label: 'Workplace Safety', path: '/occupational-health#workplace-safety' },

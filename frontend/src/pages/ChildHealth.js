@@ -110,7 +110,7 @@ const ChildHealth = () => {
             </section>
 
             {/* How We Assess */}
-            <section className="py-20 bg-[#F8FAFC]">
+            <section id="assessment" className="py-20 bg-[#F8FAFC] scroll-mt-24">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInLeft}>
@@ -144,7 +144,7 @@ const ChildHealth = () => {
             </section>
 
             {/* What We Look For */}
-            <section className="py-20 bg-white">
+            <section id="detection" className="py-20 bg-white scroll-mt-24">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <motion.div className="text-center mb-12" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
                         <span className="text-[#F97316] font-medium text-sm uppercase tracking-wider">Early Detection</span>
@@ -172,7 +172,7 @@ const ChildHealth = () => {
             </section>
 
             {/* How We Plan */}
-            <section className="py-20 bg-gradient-to-r from-[#2563EB] to-[#38BDF8]">
+            <section id="planning" className="py-20 bg-gradient-to-r from-[#2563EB] to-[#38BDF8] scroll-mt-24">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
