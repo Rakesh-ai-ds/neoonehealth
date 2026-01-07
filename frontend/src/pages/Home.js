@@ -434,8 +434,8 @@ const Home = () => {
               transition={{ delay: 0.5 }}
             >
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 bg-[#38BDF8]/10 rounded-xl flex items-center justify-center">
-                  <Users className="text-[#38BDF8]" size={24} />
+                <div className="w-12 h-12 bg-[#7C3AED]/10 rounded-xl flex items-center justify-center">
+                  <Users className="text-[#7C3AED]" size={24} />
                 </div>
                 <div>
                   <h3 className="text-[#1E293B] font-bold text-lg">Waist-to-Hip Ratio</h3>
@@ -456,6 +456,11 @@ const Home = () => {
                   <span className="font-semibold text-[#EF4444]">Above limits</span>
                 </div>
               </div>
+              <Link to="/personal-wellness#whr-calculator">
+                <button className="mt-4 w-full px-4 py-2 bg-[#7C3AED] text-white rounded-lg font-medium text-sm hover:bg-[#6D28D9] transition-colors">
+                  Calculate Your WHR
+                </button>
+              </Link>
             </motion.div>
 
           </div>
