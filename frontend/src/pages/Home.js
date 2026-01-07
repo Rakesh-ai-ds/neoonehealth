@@ -153,14 +153,14 @@ const Home = () => {
         </div>
 
         {/* Slide Indicators - Tiny dots */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex items-center gap-1">
+        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20 flex items-center gap-1.5">
           {heroSlides.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
-              className={`w-[5px] h-[5px] rounded-full transition-all duration-300 ${currentSlide === index
-                ? 'bg-[#2563EB]'
-                : 'bg-[#94A3B8]/50 hover:bg-[#64748B]'
+              className={`w-2 h-2 md:w-2.5 md:h-2.5 rounded-full transition-all duration-300 ${currentSlide === index
+                ? 'bg-[#2563EB] scale-110'
+                : 'bg-white/60 hover:bg-white/80'
                 }`}
               aria-label={`Slide ${index + 1}`}
             />
