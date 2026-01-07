@@ -62,7 +62,6 @@ const Navbar = () => {
       ]
     },
     { label: 'Workshops', path: '/workshops' },
-    { label: 'Associates', path: '/associates' },
     { label: 'Contact', path: '/contact' }
   ];
 

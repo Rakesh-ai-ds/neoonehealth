@@ -6,6 +6,7 @@ import { Heart, Apple, Brain, Shield, Dumbbell, Salad, Smile, Stethoscope, Chevr
 import FAQSection from '@/components/FAQSection';
 import TopicQueryForm from '@/components/TopicQueryForm';
 import BMICalculator from '@/components/BMICalculator';
+import WHRCalculator from '@/components/WHRCalculator';
 
 const PersonalWellness = () => {
     const [heroRef, heroInView] = useInView({ triggerOnce: true, threshold: 0.1 });
@@ -178,6 +179,7 @@ const PersonalWellness = () => {
             </section>
 
             <BMICalculator />
+            <WHRCalculator />
             <FAQSection faqs={faqs} title="Personal Wellness FAQs" />
             <TopicQueryForm topic="Personal Wellness" subtitle="Have questions about your wellness journey? We're here to guide you." />
 

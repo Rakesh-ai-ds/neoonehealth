@@ -105,7 +105,7 @@ const Footer = () => {
               </li>
               <li className="flex items-start gap-2">
                 <MapPin className="text-[#38BDF8] flex-shrink-0 mt-0.5" size={14} />
-                <span className="text-gray-300 text-sm">Chennai, India</span>
+                <a href="https://maps.app.goo.gl/xEHbQKCFRosT8GXm6" target="_blank" rel="noopener noreferrer" className="text-gray-300 text-sm hover:text-[#38BDF8] transition-colors">Salem, Tamil Nadu</a>
               </li>
             </ul>
           </motion.div>
