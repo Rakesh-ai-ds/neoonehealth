@@ -43,7 +43,10 @@ const OccupationalHealth = () => {
             <section className="py-6 bg-white border-y border-gray-100">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex flex-wrap justify-center gap-4">
-                        {services.map((service, index) => (<a key={index} href={`#${service.id}`} className="px-6 py-3 bg-[#F8FAFC] text-[#64748B] rounded-xl font-medium hover:bg-[#2563EB]/10 hover:text-[#2563EB] transition-all">{service.title.split(' ')[0]}</a>))}
+                        <a href="#workplace-safety" className="px-6 py-3 bg-[#F8FAFC] text-[#64748B] rounded-xl font-medium hover:bg-[#2563EB]/10 hover:text-[#2563EB] transition-all">Safety</a>
+                        <a href="#ergonomics" className="px-6 py-3 bg-[#F8FAFC] text-[#64748B] rounded-xl font-medium hover:bg-[#2563EB]/10 hover:text-[#2563EB] transition-all">Ergonomics</a>
+                        <a href="#mental-wellness" className="px-6 py-3 bg-[#F8FAFC] text-[#64748B] rounded-xl font-medium hover:bg-[#2563EB]/10 hover:text-[#2563EB] transition-all">Mental Health</a>
+                        <a href="#health-screening" className="px-6 py-3 bg-[#F8FAFC] text-[#64748B] rounded-xl font-medium hover:bg-[#2563EB]/10 hover:text-[#2563EB] transition-all">Screening</a>
                     </div>
                 </div>
             </section>
