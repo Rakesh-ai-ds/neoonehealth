@@ -152,15 +152,15 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Slide Indicators - Tiny dots */}
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20 flex items-center gap-1">
+        {/* Slide Indicators - Very tiny dots */}
+        <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 z-20 flex items-center gap-[3px]">
           {heroSlides.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
-              className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${currentSlide === index
+              className={`w-[4px] h-[4px] rounded-full transition-all duration-300 ${currentSlide === index
                 ? 'bg-[#2563EB]'
-                : 'bg-white/50'
+                : 'bg-white/40'
                 }`}
               aria-label={`Slide ${index + 1}`}
             />
