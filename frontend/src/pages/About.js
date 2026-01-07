@@ -23,13 +23,6 @@ const About = () => {
 
   const team = [
     {
-      name: 'Dr. Amudhadevi S',
-      role: 'Senior Assistant Professor of Paediatrics',
-      subtitle: 'Child Specialist | Developmental Neurologist | Adolescent Pediatrician',
-      desc: 'Highly qualified Pediatrician with 13+ years experience. MBBS (Stanley Medical College), M.D. Paediatrics (GMKMCH), PG Diplomas in Developmental Neurology & Adolescent Paediatrics. Published researcher and conference speaker.',
-      img: '/images/dr-amudhadevi.jpg'
-    },
-    {
       name: 'Sangeetha R',
       role: 'Director cum Chief Nutritionist',
       subtitle: 'MSc Foods & Nutrition | Clinical Nutrition Expert',
@@ -111,18 +104,18 @@ const About = () => {
       <section className="py-20 bg-white" ref={teamRef}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div className="text-center mb-16" initial="hidden" animate={teamInView ? "visible" : "hidden"} variants={fadeInUp}>
-            <span className="text-[#2563EB] font-medium text-sm uppercase tracking-wider">Meet Our Leaders</span>
+            <span className="text-[#2563EB] font-medium text-sm uppercase tracking-wider">Meet Our Leader</span>
             <h2 className="text-4xl font-bold text-[#1E293B] mt-2 mb-4">Leadership & Expertise</h2>
             <p className="text-xl text-[#64748B]">Backed by clinical excellence and dedication</p>
           </motion.div>
-          <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto" initial="hidden" animate={teamInView ? "visible" : "hidden"} variants={staggerContainer}>
+          <motion.div className="flex justify-center" initial="hidden" animate={teamInView ? "visible" : "hidden"} variants={staggerContainer}>
             {team.map((member, index) => (
-              <motion.div key={index} className="bg-[#F8FAFC] border border-gray-100 p-8 rounded-2xl text-center group hover:shadow-xl transition-all" variants={fadeInUp} whileHover={{ y: -10 }}>
-                <div className="relative w-36 h-36 mx-auto mb-6 rounded-full overflow-hidden border-4 border-[#2563EB]/20 shadow-lg"><img src={member.img} alt={member.name} className="w-full h-full object-cover object-top" /></div>
-                <h3 className="text-xl font-bold text-[#1E293B] mb-1">{member.name}</h3>
-                <p className="text-[#2563EB] font-semibold mb-2">{member.role}</p>
+              <motion.div key={index} className="bg-[#F8FAFC] border border-gray-100 p-10 rounded-2xl text-center group hover:shadow-xl transition-all max-w-md" variants={fadeInUp} whileHover={{ y: -10 }}>
+                <div className="relative w-40 h-40 mx-auto mb-6 rounded-full overflow-hidden border-4 border-[#2563EB]/20 shadow-lg"><img src={member.img} alt={member.name} className="w-full h-full object-cover object-top" /></div>
+                <h3 className="text-2xl font-bold text-[#1E293B] mb-1">{member.name}</h3>
+                <p className="text-[#2563EB] font-semibold mb-2 text-lg">{member.role}</p>
                 {member.subtitle && <p className="text-[#64748B] text-xs mb-4">{member.subtitle}</p>}
-                <p className="text-[#64748B] text-sm leading-relaxed">{member.desc}</p>
+                <p className="text-[#64748B] leading-relaxed">{member.desc}</p>
               </motion.div>
             ))}
           </motion.div>
