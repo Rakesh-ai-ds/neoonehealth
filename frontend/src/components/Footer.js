@@ -31,7 +31,7 @@ const Footer = () => {
           >
             <div className="flex items-center gap-3 mb-4">
               <div className="w-14 h-14 rounded-full bg-white shadow-lg border-2 border-[#2563EB]/20 overflow-hidden flex items-center justify-center p-1.5">
-                <img src="/images/logo.png" alt="NeoOne Health" className="w-full h-full object-contain scale-110" />
+                <img src="/images/logo.png" alt="NeoOne Health" className="w-full h-full object-contain scale-150" />
               </div>
               <span className="text-white font-bold text-xl">NeoOne<span className="text-[#38BDF8]">Health</span></span>
             </div>

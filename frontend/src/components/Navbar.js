@@ -85,7 +85,7 @@ const Navbar = () => {
                 <img
                   src="/images/logo.png"
                   alt="NeoOne Health"
-                  className="w-full h-full object-contain scale-110"
+                  className="w-full h-full object-contain scale-150"
                 />
               </motion.div>
               <span className="text-[#1E293B] font-bold text-xl hidden sm:block">NeoOne<span className="text-[#2563EB]">Health</span></span>
