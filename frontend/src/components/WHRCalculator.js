@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Ruler, ArrowRight, Info, CheckCircle } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Ruler, ArrowRight, Info, CheckCircle, X } from 'lucide-react';
 
 const WHRCalculator = () => {
     const [waist, setWaist] = useState('');
     const [hip, setHip] = useState('');
     const [gender, setGender] = useState('male');
     const [result, setResult] = useState(null);
+    const [showGuide, setShowGuide] = useState(false);
 
     const calculateWHR = () => {
         if (!waist || !hip) return;
@@ -69,8 +70,15 @@ const WHRCalculator = () => {
                     viewport={{ once: true }}
                 >
                     <span className="text-[#7C3AED] font-medium text-xs md:text-sm uppercase tracking-wider">Health Assessment</span>
-                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1E293B] mt-2 mb-3">
+                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1E293B] mt-2 mb-3 flex items-center justify-center gap-3">
                         Waist-Hip Ratio <span className="bg-gradient-to-r from-[#7C3AED] to-[#38BDF8] bg-clip-text text-transparent">Calculator</span>
+                        <button
+                            onClick={() => setShowGuide(true)}
+                            className="inline-flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#7C3AED]/10 hover:bg-[#7C3AED]/20 transition-colors"
+                            aria-label="How to measure"
+                        >
+                            <Info className="text-[#7C3AED]" size={20} />
+                        </button>
                     </h2>
                     <p className="text-sm md:text-base text-[#64748B] max-w-xl mx-auto">
                         WHR is a key indicator of health risk. Calculate yours to understand your body fat distribution.
@@ -99,8 +107,8 @@ const WHRCalculator = () => {
                                         <button
                                             onClick={() => setGender('male')}
                                             className={`py-3 rounded-xl font-medium transition-all ${gender === 'male'
-                                                    ? 'bg-[#7C3AED] text-white'
-                                                    : 'bg-gray-100 text-[#64748B] hover:bg-gray-200'
+                                                ? 'bg-[#7C3AED] text-white'
+                                                : 'bg-gray-100 text-[#64748B] hover:bg-gray-200'
                                                 }`}
                                         >
                                             Male
@@ -108,8 +116,8 @@ const WHRCalculator = () => {
                                         <button
                                             onClick={() => setGender('female')}
                                             className={`py-3 rounded-xl font-medium transition-all ${gender === 'female'
-                                                    ? 'bg-[#7C3AED] text-white'
-                                                    : 'bg-gray-100 text-[#64748B] hover:bg-gray-200'
+                                                ? 'bg-[#7C3AED] text-white'
+                                                : 'bg-gray-100 text-[#64748B] hover:bg-gray-200'
                                                 }`}
                                         >
                                             Female
@@ -252,6 +260,138 @@ const WHRCalculator = () => {
                         ))}
                     </motion.div>
                 </div>
+
+                {/* Measurement Guide Modal */}
+                <AnimatePresence>
+                    {showGuide && (
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+                            onClick={() => setShowGuide(false)}
+                        >
+                            <motion.div
+                                initial={{ scale: 0.9, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                                exit={{ scale: 0.9, opacity: 0 }}
+                                onClick={(e) => e.stopPropagation()}
+                                className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+                            >
+                                {/* Header */}
+                                <div className="sticky top-0 bg-gradient-to-r from-[#7C3AED] to-[#38BDF8] p-6 flex items-center justify-between">
+                                    <div>
+                                        <h3 className="text-xl md:text-2xl font-bold text-white">How to Measure Waist & Hips</h3>
+                                        <p className="text-white/90 text-sm mt-1">Get accurate measurements for WHR calculation</p>
+                                    </div>
+                                    <button
+                                        onClick={() => setShowGuide(false)}
+                                        className="w-10 h-10 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 transition-colors"
+                                    >
+                                        <X className="text-white" size={20} />
+                                    </button>
+                                </div>
+
+                                <div className="p-6 space-y-6">
+                                    {/* Visual Guide Image */}
+                                    <div className="rounded-xl overflow-hidden border-2 border-[#7C3AED]/20">
+                                        <img
+                                            src="/images/whr-measurement-guide.png"
+                                            alt="Waist and Hip Measurement Guide"
+                                            className="w-full"
+                                        />
+                                    </div>
+
+                                    {/* Step-by-Step Instructions */}
+                                    <div className="bg-[#F8FAFC] rounded-xl p-5">
+                                        <h4 className="font-bold text-[#1E293B] mb-4 flex items-center gap-2">
+                                            <Ruler className="text-[#7C3AED]" size={18} />
+                                            Step-by-Step Measurement Guide
+                                        </h4>
+
+                                        <div className="space-y-4">
+                                            {/* Waist */}
+                                            <div>
+                                                <p className="font-semibold text-[#7C3AED] mb-2">📏 Waist Measurement</p>
+                                                <ol className="list-decimal list-inside space-y-1.5 text-sm text-[#64748B]">
+                                                    <li>Stand straight with feet together, relax your abdomen</li>
+                                                    <li>Find the midpoint between your lowest rib and top of hip bone (usually ~1 inch above belly button)</li>
+                                                    <li>Wrap measuring tape around waist, keeping it level and parallel to floor</li>
+                                                    <li>Exhale naturally (don't suck in or push out)</li>
+                                                    <li>Tape should be snug but not tight - you should fit one finger under it</li>
+                                                    <li>Read the measurement and record in centimeters</li>
+                                                </ol>
+                                            </div>
+
+                                            {/* Hips */}
+                                            <div>
+                                                <p className="font-semibold text-[#38BDF8] mb-2">📏 Hip Measurement</p>
+                                                <ol className="list-decimal list-inside space-y-1.5 text-sm text-[#64748B]">
+                                                    <li>Stand straight with feet together</li>
+                                                    <li>Find the widest part of your buttocks/hips</li>
+                                                    <li>Wrap measuring tape around hips, keeping it level</li>
+                                                    <li>Make sure tape is parallel to floor all the way around</li>
+                                                    <li>Tape should be snug against body without compressing</li>
+                                                    <li>Read the measurement and record in centimeters</li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* String Alternative */}
+                                    <div className="bg-[#7C3AED]/5 border border-[#7C3AED]/20 rounded-xl p-5">
+                                        <h4 className="font-bold text-[#1E293B] mb-3 flex items-center gap-2">
+                                            <Info className="text-[#7C3AED]" size={18} />
+                                            Don't Have a Measuring Tape?
+                                        </h4>
+                                        <p className="text-sm text-[#64748B] mb-3">Use a <strong>non-stretchy string or yarn</strong> as an alternative:</p>
+                                        <ol className="list-decimal list-inside space-y-1.5 text-sm text-[#64748B]">
+                                            <li>Wrap string around waist/hips following steps above</li>
+                                            <li>Mark where the string overlaps with a pen or make a knot</li>
+                                            <li>Lay the string flat on a ruler or straight edge</li>
+                                            <li>Measure the marked length in centimeters</li>
+                                            <li>Record the measurement</li>
+                                        </ol>
+                                    </div>
+
+                                    {/* Important Tips */}
+                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                        {[
+                                            { icon: "🧍", title: "Stand Straight", desc: "Feet together, weight evenly distributed" },
+                                            { icon: "😮‍💨", title: "Breathe Normally", desc: "Exhale naturally, don't hold breath" },
+                                            { icon: "📏", title: "Keep Level", desc: "Tape parallel to floor, not tilted" }
+                                        ].map((tip, idx) => (
+                                            <div key={idx} className="bg-white border border-gray-200 rounded-lg p-3 text-center">
+                                                <div className="text-2xl mb-1">{tip.icon}</div>
+                                                <p className="font-semibold text-[#1E293B] text-xs mb-1">{tip.title}</p>
+                                                <p className="text-[#64748B] text-xs">{tip.desc}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    {/* Why It Matters */}
+                                    <div className="bg-gradient-to-r from-[#7C3AED]/10 to-[#38BDF8]/10 rounded-xl p-5">
+                                        <h4 className="font-bold text-[#1E293B] mb-2">Why Accurate Measurements Matter</h4>
+                                        <p className="text-sm text-[#64748B] mb-2">
+                                            WHR is calculated by dividing waist measurement by hip measurement. Even small errors can affect your result.
+                                        </p>
+                                        <p className="text-sm text-[#64748B]">
+                                            <strong>High WHR ({'>'}0.85 women, {'>'}0.90 men)</strong> indicates more abdominal fat, which is linked to increased risk of heart disease, stroke, and diabetes - even if your BMI is healthy.
+                                        </p>
+                                    </div>
+
+                                    {/* Close Button */}
+                                    <button
+                                        onClick={() => setShowGuide(false)}
+                                        className="w-full py-3 bg-gradient-to-r from-[#7C3AED] to-[#38BDF8] text-white rounded-xl font-bold hover:opacity-90 transition-opacity"
+                                    >
+                                        Got It! Let's Calculate
+                                    </button>
+                                </div>
+                            </motion.div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </div>
         </section>
     );
